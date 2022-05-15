@@ -2,98 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ed0264e-32ec-41bb-b951-8da0de5cba67" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Client/.idea/libraries/libs1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/assets/player/idle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/out/production/Client/events/game/GameEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/out/production/Client/events/lobby/LobbyStartEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/out/production/Client/listeners/GameEventListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/GameScreen.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/elements/Element.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/elements/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/events/game/GameEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/events/game/PositionEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/events/lobby/LobbyStartEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/listeners/GameEventListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client/src/screens/GameScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/events/game/GameEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/events/lobby/LobbyStartEvent.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/gameServer/GameServer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$onUpdate.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/shapes/Enemy.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/handlers/LobbyHandler.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/listeners/GameEventListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/listeners/LobbyListener.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/main/Server.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/model/Lobby.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Server/server/model/ServerPlayer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/libs/gdx-1.9.14.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/libs/gdx-backend-headless-1.9.14.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/libs/gdx-backend-lwjgl-1.9.14.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/libs/gdx-platform-1.9.14.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/events/game/GameEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/events/game/PositionEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/events/lobby/LobbyStartEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/game/gameServer/GameServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/game/map/ServerMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/game/shapes/Enemy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/listeners/GameEventListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Client.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/handlers/ResourceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/handlers/ResourceManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/listeners/EventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/listeners/EventListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/LobbyScreen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/LobbyScreen$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/LobbyScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/LobbyScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/elements/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/elements/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/listeners/GameEventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/listeners/GameEventListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/GameScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/handlers/ResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/handlers/ResourceManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/libs/gdx-1.9.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/libs/gdx-1.9.10.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/libs/gdx-backend-headless-1.9.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/libs/gdx-backend-headless-1.9.10.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/libs/gdx-backend-lwjgl-1.9.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/libs/gdx-backend-lwjgl-1.9.10.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/libs/gdx-platform-1.9.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/libs/gdx-platform-1.9.10.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/listeners/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/listeners/EventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/screens/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/LobbyScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/elements/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/elements/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/listeners/GameEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/listeners/GameEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/GameScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/src/screens/MenuScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/MenuScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/handlers/LobbyHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-backend-headless-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-backend-lwjgl-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-advanced-1.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-desktop-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-lwjgl3-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-platform-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-freetype-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-platform-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/listeners/LobbyListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/main/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/model/Lobby.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/model/ServerPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/server/model/ServerMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/handlers/LobbyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/handlers/LobbyHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-backend-headless-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-backend-lwjgl-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-advanced-1.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-desktop-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-lwjgl3-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-platform-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-freetype-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/libs/gdx-platform-1.9.10.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/listeners/LobbyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/listeners/LobbyListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/Lobby.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ServerPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/ServerPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/ServerMap.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/listeners/GameEventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/listeners/GameEventListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/main/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/main/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/game/map/ServerMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/game/map/ServerMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/listeners/GameEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/listeners/GameEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/Server.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -184,7 +109,7 @@
       <workItem from="1652280298636" duration="5111000" />
       <workItem from="1652538040626" duration="11272000" />
       <workItem from="1652550248424" duration="3058000" />
-      <workItem from="1652609803053" duration="7415000" />
+      <workItem from="1652609803053" duration="9357000" />
     </task>
     <servers />
   </component>

@@ -158,6 +158,7 @@ public class MenuScreen extends BScreen {
         //Events happening in-game
         client.getKryo().register(GameEvent.class);
         client.getKryo().register(PositionEvent.class);
+        client.getKryo().register(PositionEvent.DIRECTION.class);
 
         //Common
         client.getKryo().register(ArrayList.class);

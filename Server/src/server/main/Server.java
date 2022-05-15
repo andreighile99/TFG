@@ -64,6 +64,7 @@ public class Server {
         //Game events
         this.server.getKryo().register(GameEvent.class);
         this.server.getKryo().register(PositionEvent.class);
+        this.server.getKryo().register(PositionEvent.DIRECTION.class);
 
         //Common
         this.server.getKryo().register(ArrayList.class);

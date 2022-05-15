@@ -26,6 +26,10 @@ public class GameScreen extends BScreen{
         //map = ResourceManager.getMap("src/assets/maps/Test1.tmx");
 
         mainStage = new Stage();
+
+        camera = (OrthographicCamera) mainStage.getCamera();
+        camera.setToOrtho(false, 800,
+                600);
         float inicioX;
         float inicioY;
 
@@ -44,13 +48,13 @@ public class GameScreen extends BScreen{
         mainStage.act();
         uiStage.act();
 
-
+        centerCamera();
 
 
         mainStage.draw();
         uiStage.draw();
 
-       // centerCamera();
+
 
     }
 
@@ -60,9 +64,13 @@ public class GameScreen extends BScreen{
         camera.update();
     }
 
+
     public void updatePlayersPosition(GameEvent gameEvent){
-        player1.moveBy(player1.getX() - gameEvent.playerPositions.get(0), player1.getY() - gameEvent.playerPositions.get(1));
-        player2.moveBy(player2.getX() - gameEvent.playerPositions.get(2), player2.getY() - gameEvent.playerPositions.get(3));
+        player1.setX(gameEvent.playerPositions.get(0));
+        player1.setY(gameEvent.playerPositions.get(1));
+        player2.setX(gameEvent.playerPositions.get(2));
+        player2.setY(gameEvent.playerPositions.get(3));
     }
+
 
 }

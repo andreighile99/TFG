@@ -42,21 +42,20 @@ public class ServerMap {
     }
 
     public void updatePlayerPosition(PositionEvent message) {
-        System.out.println("He recibido una update del jugador, updateando!!");
             ServerPlayer player = this.checkPlayerNickname(message);
             Vector2 v = player.getPosition();
             switch (message.getDirection()) {
                 case LEFT:
-                    v.x -= deltaTime * 200;
+                    v.x -= deltaTime * 5;
                     break;
                 case RIGHT:
-                    v.x += deltaTime * 200;
+                    v.x += deltaTime * 5;
                     break;
                 case UP:
-                    v.y -= deltaTime * 200;
+                    v.y -= deltaTime * 5;
                     break;
                 case DOWN:
-                    v.y += deltaTime * 200;
+                    v.y += deltaTime * 5;
                     break;
                 default:
                     break;

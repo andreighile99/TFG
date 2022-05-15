@@ -26,9 +26,6 @@ public class Player extends Element{
         this.username = username;
         this.lobbyName = lobbyName;
 
-        this.setX(x);
-        this.setY(y);
-
         idle = this.loadFullAnimation("assets/player/idle.png", 1, 1, 0.2f, true);
         this.setPolygon(8);
     }

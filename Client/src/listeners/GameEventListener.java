@@ -14,6 +14,9 @@ public class GameEventListener extends Listener {
         if(object instanceof GameEvent) {
             System.out.println("Recibida una actualización del estado del juego");
             GameEvent gameEvent = (GameEvent) object;
+            /**Añadido el try catch puesto que nada asegura que ambos clientes hayan ejecutado ya el cambio de screen
+             * debido a posibles discrepancias entre los hilos del procesador, especialmente en una sola máquina
+             */
             try{
                 GameScreen gameScreen = (GameScreen) MontessoriSlug.getInstance().getScreen();
                 gameScreen.updatePlayersPosition(gameEvent);
