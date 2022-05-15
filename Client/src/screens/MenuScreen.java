@@ -6,13 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.esotericsoftware.kryonet.Client;
-import events.lobby.CreateNewLobbyEvent;
-import events.lobby.JoinLobbyEvent;
-import events.lobby.LobbyCreatedEvent;
-import events.lobby.LobbyJoinedEvent;
+import com.esotericsoftware.minlog.Log;
+import events.game.GameEvent;
+import events.game.PositionEvent;
+import events.lobby.*;
 import handlers.LabelHandler;
 import listeners.EventListener;
+import listeners.GameEventListener;
 import main.MontessoriSlug;
+
+import java.util.ArrayList;
 
 public class MenuScreen extends BScreen {
     private Table table;
@@ -52,13 +55,8 @@ public class MenuScreen extends BScreen {
                 final Client client = new Client();
 
                 //client.addListener(new ConnectionStateListener());
-                client.addListener(new EventListener());
-
-                //Lobby management
-                client.getKryo().register(CreateNewLobbyEvent.class);
-                client.getKryo().register(JoinLobbyEvent.class);
-                client.getKryo().register(LobbyCreatedEvent.class);
-                client.getKryo().register(LobbyJoinedEvent.class);
+                addListeners(client);
+                registerClasses(client);
 
                 try {
                     client.start();
@@ -77,8 +75,6 @@ public class MenuScreen extends BScreen {
 
                 client.sendTCP(createNewLobbyEvent);
 
-                //JoinRequestEvent joinRequestEvent = new JoinRequestEvent();
-                //joinRequestEvent.username = usernameLabel.getText();
 
                 //client.sendTCP(joinRequestEvent);
 
@@ -94,14 +90,9 @@ public class MenuScreen extends BScreen {
                 // Connect
                 final Client client = new Client();
 
-                //client.addListener(new ConnectionStateListener());
-                client.addListener(new EventListener());
+                addListeners(client);
+                registerClasses(client);
 
-                //Lobby management
-                client.getKryo().register(CreateNewLobbyEvent.class);
-                client.getKryo().register(JoinLobbyEvent.class);
-                client.getKryo().register(LobbyCreatedEvent.class);
-                client.getKryo().register(LobbyJoinedEvent.class);
 
                 try {
                     client.start();
@@ -111,7 +102,7 @@ public class MenuScreen extends BScreen {
                     return super.touchDown(event, x, y, pointer, button);
                 }
 
-                // Connection established with the server
+                // Connection established with the server so set the client to the main game class
                 MontessoriSlug.getInstance().setClient(client);
 
                 JoinLobbyEvent joinLobbyEvent = new JoinLobbyEvent();
@@ -119,7 +110,6 @@ public class MenuScreen extends BScreen {
                 joinLobbyEvent.username = usernameLabel.getText();
 
                 client.sendTCP(joinLobbyEvent);
-
 
                 return super.touchDown(event, x, y, pointer, button);
             }
@@ -148,6 +138,32 @@ public class MenuScreen extends BScreen {
         super.render(delta);
         uiStage.act();
         uiStage.draw();
+    }
+
+    private void addListeners(Client client){
+        //Add the new listener that retrieves the lobby stuff
+        client.addListener(new EventListener());
+        //Add the new listener that retrieves the game status
+        client.addListener(new GameEventListener());
+    }
+
+    private void registerClasses(Client client){
+        //Lobby management
+        client.getKryo().register(CreateNewLobbyEvent.class);
+        client.getKryo().register(JoinLobbyEvent.class);
+        client.getKryo().register(LobbyCreatedEvent.class);
+        client.getKryo().register(LobbyJoinedEvent.class);
+        client.getKryo().register(LobbyStartEvent.class);
+
+        //Events happening in-game
+        client.getKryo().register(GameEvent.class);
+        client.getKryo().register(PositionEvent.class);
+
+        //Common
+        client.getKryo().register(ArrayList.class);
+    }
+    public void renderErrorMessage(String errorMessage){
+        this.errorLabel.setText(errorMessage);
     }
 
 

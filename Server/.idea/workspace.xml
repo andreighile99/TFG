@@ -1,7 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ed0264e-32ec-41bb-b951-8da0de5cba67" name="Default Changelist" comment="" />
+    <list default="true" id="3ed0264e-32ec-41bb-b951-8da0de5cba67" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Client/.idea/libraries/libs1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/assets/player/idle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/out/production/Client/events/game/GameEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/out/production/Client/events/lobby/LobbyStartEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/out/production/Client/listeners/GameEventListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/GameScreen.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/elements/Element.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/elements/Player.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/events/game/GameEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/events/game/PositionEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/events/lobby/LobbyStartEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/listeners/GameEventListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/src/screens/GameScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/events/game/GameEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/events/lobby/LobbyStartEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/gameServer/GameServer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$onUpdate.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/game/shapes/Enemy.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/handlers/LobbyHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/listeners/GameEventListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/listeners/LobbyListener.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/main/Server.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/model/Lobby.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Server/server/model/ServerPlayer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/gdx-1.9.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/gdx-backend-headless-1.9.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/gdx-backend-lwjgl-1.9.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/gdx-platform-1.9.14.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/events/game/GameEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/events/game/PositionEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/events/lobby/LobbyStartEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/game/gameServer/GameServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/game/map/ServerMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/game/shapes/Enemy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/listeners/GameEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/Client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/Client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/handlers/ResourceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/handlers/ResourceManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/listeners/EventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/listeners/EventListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/LobbyScreen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/LobbyScreen$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/LobbyScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/LobbyScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/handlers/ResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/handlers/ResourceManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/libs/gdx-1.9.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/libs/gdx-1.9.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/libs/gdx-backend-headless-1.9.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/libs/gdx-backend-headless-1.9.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/libs/gdx-backend-lwjgl-1.9.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/libs/gdx-backend-lwjgl-1.9.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/libs/gdx-platform-1.9.10.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/libs/gdx-platform-1.9.10.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/listeners/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/listeners/EventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/screens/LobbyScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/LobbyScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/screens/MenuScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/MenuScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/handlers/LobbyHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-backend-headless-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-backend-lwjgl-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-advanced-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-desktop-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-lwjgl3-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-controllers-platform-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-freetype-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/libs/gdx-platform-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/listeners/LobbyListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/main/Server.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/model/Lobby.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/model/ServerPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/model/ServerMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/LobbyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/handlers/LobbyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-backend-headless-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-backend-lwjgl-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-advanced-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-desktop-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-lwjgl3-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-controllers-platform-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-freetype-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/libs/gdx-platform-1.9.10.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/listeners/LobbyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/listeners/LobbyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Lobby.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/Lobby.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ServerPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/ServerPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/model/ServerMap.java" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,12 +108,20 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="28zAU0kjs8e21cCR5BYvLd6DW98" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/server/events/lobby" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/libs" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -32,8 +133,9 @@
       <recent name="server.events.lobby" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\nayor\Desktop\TFG\Server\src\server\events\lobby" />
       <recent name="C:\Users\nayor\Desktop\TFG\Server\src\libs" />
+      <recent name="C:\Users\nayor\Desktop\TFG\Server\src\listeners" />
+      <recent name="C:\Users\nayor\Desktop\TFG\Server\src\server\events\lobby" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -50,11 +152,11 @@
   </component>
   <component name="RunManager">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.Server" />
+      <option name="MAIN_CLASS_NAME" value="server.main.Server" />
       <module name="Server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="server.main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -80,10 +182,29 @@
       <updated>1652209052219</updated>
       <workItem from="1652209054772" duration="3287000" />
       <workItem from="1652280298636" duration="5111000" />
+      <workItem from="1652538040626" duration="11272000" />
+      <workItem from="1652550248424" duration="3058000" />
+      <workItem from="1652609803053" duration="7415000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

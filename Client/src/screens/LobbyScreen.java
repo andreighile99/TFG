@@ -3,15 +3,15 @@ package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.esotericsoftware.kryonet.Client;
-import events.lobby.CreateNewLobbyEvent;
-import events.lobby.JoinLobbyEvent;
-import events.lobby.LobbyCreatedEvent;
-import events.lobby.LobbyJoinedEvent;
+import events.game.GameEvent;
+import events.lobby.*;
 import handlers.LabelHandler;
-import listeners.EventListener;
+import listeners.GameEventListener;
 import main.MontessoriSlug;
 
 public class LobbyScreen extends BScreen{
@@ -46,7 +46,11 @@ public class LobbyScreen extends BScreen{
             this.startGameButton.addListener(new ClickListener() {
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    return false;
+                    LobbyStartEvent lobbyStartEvent = new LobbyStartEvent();
+                    lobbyStartEvent.lobbyName = lobbyName;
+                    MontessoriSlug.getInstance().getClient().sendTCP(lobbyStartEvent);
+
+                    return super.touchDown(event, x, y, pointer, button);
                 }
             });
 
@@ -75,5 +79,21 @@ public class LobbyScreen extends BScreen{
         super.render(delta);
         uiStage.act();
         uiStage.draw();
+    }
+
+    public void renderErrorMessage(String errorMessage){
+        this.errorLabel.setText(errorMessage);
+    }
+
+    public Label getPlayer1Name() {
+        return player1Name;
+    }
+
+    public Label getPlayer2Name() {
+        return player2Name;
+    }
+
+    public Label getLobbyName() {
+        return lobbyName;
     }
 }
