@@ -4,6 +4,8 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import server.game.map.ServerMap;
+import server.handlers.ResourceManager;
+import server.model.Headless;
 import server.model.ServerPlayer;
 
 public class GameServer extends Game {
@@ -17,6 +19,7 @@ public class GameServer extends Game {
 
     public GameServer(ServerMap.onUpdate onUpdate, ServerPlayer player1, ServerPlayer player2) {
 
+        Headless.loadHeadless();
         time = 0;
         this.player1 = player1;
         this.player2 = player2;

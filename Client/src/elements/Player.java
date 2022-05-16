@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.esotericsoftware.kryonet.Client;
@@ -20,6 +21,7 @@ public class Player extends Element{
 
     private Element feet;
     private boolean onGround;
+    public Rectangle boundRect;
 
     private Client myClient;
 
@@ -29,6 +31,7 @@ public class Player extends Element{
         this.myClient = MontessoriSlug.getInstance().getClient();
         this.username = username;
         this.lobbyName = lobbyName;
+        this.boundRect = new Rectangle(this.position.x, this.position.y, 10, 10);
 
         idle = this.loadFullAnimation("assets/player/idle.png", 1, 1, 0.2f, true);
         this.setPolygon(8);
@@ -65,6 +68,8 @@ public class Player extends Element{
             positionEvent.setDirection(PositionEvent.DIRECTION.RIGHT);
             this.myClient.sendUDP(positionEvent);
         }
+        this.boundRect.x = this.getX();
+        this.boundRect.y = this.getY();
 
     }
 

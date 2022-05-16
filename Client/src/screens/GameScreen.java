@@ -1,6 +1,7 @@
 package screens;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -54,17 +55,6 @@ public class GameScreen extends BScreen{
         this.inicioX = (float) props.get("x");
         this.inicioY = (float) props.get("y");
 
-        //Add solids
-        Solid solid;
-        elements = getRectangleList("Solid");
-        this.solids = new ArrayList<>();
-        for (MapObject mapObject : elements) {
-            props = mapObject.getProperties();
-            solid = new Solid((float) props.get("x"), (float) props.get("y"), mainStage, (float) props.get("width"),
-                    (float) props.get("height"));
-            solids.add(solid);
-        }
-
         this.player1 = new Player(inicioX, inicioY, mainStage, username1, lobbyName);
         this.player2 = new ManagedPlayer(inicioX, inicioY, mainStage, username2, lobbyName);
 
@@ -79,7 +69,6 @@ public class GameScreen extends BScreen{
         super.render(delta);
         mainStage.act();
         uiStage.act();
-        colide();
         centerCamera();
 
         renderer.setView(camera);
@@ -96,19 +85,6 @@ public class GameScreen extends BScreen{
         this.camera.position.x = player1.getX();
         this.camera.position.y = player1.getY();
         camera.update();
-    }
-
-    public void colide(){
-        for (Solid solid : solids) {
-
-            if (solid.getEnabled() && solid.overlaps(player1)) {
-                player1.preventOverlap(solid);
-            }
-
-            if (solid.getEnabled() && solid.overlaps(player2)) {
-                player2.preventOverlap(solid);
-            }
-        }
     }
 
 

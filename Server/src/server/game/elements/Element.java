@@ -1,7 +1,6 @@
-package elements;
+package server.game.elements;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,7 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-import handlers.ResourceManager;
+import server.handlers.ResourceManager;
 
 
 public class Element extends Actor {
@@ -127,7 +126,6 @@ public class Element extends Actor {
         shapeRenderer.end();
         batch.begin();
     }
-
 
 
     @Override
