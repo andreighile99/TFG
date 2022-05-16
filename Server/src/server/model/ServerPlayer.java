@@ -8,36 +8,14 @@ public class ServerPlayer {
     private final String username;
     private final Connection connection;
 
-    public boolean moveUp, moveDown, moveLeft, moveRight;
-
     private float speed;
 
-    private float x;
-    private float y;
     private Vector2 position;
 
     public ServerPlayer(String username, Connection connection) {
         this.username = username;
         this.connection = connection;
-        this.position = new Vector2(100,200);
-        this.speed = 5F;
-    }
-
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
+        this.position = new Vector2(16,168);
     }
 
     public String getUsername() {

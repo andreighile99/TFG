@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.esotericsoftware.kryonet.Client;
 import events.game.PositionEvent;
@@ -12,6 +13,8 @@ import main.MontessoriSlug;
 public class Player extends Element{
     private String username;
     private String lobbyName;
+
+    private Vector2 position;
 
     private Animation<TextureRegion> idle;
 
@@ -22,6 +25,7 @@ public class Player extends Element{
 
     public Player(float x, float y, Stage s, String username, String lobbyName) {
         super(x, y, s);
+        this.position = new Vector2(x,y);
         this.myClient = MontessoriSlug.getInstance().getClient();
         this.username = username;
         this.lobbyName = lobbyName;
@@ -64,4 +68,19 @@ public class Player extends Element{
 
     }
 
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

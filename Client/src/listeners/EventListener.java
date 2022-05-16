@@ -7,6 +7,7 @@ import events.lobby.LobbyCreatedEvent;
 import events.lobby.LobbyJoinedEvent;
 import events.lobby.LobbyStartEvent;
 import main.MontessoriSlug;
+import parameters.Parameters;
 import screens.GameScreen;
 import screens.LobbyScreen;
 
@@ -49,9 +50,16 @@ public class EventListener extends Listener {
                 String player1username = lobbyScreen.getPlayer1Name().getText().toString();
                 String player2username = lobbyScreen.getPlayer2Name().getText().toString();
                 String lobbyName = lobbyScreen.getLobbyName().getText().toString();
-                Gdx.app.postRunnable(()->{
-                    MontessoriSlug.getInstance().setScreen(new GameScreen(MontessoriSlug.getInstance(), player1username, player2username, lobbyName));
-                });
+                if(Parameters.actualNickname.equalsIgnoreCase(player1username)){
+                    Gdx.app.postRunnable(()->{
+                        MontessoriSlug.getInstance().setScreen(new GameScreen(MontessoriSlug.getInstance(), player1username, player2username, lobbyName));
+                    });
+                }else{
+                    Gdx.app.postRunnable(()->{
+                        MontessoriSlug.getInstance().setScreen(new GameScreen(MontessoriSlug.getInstance(), player2username, player1username, lobbyName));
+                    });
+                }
+
             }else{
                 Gdx.app.postRunnable(()->{
                     LobbyScreen lobbyScreen = (LobbyScreen) MontessoriSlug.getInstance().getScreen();

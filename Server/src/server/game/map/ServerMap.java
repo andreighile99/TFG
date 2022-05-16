@@ -32,7 +32,10 @@ public class ServerMap {
 
         GameEvent gameEvent = new GameEvent();
         this.gatherPlayerPositions();
+
         gameEvent.playerPositions = this.playerPositions;
+        gameEvent.player1 = this.player1.getUsername();
+        gameEvent.player2 = this.player2.getUsername();
 
         this.callback.sendToBothClients(gameEvent);
     }
@@ -46,27 +49,30 @@ public class ServerMap {
             Vector2 v = player.getPosition();
             switch (message.getDirection()) {
                 case LEFT:
-                    v.x -= deltaTime * 5;
+                    v.x -= deltaTime * 200;
                     break;
                 case RIGHT:
-                    v.x += deltaTime * 5;
+                    v.x += deltaTime * 200;
                     break;
                 case UP:
-                    v.y -= deltaTime * 5;
+                    v.y += deltaTime * 200;
                     break;
                 case DOWN:
-                    v.y += deltaTime * 5;
+                    v.y -= deltaTime * 200;
                     break;
                 default:
                     break;
             }
-        System.out.println("El jugador se ha movido a la posición " + player.getX() + " " + player.getY());
+        //System.out.println("El jugador se ha movido a la posición " + player.getPosition().x + " " + player.getPosition().y);
     }
 
     public ServerPlayer checkPlayerNickname(PositionEvent message){
         if(this.player1.getUsername().equalsIgnoreCase(message.getUsername())){
+            //System.out.println(message.getUsername());
+            System.out.println("Recibida una actualización del jugador 1");
             return this.player1;
         }else{
+            System.out.println("Recibida una actualización del jugador 2");
             return this.player2;
         }
     }

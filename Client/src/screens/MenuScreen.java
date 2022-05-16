@@ -14,6 +14,7 @@ import handlers.LabelHandler;
 import listeners.EventListener;
 import listeners.GameEventListener;
 import main.MontessoriSlug;
+import parameters.Parameters;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,8 @@ public class MenuScreen extends BScreen {
                     return super.touchDown(event, x, y, pointer, button);
                 }
 
+                Parameters.actualNickname = usernameLabel.getText();
+
                 // Connection established with the server
                 MontessoriSlug.getInstance().setClient(client);
 
@@ -101,6 +104,8 @@ public class MenuScreen extends BScreen {
                     errorLabel.setText(e.getMessage());
                     return super.touchDown(event, x, y, pointer, button);
                 }
+
+                Parameters.actualNickname = usernameLabel.getText();
 
                 // Connection established with the server so set the client to the main game class
                 MontessoriSlug.getInstance().setClient(client);
