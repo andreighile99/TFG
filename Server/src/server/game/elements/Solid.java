@@ -17,7 +17,7 @@ public class Solid{
 		// TODO Auto-generated constructor stub
 		this.x = x;
 		this.y = y;
-		float[] vertices= {0,0,w,0,w,h,0,h};
+		float[] vertices= {x,y+0,x+w,y+0,x+w,y+h,x+0,y+h};
 		colision=new Polygon(vertices);
 		this.setSize(w, h);
 	}

@@ -16,8 +16,6 @@ public class ServerPlayer {
 
     private boolean onGround;
 
-    private float speed;
-
     private Vector2 position;
 
     public ServerPlayer(String username, Connection connection) {
@@ -31,7 +29,7 @@ public class ServerPlayer {
 
     public void init(){
         this.boundRect = new Rectangle(this.position.x, this.position.y, 10, 10);
-        this.feet = new Rectangle(0, 0, this.boundRect.width / 4, this.boundRect.height / 10);
+        this.feet = new Rectangle(0, 0, this.boundRect.width / 8, this.boundRect.height / 10);
         this.onGround = false;
     }
 

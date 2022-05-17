@@ -2,27 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="365638bc-3ab6-48d7-ab72-64cb53eb6ae9" name="Default Changelist" comment="Sync both players in a single Map instance">
-      <change afterPath="$PROJECT_DIR$/../Server/src/server/game/elements/Element.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server/src/server/game/elements/Solid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server/src/server/handlers/ResourceManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server/src/server/model/Headless.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/maps/map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/maps/map1.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/elements/Element.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/elements/Element.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/elements/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/elements/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Client/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Client/screens/GameScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/elements/Element.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/elements/Element.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/elements/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/elements/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/GameScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/assets/maps/images/monochrome_tilemap_packed.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/assets/maps/map1.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/assets/maps/map1.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/assets/maps/monochrome_tilemap_packed.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/out/production/Server/server/game/gameServer/GameServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/out/production/Server/server/game/gameServer/GameServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/out/production/Server/server/game/elements/Solid.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/out/production/Server/server/game/elements/Solid.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/out/production/Server/server/game/map/ServerMap$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/out/production/Server/server/game/map/ServerMap$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/out/production/Server/server/game/map/ServerMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/out/production/Server/server/game/map/ServerMap.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/out/production/Server/server/model/ServerPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/out/production/Server/server/model/ServerPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/src/server/game/gameServer/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/src/server/game/gameServer/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/src/server/game/elements/Solid.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/src/server/game/elements/Solid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/src/server/game/map/ServerMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/src/server/game/map/ServerMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Server/src/server/model/ServerPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/src/server/model/ServerPlayer.java" afterDir="false" />
     </list>
@@ -142,7 +130,8 @@
       <workItem from="1652550244674" duration="867000" />
       <workItem from="1652609793736" duration="10013000" />
       <workItem from="1652685651923" duration="24265000" />
-      <workItem from="1652722781281" duration="606000" />
+      <workItem from="1652722781281" duration="4098000" />
+      <workItem from="1652731924129" duration="699000" />
     </task>
     <servers />
   </component>

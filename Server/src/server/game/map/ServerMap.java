@@ -64,6 +64,7 @@ public class ServerMap {
                     (float) props.get("height"));
             //System.out.println("El sólido tiene las propiedades: " + "\nX: " + solid.getX() + "\nY: " + solid.getY() + "\nHeight: ");
             solids.add(solid);
+            System.out.println(solid.getX()+""+solid.getY());
         }
 
         this.playerPositions = new ArrayList<>();
@@ -185,9 +186,11 @@ public class ServerMap {
         for(Solid s : this.solids){
             if(s.isCollision(this.player1.getBoundRect())){
                 player1.preventOverlap(s.getColision());
+                System.out.println(s.getX()+" "+s.getY());
             }
             if(s.isCollision(this.player1.getFeet())){
                 this.player1.setOnGround(true);
+                System.out.println(s.getX()+" "+s.getY());
             }
             if(s.isCollision(this.player2.getBoundRect())){
                 player2.preventOverlap(s.getColision());
