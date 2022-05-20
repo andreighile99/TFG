@@ -8,7 +8,7 @@ import com.esotericsoftware.kryonet.Connection;
 
 public class ServerPlayer {
 
-    private final String username;
+    private String username;
     private final Connection connection;
 
     private Rectangle boundRect;
@@ -20,6 +20,10 @@ public class ServerPlayer {
 
     public ServerPlayer(String username, Connection connection) {
         this.username = username;
+        this.connection = connection;
+    }
+
+    public ServerPlayer(Connection connection) {
         this.connection = connection;
     }
 
@@ -73,11 +77,11 @@ public class ServerPlayer {
         this.onGround = onGround;
     }
 
-    public void updateRectanglePosition(float x, float y){
-        this.boundRect.x = x;
-        this.boundRect.y = y;
-        this.feet.x = x + feet.width / 8;
-        this.feet.y = y - feet.height ;//- 0.1f;
+    public void updateRectanglePosition(){
+        this.boundRect.x = this.position.x;
+        this.boundRect.y = this.position.y;
+        this.feet.x = this.position.x + feet.width / 8;
+        this.feet.y = this.position.y - feet.height ;//- 0.1f;
     }
 
     public Vector2 preventOverlap(Polygon anotherPoly)
@@ -102,10 +106,11 @@ public class ServerPlayer {
     }
 
     /** Add x and y to current position */
-    public void moveBy (float x, float y) {
+    private void moveBy (float x, float y) {
         if (x != 0 || y != 0) {
             this.position.x += x;
             this.position.y += y;
         }
     }
+
 }

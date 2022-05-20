@@ -2,7 +2,6 @@ package server.listeners;
 
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import server.events.game.PositionEvent;
 import server.handlers.LobbyHandler;
 import server.model.Lobby;
 import server.model.ServerPlayer;
@@ -11,7 +10,7 @@ import server.events.lobby.*;
 public class LobbyListener extends Listener {
     @Override
     public void received(Connection connection, Object object) {
-
+        super.received(connection, object);
         if(object instanceof CreateNewLobbyEvent) {
             final CreateNewLobbyEvent createNewLobbyEvent = (CreateNewLobbyEvent) object;
 
@@ -24,20 +23,23 @@ public class LobbyListener extends Listener {
                 lobbyCreatedEvent.description = "No se puede crear un lobby que ya existe";
                 connection.sendTCP(lobbyCreatedEvent);
                 return;
+            }else{
+                final LobbyCreatedEvent lobbyCreatedEvent = new LobbyCreatedEvent();
+                lobbyCreatedEvent.lobbyName = createNewLobbyEvent.lobbyName;
+                lobbyCreatedEvent.code = "01";
+                lobbyCreatedEvent.player1 = createNewLobbyEvent.username;
+                connection.sendTCP(lobbyCreatedEvent);
+                System.out.println("LOG - Sala [ " + createNewLobbyEvent.lobbyName + " ] creada con éxito");
+
+                //Lobby is created with the following properties
+                final Lobby lobby = new Lobby();
+                lobby.createLobby(new ServerPlayer(createNewLobbyEvent.username, connection));
+                LobbyHandler.INSTANCE.getLobbies().put(createNewLobbyEvent.lobbyName, lobby);
+
+                return;
             }
 
-            //Lobby is created with the following properties
-            final Lobby lobby = new Lobby();
-            lobby.createLobby(new ServerPlayer(createNewLobbyEvent.username, connection));
-            LobbyHandler.INSTANCE.getLobbies().put(createNewLobbyEvent.lobbyName, lobby);
 
-            final LobbyCreatedEvent lobbyCreatedEvent = new LobbyCreatedEvent();
-            lobbyCreatedEvent.lobbyName = createNewLobbyEvent.lobbyName;
-            lobbyCreatedEvent.code = "01";
-            lobbyCreatedEvent.player1 = createNewLobbyEvent.username;
-            connection.sendTCP(lobbyCreatedEvent);
-            System.out.println("LOG - Sala [ " + createNewLobbyEvent.lobbyName + " ] creada con éxito");
-            return;
         }
 
         else if(object instanceof JoinLobbyEvent){
@@ -49,6 +51,13 @@ public class LobbyListener extends Listener {
                 lobbyJoinedEvent.lobbyName = joinLobbyEvent.lobbyName;
                 lobbyJoinedEvent.code = "00";
                 lobbyJoinedEvent.description = "LOG - No se puede acceder a un lobby que no existe todavía";
+                connection.sendTCP(lobbyJoinedEvent);
+                return;
+            }else if(LobbyHandler.INSTANCE.getLobbies().get(joinLobbyEvent.lobbyName).getPlayer1().getUsername().equals(joinLobbyEvent.username)){
+                final LobbyJoinedEvent lobbyJoinedEvent = new LobbyJoinedEvent();
+                lobbyJoinedEvent.lobbyName = joinLobbyEvent.lobbyName;
+                lobbyJoinedEvent.code = "00";
+                lobbyJoinedEvent.description = "LOG - No se puede acceder con nombres de usuario duplicados";
                 connection.sendTCP(lobbyJoinedEvent);
                 return;
             }
@@ -105,6 +114,6 @@ public class LobbyListener extends Listener {
                 return;
             }
         }
-        super.received(connection, object);
+
     }
 }

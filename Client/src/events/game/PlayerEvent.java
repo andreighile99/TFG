@@ -1,10 +1,12 @@
 package events.game;
 
 
+import com.badlogic.gdx.math.Vector2;
+
 /***
  * Whenever player press a button from a keyboard this message should be send.
  */
-public class PositionEvent {
+public class PlayerEvent {
 
     private String lobyName;
 
@@ -17,12 +19,15 @@ public class PositionEvent {
      */
     private DIRECTION direction;
 
+
+
     public enum DIRECTION {
-        LEFT, RIGHT, DOWN, UP
+        LEFT, RIGHT, UP
     }
 
-    public PositionEvent() {
+    public PlayerEvent() {
     }
+
 
     public String getUsername() {
         return username;

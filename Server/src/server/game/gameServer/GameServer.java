@@ -35,10 +35,6 @@ public class GameServer extends Game {
     @Override
     public void render() {
         float deltaTime = Gdx.graphics.getDeltaTime();
-        time += deltaTime;
-        if (time >= 1) {
-            time = 0;
-        }
         serverMap.update(deltaTime);
     }
 

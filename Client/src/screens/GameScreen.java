@@ -1,7 +1,6 @@
 package screens;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -9,9 +8,9 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import elements.Bullet;
 import elements.ManagedPlayer;
 import elements.Player;
-import elements.Solid;
 import events.game.GameEvent;
 import handlers.ResourceManager;
 import main.MontessoriSlug;
@@ -32,11 +31,14 @@ public class GameScreen extends BScreen{
     private float inicioX;
     private float inicioY;
 
-    public ArrayList<Solid> solids;
+    private ArrayList<Bullet> bullets;
+
 
     public GameScreen(MontessoriSlug game, String username1, String username2, String lobbyName) {
         super(game);
         ResourceManager.loadAllResources();
+
+        bullets = new ArrayList<>();
 
         map = ResourceManager.getMap("assets/maps/map1.tmx");
 
@@ -102,6 +104,22 @@ public class GameScreen extends BScreen{
         }
     }
 
+    public void updateBulletsPosition(GameEvent gameEvent){
+        int numberOfBullets = gameEvent.bulletPositions.size() / 2;
+        int deltaBullets = numberOfBullets - bullets.size();
+        int i = 0;
+        for(Bullet b : bullets){
+            b.moveBy(gameEvent.bulletPositions.get(i) - b.getX(), gameEvent.bulletPositions.get(i+1) - b.getY());
+            i += 2;
+        }
+        if(deltaBullets != 0) {
+            for(int j = 0; j < deltaBullets; j++){
+                bullets.add(new Bullet(gameEvent.bulletPositions.get(i), gameEvent.bulletPositions.get(i+1), mainStage));
+                i += 2;
+            }
+        }
+    }
+
 
     public ArrayList<MapObject> getRectangleList(String propertyName) {
         ArrayList<MapObject> list = new ArrayList<MapObject>();
@@ -119,5 +137,11 @@ public class GameScreen extends BScreen{
         return list;
     }
 
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
+    }
 
+    public void setBullets(ArrayList<Bullet> bullets) {
+        this.bullets = bullets;
+    }
 }

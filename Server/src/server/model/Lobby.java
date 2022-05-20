@@ -3,6 +3,8 @@ package server.model;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 import server.events.game.GameEvent;
+import server.events.game.RemoveBulletEvent;
+import server.events.lobby.FinishLobby;
 import server.events.lobby.LobbyCreatedEvent;
 import server.game.gameServer.GameServer;
 import server.game.map.ServerMap;
@@ -15,11 +17,6 @@ public class Lobby implements ServerMap.onUpdate {
     ServerPlayer player2;
 
     public void createLobby(final ServerPlayer serverPlayer) {
-        if(this.player1 == null){
-            final LobbyCreatedEvent lobbyCreatedEvent = new LobbyCreatedEvent();
-            lobbyCreatedEvent.lobbyName = this.lobbyName;
-            serverPlayer.getConnection().sendTCP(lobbyCreatedEvent);
-        }
         this.player1 = serverPlayer;
     }
 
@@ -29,8 +26,6 @@ public class Lobby implements ServerMap.onUpdate {
 
     public void startLobbyGame(){
         this.gameServer = new GameServer(this, player1, player2);
-        //¿Quizá tenga que encerrar esto en un thread cada vez?
-
         //Headless Application
         HeadlessApplicationConfiguration conf = new HeadlessApplicationConfiguration();
         //60 Renders per second
@@ -59,11 +54,40 @@ public class Lobby implements ServerMap.onUpdate {
         this.player2 = player2;
     }
 
+    public String getLobbyName() {
+        return lobbyName;
+    }
+
+    public void setLobbyName(String lobbyName) {
+        this.lobbyName = lobbyName;
+    }
+
     @Override
     public void sendToBothClients(GameEvent gameEvent) {
         this.player1.getConnection().sendUDP(gameEvent);
         this.player2.getConnection().sendUDP(gameEvent);
     }
+
+    @Override
+    public void sendToBothClients(RemoveBulletEvent removeBulletEvent) {
+        this.player1.getConnection().sendUDP(removeBulletEvent);
+        this.player2.getConnection().sendUDP(removeBulletEvent);
+    }
+
+    public void sendToBothClients(FinishLobby finishLobby){
+        try{
+            this.player1.getConnection().sendTCP(finishLobby);
+        }catch (NullPointerException e){
+
+        }
+        try{
+            this.player2.getConnection().sendTCP(finishLobby);
+        }catch (NullPointerException e){
+
+        }
+
+    }
+
 
     public ServerPlayer getPlayerByUsername(String username){
         if(this.player1.getUsername().equalsIgnoreCase(username)){
@@ -79,5 +103,17 @@ public class Lobby implements ServerMap.onUpdate {
 
     public void setGameServer(GameServer gameServer) {
         this.gameServer = gameServer;
+    }
+
+    public void finish(){
+        System.out.println("LOG - Terminando el lobby y notificando a los clientes");
+        this.sendToBothClients(new FinishLobby());
+        try{
+            this.player1.getConnection().close();
+            this.player2.getConnection().close();
+            this.gameServer.dispose();
+        }catch (NullPointerException e){
+        }
+
     }
 }

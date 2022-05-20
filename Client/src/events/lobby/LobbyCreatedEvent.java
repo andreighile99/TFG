@@ -5,4 +5,7 @@ public class LobbyCreatedEvent {
     public String code;
     public String description;
     public String player1;
+
+    public LobbyCreatedEvent() {
+    }
 }

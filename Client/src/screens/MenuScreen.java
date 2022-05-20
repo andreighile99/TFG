@@ -2,13 +2,16 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.minlog.Log;
+import elements.Bullet;
+import events.game.BulletEvent;
 import events.game.GameEvent;
-import events.game.PositionEvent;
+import events.game.PlayerEvent;
+import events.game.RemoveBulletEvent;
 import events.lobby.*;
 import handlers.LabelHandler;
 import listeners.EventListener;
@@ -96,7 +99,6 @@ public class MenuScreen extends BScreen {
                 addListeners(client);
                 registerClasses(client);
 
-
                 try {
                     client.start();
                     client.connect(15000, ipAddressLabel.getText(), Integer.parseInt(portLabel.getText()),  Integer.parseInt(portLabel.getText()));
@@ -159,14 +161,18 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(LobbyCreatedEvent.class);
         client.getKryo().register(LobbyJoinedEvent.class);
         client.getKryo().register(LobbyStartEvent.class);
+        client.getKryo().register(FinishLobby.class);
 
         //Events happening in-game
         client.getKryo().register(GameEvent.class);
-        client.getKryo().register(PositionEvent.class);
-        client.getKryo().register(PositionEvent.DIRECTION.class);
+        client.getKryo().register(PlayerEvent.class);
+        client.getKryo().register(PlayerEvent.DIRECTION.class);
+        client.getKryo().register(BulletEvent.class);
+        client.getKryo().register(RemoveBulletEvent.class);
 
         //Common
         client.getKryo().register(ArrayList.class);
+        client.getKryo().register(Vector2.class);
     }
     public void renderErrorMessage(String errorMessage){
         this.errorLabel.setText(errorMessage);

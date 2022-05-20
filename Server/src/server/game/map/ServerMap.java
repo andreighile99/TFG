@@ -6,9 +6,7 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import server.events.game.GameEvent;
-import server.events.game.PositionEvent;
+import server.events.game.*;
 import server.game.elements.Solid;
 import server.handlers.ResourceManager;
 import server.model.ServerPlayer;
@@ -22,6 +20,7 @@ public class ServerMap {
     private onUpdate callback;
 
     private ArrayList<Float> playerPositions;
+    private ArrayList<Float> bulletPositions;
 
     private ServerPlayer player1;
     private ServerPlayer player2;
@@ -32,6 +31,7 @@ public class ServerMap {
     private TiledMap map;
     private ArrayList<Solid> solids;
     private ArrayList<MapObject> elements;
+    private ArrayList<Bullet> bullets;
 
 
     public ServerMap(onUpdate callback, ServerPlayer player1, ServerPlayer player2){
@@ -41,9 +41,8 @@ public class ServerMap {
 
         elements = new ArrayList<>();
 
-        //mainStage = new Stage();
+        bullets = new ArrayList<>();
 
-        //Add starting x and y
         MapProperties props;
 
         elements = getRectangleList("Inicio");
@@ -58,16 +57,14 @@ public class ServerMap {
         this.solids = new ArrayList<>();
         for (MapObject mapObject : elements) {
             props = mapObject.getProperties();
-            System.out.println("El sólido tiene las siguientes propiedades" + "\nX:" + props.get("x") + "\nY:" +props.get("y")+ "\nW:" +  props.get("width")+
-                    "\nH:" + props.get("height"));
             solid = new Solid((float) props.get("x"), (float) props.get("y"), (float) props.get("width"),
                     (float) props.get("height"));
-            //System.out.println("El sólido tiene las propiedades: " + "\nX: " + solid.getX() + "\nY: " + solid.getY() + "\nHeight: ");
             solids.add(solid);
             System.out.println(solid.getX()+""+solid.getY());
         }
 
         this.playerPositions = new ArrayList<>();
+        this.bulletPositions = new ArrayList<>();
         this.callback = callback;
 
         this.player1 = player1;
@@ -83,27 +80,26 @@ public class ServerMap {
         this.deltaTime = deltaTime;
 
         this.updatePlayersRectangles();
+        this.updateBulletsRectangles();
 
-        this.preventColision();
+        this.removeBullets();
+        this.preventOverlapping();
+
+        this.updateBulletsPosition();
 
         this.applyGravity();
 
-        GameEvent gameEvent = new GameEvent();
-        this.gatherPlayerPositions();
-
-        gameEvent.playerPositions = this.playerPositions;
-        gameEvent.player1 = this.player1.getUsername();
-        gameEvent.player2 = this.player2.getUsername();
-
-        this.callback.sendToBothClients(gameEvent);
+        this.sendGameUpdate();
     }
 
     public interface onUpdate{
         void sendToBothClients(GameEvent gameEvent);
+
+        void sendToBothClients(RemoveBulletEvent removeBulletEvent);
     }
 
-    public void updatePlayerPosition(PositionEvent message) {
-            ServerPlayer player = this.checkPlayerNickname(message);
+    public void updatePlayerPosition(PlayerEvent message) {
+            ServerPlayer player = this.getPlayerByNickName(message);
             Vector2 v = player.getPosition();
             switch (message.getDirection()) {
                 case LEFT:
@@ -114,29 +110,61 @@ public class ServerMap {
                     break;
                 case UP:
                     if(player.isOnGround()){
-                        v.y += deltaTime * 1000;
+                        v.y += deltaTime * 1500;
                     }
-                    break;
-                case DOWN:
-                    v.y -= deltaTime * 200;
                     break;
                 default:
                     break;
             }
-        //System.out.println("El jugador se ha movido a la posición " + player.getPosition().x + " " + player.getPosition().y);
     }
 
-    private void updatePlayersRectangles(){
-        this.player1.updateRectanglePosition(player1.getPosition().x, player1.getPosition().y);
-        this.player2.updateRectanglePosition(player2.getPosition().x, player2.getPosition().y);
+    private void updatePlayersRectangles() {
+        this.player1.updateRectanglePosition();
+        this.player2.updateRectanglePosition();
     }
 
-    public ServerPlayer checkPlayerNickname(PositionEvent message){
+    public void playerShoots(BulletEvent message){
+        ServerPlayer player = this.getPlayerByNickName(message);
+        if(message.getBulletDirection() != null){
+            Bullet bullet = new Bullet(player.getPosition().x, player.getPosition().y, message.getBulletDirection());
+            this.bullets.add(bullet);
+        }
+    }
+
+    public void updateBulletsPosition(){
+        if(!bullets.isEmpty()){
+            for(Bullet b : bullets){
+                if(b.isEnabled()){
+                    b.getPosition().x += b.getBulletDirection().x * deltaTime * 350;
+                    b.getPosition().y += b.getBulletDirection().y * deltaTime * 350;
+                    b.updateBulletRectangle();
+                }
+            }
+        }
+    }
+
+    public void updateBulletsRectangles(){
+        if(!bullets.isEmpty()){
+            for(Bullet b : bullets){
+                if(b.isEnabled()){
+                    b.updateBulletRectangle();
+                }
+            }
+        }
+    }
+
+    public ServerPlayer getPlayerByNickName(PlayerEvent message){
         if(this.player1.getUsername().equalsIgnoreCase(message.getUsername())){
-            //System.out.println("Recibida una actualización del jugador 1");
             return this.player1;
         }else{
-            //System.out.println("Recibida una actualización del jugador 2");
+            return this.player2;
+        }
+    }
+
+    public ServerPlayer getPlayerByNickName(BulletEvent message){
+        if(this.player1.getUsername().equalsIgnoreCase(message.getUsername())){
+            return this.player1;
+        }else{
             return this.player2;
         }
     }
@@ -147,13 +175,35 @@ public class ServerMap {
         }
        this.playerPositions.add(this.player1.getPosition().x);
        this.playerPositions.add(this.player1.getPosition().y);
-       //System.out.println("LOG - Jugador1 posición = " + this.player1.getPosition().x + " " + this.player1.getPosition().y);
        this.playerPositions.add(this.player2.getPosition().x);
        this.playerPositions.add(this.player2.getPosition().y);
     }
 
+    public void gatherBulletsPositions(){
+        if(!bullets.isEmpty()){
+            bulletPositions.clear();
+            for(Bullet b : bullets){
+                bulletPositions.add(b.getPosition().x);
+                bulletPositions.add(b.getPosition().y);
+            }
+        }
+    }
+
+    private void sendGameUpdate(){
+        GameEvent gameEvent = new GameEvent();
+        this.gatherPlayerPositions();
+        this.gatherBulletsPositions();
+
+        gameEvent.playerPositions = this.playerPositions;
+        gameEvent.player1 = this.player1.getUsername();
+        gameEvent.player2 = this.player2.getUsername();
+        gameEvent.bulletPositions = this.bulletPositions;
+
+        this.callback.sendToBothClients(gameEvent);
+    }
+
     private ArrayList<MapObject> getRectangleList(String propertyName) {
-        ArrayList<MapObject> list = new ArrayList<MapObject>();
+        ArrayList<MapObject> list = new ArrayList<>();
         for (MapLayer layer : map.getLayers()) {
             for (MapObject obj : layer.getObjects()) {
                 if (!(obj instanceof RectangleMapObject))
@@ -179,18 +229,17 @@ public class ServerMap {
         }
     }
 
-    //?¿?
-    private void preventColision(){
+
+
+    private void preventOverlapping(){
         player1.setOnGround(false);
         player2.setOnGround(false);
         for(Solid s : this.solids){
             if(s.isCollision(this.player1.getBoundRect())){
                 player1.preventOverlap(s.getColision());
-                System.out.println(s.getX()+" "+s.getY());
             }
             if(s.isCollision(this.player1.getFeet())){
                 this.player1.setOnGround(true);
-                System.out.println(s.getX()+" "+s.getY());
             }
             if(s.isCollision(this.player2.getBoundRect())){
                 player2.preventOverlap(s.getColision());
@@ -199,6 +248,24 @@ public class ServerMap {
                 this.player2.setOnGround(true);
             }
         }
+    }
+
+    private void removeBullets(){
+        for(Solid s : solids){
+            if(!bullets.isEmpty()){
+                RemoveBulletEvent removeBulletEvent = new RemoveBulletEvent();
+                removeBulletEvent.setBulletIndex(new ArrayList<>());
+                for(Bullet b : bullets){
+                    if(s.isCollision(b.getBoundRect())){
+                        removeBulletEvent.getBulletIndex().add(this.bullets.indexOf(b));
+                    }
+                }
+                bullets.removeAll(removeBulletEvent.getBulletIndex());
+                this.callback.sendToBothClients(removeBulletEvent);
+            }
+        }
+
+        //Add enemies with damage
     }
 
 }

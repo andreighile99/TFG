@@ -8,6 +8,7 @@ public class GameEvent {
     public ArrayList<Float> playerPositions;
     public String player1;
     public String player2;
+    public ArrayList<Float> bulletPositions;
 
     public GameEvent() {
     }

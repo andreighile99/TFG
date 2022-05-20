@@ -1,16 +1,18 @@
 package server.main;
 
-import com.badlogic.gdx.backends.headless.HeadlessApplication;
-import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
-import server.events.game.PositionEvent;
-import server.game.gameServer.GameServer;
+import com.badlogic.gdx.math.Vector2;
+import server.events.game.*;
 import server.listeners.GameEventListener;
+import server.listeners.LeaveListener;
 import server.listeners.LobbyListener;
-import server.events.game.GameEvent;
 import server.events.lobby.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class Server {
     public static Server instance;
@@ -18,15 +20,33 @@ public class Server {
     private com.esotericsoftware.kryonet.Server server;
 
     public static void main(String[] args) {
-        Server.instance = new Server();
+        Properties properties = new Properties();
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream("server.properties");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("LOG - Se ha detectado un fallo al localizar el archivo server.properties");
+        }
+
+        try {
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("LOG - Ha ocurrido un error al cargar las propiedades del archivo server.properties");
+        }
+
+        Server.instance = new Server(Integer.parseInt(
+                properties.getProperty("server.port")
+        ));
     }
 
-    public Server() {
+    public Server(int port) {
         this.server = new com.esotericsoftware.kryonet.Server();
-        registerClasses(server);
-        addListeners(server);
+        registerClasses();
+        addListeners();
 
-        this.bindServer(9998, 9998);
+        this.bindServer(port, port);
     }
 
     public void bindServer(final int tcpPort, final int udpPort) {
@@ -36,22 +56,23 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("[OK] El servidor está levantado");
+        System.out.println("[OK] El servidor está levantado en el puerto " + tcpPort);
 
     }
 
 
-    public void addListeners(com.esotericsoftware.kryonet.Server server){
+    public void addListeners(){
         /** Listeners **/
 
         //Lobby
         this.server.addListener(new LobbyListener());
+        this.server.addListener(new LeaveListener());
 
         //Game events
         this.server.addListener(new GameEventListener());
     }
 
-    public void registerClasses(com.esotericsoftware.kryonet.Server server){
+    public void registerClasses(){
         /** Events register **/
 
         //Lobby
@@ -60,14 +81,18 @@ public class Server {
         this.server.getKryo().register(LobbyCreatedEvent.class);
         this.server.getKryo().register(LobbyJoinedEvent.class);
         this.server.getKryo().register(LobbyStartEvent.class);
+        this.server.getKryo().register(FinishLobby.class);
 
         //Game events
         this.server.getKryo().register(GameEvent.class);
-        this.server.getKryo().register(PositionEvent.class);
-        this.server.getKryo().register(PositionEvent.DIRECTION.class);
+        this.server.getKryo().register(PlayerEvent.class);
+        this.server.getKryo().register(PlayerEvent.DIRECTION.class);
+        this.server.getKryo().register(BulletEvent.class);
+        this.server.getKryo().register(RemoveBulletEvent.class);
 
         //Common
         this.server.getKryo().register(ArrayList.class);
+        this.server.getKryo().register(Vector2.class);
 
     }
     public com.esotericsoftware.kryonet.Server getServer() {
