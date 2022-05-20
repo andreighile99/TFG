@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import server.events.game.*;
+import server.game.elements.Soldier;
 import server.game.elements.Solid;
 import server.handlers.ResourceManager;
 import server.model.ServerPlayer;
@@ -20,7 +21,8 @@ public class ServerMap {
     private onUpdate callback;
 
     private ArrayList<Float> playerPositions;
-    private ArrayList<Float> bulletPositions;
+    private ArrayList<Float> bulletsPositions;
+    private ArrayList<Float> soldiersPositions;
 
     private ServerPlayer player1;
     private ServerPlayer player2;
@@ -30,6 +32,7 @@ public class ServerMap {
 
     private TiledMap map;
     private ArrayList<Solid> solids;
+    private ArrayList<Soldier> soldiers;
     private ArrayList<MapObject> elements;
     private ArrayList<Bullet> bullets;
 
@@ -60,11 +63,23 @@ public class ServerMap {
             solid = new Solid((float) props.get("x"), (float) props.get("y"), (float) props.get("width"),
                     (float) props.get("height"));
             solids.add(solid);
-            System.out.println(solid.getX()+""+solid.getY());
         }
 
+        //Add soldiers
+        Soldier soldier;
+        elements = getRectangleList("Soldier");
+        this.soldiers = new ArrayList<>();
+        this.solids = new ArrayList<>();
+        for (MapObject mapObject : elements) {
+            props = mapObject.getProperties();
+            soldier = new Soldier((float) props.get("x"), (float) props.get("y"));
+            soldiers.add(soldier);
+        }
+
+
         this.playerPositions = new ArrayList<>();
-        this.bulletPositions = new ArrayList<>();
+        this.bulletsPositions = new ArrayList<>();
+        this.soldiersPositions = new ArrayList<>();
         this.callback = callback;
 
         this.player1 = player1;
@@ -82,8 +97,8 @@ public class ServerMap {
         this.updatePlayersRectangles();
         this.updateBulletsRectangles();
 
-        this.removeBullets();
         this.preventOverlapping();
+        this.removeBullets();
 
         this.updateBulletsPosition();
 
@@ -181,10 +196,20 @@ public class ServerMap {
 
     public void gatherBulletsPositions(){
         if(!bullets.isEmpty()){
-            bulletPositions.clear();
+            bulletsPositions.clear();
             for(Bullet b : bullets){
-                bulletPositions.add(b.getPosition().x);
-                bulletPositions.add(b.getPosition().y);
+                bulletsPositions.add(b.getPosition().x);
+                bulletsPositions.add(b.getPosition().y);
+            }
+        }
+    }
+
+    public void gatherSoldiersPositions(){
+        if(!soldiers.isEmpty()){
+            soldiersPositions.clear();
+            for(Soldier s : soldiers){
+                soldiersPositions.add(s.getPosition().x);
+                soldiersPositions.add(s.getPosition().y);
             }
         }
     }
@@ -193,11 +218,13 @@ public class ServerMap {
         GameEvent gameEvent = new GameEvent();
         this.gatherPlayerPositions();
         this.gatherBulletsPositions();
+        this.gatherSoldiersPositions();
 
         gameEvent.playerPositions = this.playerPositions;
         gameEvent.player1 = this.player1.getUsername();
         gameEvent.player2 = this.player2.getUsername();
-        gameEvent.bulletPositions = this.bulletPositions;
+        gameEvent.bulletPositions = this.bulletsPositions;
+        gameEvent.soldierPositions = this.soldiersPositions;
 
         this.callback.sendToBothClients(gameEvent);
     }
@@ -266,6 +293,23 @@ public class ServerMap {
         }
 
         //Add enemies with damage
+        for(Soldier s : soldiers){
+            if(!bullets.isEmpty()){
+                RemoveBulletEvent removeBulletEvent = new RemoveBulletEvent();
+                removeBulletEvent.setBulletIndex(new ArrayList<>());
+                RemoveEnemyEvent removeEnemyEvent = new RemoveEnemyEvent();
+                removeEnemyEvent.setSoldiersIndex(new ArrayList<>());
+                for(Bullet b : bullets){
+                    if(s.isCollision(b.getBoundRect())){
+                        s.setHp(s.getHp()-1);
+                        removeBulletEvent.getBulletIndex().add(this.bullets.indexOf(b));
+                        if(s.getHp() == 0){
+                            removeEnemyEvent.getSoldiersIndex().add(this.soldiers.indexOf(s));
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

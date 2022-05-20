@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import handlers.ResourceManager;
+import parameters.Parameters;
 
 
 public class Element extends Actor {
@@ -89,7 +90,7 @@ public class Element extends Actor {
                     getX(), getY(), getOriginX(), getOriginY(),
                     animation.getKeyFrame(animationTime).getRegionWidth(), animation.getKeyFrame(animationTime).getRegionHeight(), getScaleX(), getScaleY(), getRotation() );
             }
-            if(true) {
+            if(Parameters.debug) {
                 pintarCaja(batch);
             }
             super.draw(batch, parentAlpha);

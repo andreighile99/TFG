@@ -36,6 +36,7 @@ public final class ResourceManager {
 
         assets.load("assets/player/idle.png", Texture.class);
         assets.load("assets/player/Bola.png", Texture.class);
+        assets.load("assets/enemies/spider.png", Texture.class);
 
         assets.finishLoading();
 

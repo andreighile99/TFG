@@ -9,17 +9,11 @@ public class GameEvent {
     public String player2;
     //x1, y1, x2, y2, x3, y3
     public ArrayList<Float> bulletPositions;
+    public ArrayList<Float> soldierPositions;
 
     public GameEvent() {
     }
 
-    public ArrayList<Float> getPlayerPositions() {
-        return playerPositions;
-    }
-
-    public void setPlayerPositions(ArrayList<Float> playerPositions) {
-        this.playerPositions = playerPositions;
-    }
 
 
 }

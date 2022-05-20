@@ -1,9 +1,7 @@
 package server.handlers;
 
 import com.esotericsoftware.kryonet.Connection;
-import server.main.Server;
 import server.model.Lobby;
-import server.model.ServerPlayer;
 
 import java.util.LinkedHashMap;
 
@@ -25,16 +23,14 @@ public class LobbyHandler {
     }
 
     public void finishLobbyByConnection(Connection conn){
+        Lobby lobbyToDelete = null;
         for(Lobby lobby : lobbies.values()){
-            if(lobby.getPlayer1().getConnection() == conn){
+            if(lobby.getPlayer1().getConnection() == conn || lobby.getPlayer2().getConnection() == conn){
                 lobby.finish();
-                lobbies.remove(lobby.getLobbyName());
-            }
-            else if(lobby.getPlayer2().getConnection() == conn){
-                lobby.finish();
-                lobbies.remove(lobby.getLobbyName());
+                lobbyToDelete = lobby;
             }
         }
+        this.lobbies.values().remove(lobbyToDelete);
     }
 
 

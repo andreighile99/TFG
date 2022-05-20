@@ -5,7 +5,6 @@ import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 import server.events.game.GameEvent;
 import server.events.game.RemoveBulletEvent;
 import server.events.lobby.FinishLobby;
-import server.events.lobby.LobbyCreatedEvent;
 import server.game.gameServer.GameServer;
 import server.game.map.ServerMap;
 
@@ -34,9 +33,6 @@ public class Lobby implements ServerMap.onUpdate {
         new HeadlessApplication(this.gameServer, conf);
 
     }
-
-    //MUST IMPLEMENT REMOVE
-
 
     public ServerPlayer getPlayer1() {
         return player1;
@@ -105,14 +101,17 @@ public class Lobby implements ServerMap.onUpdate {
         this.gameServer = gameServer;
     }
 
+    //End the instance and prepare it for deletion
     public void finish(){
         System.out.println("LOG - Terminando el lobby y notificando a los clientes");
         this.sendToBothClients(new FinishLobby());
         try{
+            //Close both connections
             this.player1.getConnection().close();
             this.player2.getConnection().close();
             this.gameServer.dispose();
         }catch (NullPointerException e){
+
         }
 
     }

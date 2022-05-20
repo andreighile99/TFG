@@ -38,8 +38,6 @@ public class LobbyListener extends Listener {
 
                 return;
             }
-
-
         }
 
         else if(object instanceof JoinLobbyEvent){
@@ -66,17 +64,16 @@ public class LobbyListener extends Listener {
 
             //Two messages one for whoever joins, other message for whoever is waiting in the lobby
 
+            //First message
             final LobbyJoinedEvent lobbyJoinedEvent = new LobbyJoinedEvent();
             lobbyJoinedEvent.lobbyName = joinLobbyEvent.lobbyName;
             lobbyJoinedEvent.code = "01";
             lobbyJoinedEvent.player1 = LobbyHandler.INSTANCE.getLobbies().get(joinLobbyEvent.lobbyName).getPlayer1().getUsername();
             lobbyJoinedEvent.player2 = LobbyHandler.INSTANCE.getLobbies().get(joinLobbyEvent.lobbyName).getPlayer2().getUsername();
-
-            //Return to the player who initialized the joining
             connection.sendTCP(lobbyJoinedEvent);
             System.out.println("LOG - El jugador que ha intentado conectarse pulsando el botón ha sido notificado");
 
-            //Return to the other player that is waiting for someone to join
+            //Second message
             LobbyHandler.INSTANCE.getLobbies().get(joinLobbyEvent.lobbyName).getPlayer1().getConnection().sendTCP(lobbyJoinedEvent);
             System.out.println("LOG - El jugador que estaba esperando ha sido notificado");
             return;
@@ -103,14 +100,12 @@ public class LobbyListener extends Listener {
             }else{
                 lobbyStartEventResponse.code = "01";
                 connection.sendTCP(lobbyStartEventResponse);
+                System.out.println("LOG - Notificación a los clientes satisfactoria");
                 //Notify both players
-                System.out.println("LOG - Se comienza a ejecutar la partida de la sala [ " + lobbyStartEvent.lobbyName + " ] y se notifica a los clientes");
+                System.out.println("LOG - Se comienza a ejecutar la partida de la sala [ " + lobbyStartEvent.lobbyName + " ]");
                 LobbyHandler.INSTANCE.getLobbies().get(lobbyStartEvent.lobbyName).getPlayer1().getConnection().sendTCP(lobbyStartEventResponse);
                 LobbyHandler.INSTANCE.getLobbies().get(lobbyStartEvent.lobbyName).getPlayer2().getConnection().sendTCP(lobbyStartEventResponse);
-
                 LobbyHandler.INSTANCE.getLobbies().get(lobbyStartEvent.lobbyName).startLobbyGame();
-
-                System.out.println("LOG - Notificación a los clientes satisfactoria");
                 return;
             }
         }

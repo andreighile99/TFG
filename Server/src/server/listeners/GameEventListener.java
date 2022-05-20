@@ -16,7 +16,9 @@ public class GameEventListener extends Listener {
             LobbyHandler.INSTANCE.getLobbies().get(playerEvent.getLobyName()).getGameServer().getServerMap().updatePlayerPosition(playerEvent);
             return;
         }else if(object instanceof BulletEvent){
+            //The client shot a bullet
             BulletEvent bulletEvent = (BulletEvent)object;
+            //Make the bullet appear in the server
             LobbyHandler.INSTANCE.getLobbies().get(bulletEvent.getLobbyName()).getGameServer().getServerMap().playerShoots(bulletEvent);
             return;
         }

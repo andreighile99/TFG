@@ -9,15 +9,9 @@ public class GameEvent {
     public String player1;
     public String player2;
     public ArrayList<Float> bulletPositions;
+    public ArrayList<Float> soldierPositions;
 
     public GameEvent() {
     }
 
-    public ArrayList<Float> getPlayerPositions() {
-        return playerPositions;
-    }
-
-    public void setPlayerPositions(ArrayList<Float> playerPositions) {
-        this.playerPositions = playerPositions;
-    }
 }
