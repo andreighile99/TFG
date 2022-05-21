@@ -35,25 +35,5 @@ public class GameEventListener extends Listener {
             }
         }
 
-        else if(object instanceof RemoveBulletEvent){
-            RemoveBulletEvent removeBulletEvent = (RemoveBulletEvent) object;
-            GameScreen gameScreen = (GameScreen) MontessoriSlug.getInstance().getScreen();
-            //Remove all bullets that were removed from the server, we get each index in the ArrayList sent by the server
-            for(Integer i : removeBulletEvent.getBulletIndex()){
-                gameScreen.getBullets().get(i).setEnabled(false);
-            }
-            //Remove them completely from the ArrayList so they don't collide with further instructions for each bullet
-            removeBulletEvent.getBulletIndex().stream().forEach(i->gameScreen.getBullets().remove(i));
-        }
-
-        else if(object instanceof RemoveEnemyEvent){
-            RemoveEnemyEvent removeEnemyEvent = (RemoveEnemyEvent) object;
-            GameScreen gameScreen = (GameScreen) MontessoriSlug.getInstance().getScreen();
-            for(Integer i : removeEnemyEvent.getSoldiersIndex()){
-                gameScreen.getSoldiers().get(i).setEnabled(false);
-            }
-            removeEnemyEvent.getSoldiersIndex().stream().forEach(i->gameScreen.getSoldiers().remove(i));
-        }
-
     }
 }

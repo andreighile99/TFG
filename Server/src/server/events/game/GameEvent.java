@@ -1,5 +1,8 @@
 package server.events.game;
 
+import server.game.elements.Bullet;
+import server.game.elements.Soldier;
+
 import java.util.ArrayList;
 
 public class GameEvent {
@@ -8,8 +11,8 @@ public class GameEvent {
     public ArrayList<Float> playerPositions;
     public String player1;
     public String player2;
-    public ArrayList<Float> bulletPositions;
-    public ArrayList<Float> soldierPositions;
+    public ArrayList<Bullet> bullets;
+    public ArrayList<Soldier> soldiers;
 
     public GameEvent() {
     }

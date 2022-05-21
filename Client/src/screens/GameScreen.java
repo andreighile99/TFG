@@ -8,13 +8,14 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import elements.Bullet;
+import elements.BulletRep;
 import elements.ManagedPlayer;
 import elements.Player;
-import elements.Soldier;
+import elements.SoldierRep;
 import events.game.GameEvent;
 import handlers.ResourceManager;
 import main.MontessoriSlug;
+import parameters.Parameters;
 
 import java.util.ArrayList;
 
@@ -32,16 +33,16 @@ public class GameScreen extends BScreen{
     private float inicioX;
     private float inicioY;
 
-    private ArrayList<Bullet> bullets;
-    private ArrayList<Soldier> soldiers;
+    private ArrayList<BulletRep> bulletReps;
+    private ArrayList<SoldierRep> soldierReps;
 
 
     public GameScreen(MontessoriSlug game, String username1, String username2, String lobbyName) {
         super(game);
         ResourceManager.loadAllResources();
 
-        bullets = new ArrayList<>();
-        soldiers = new ArrayList<>();
+        bulletReps = new ArrayList<>();
+        soldierReps = new ArrayList<>();
 
         map = ResourceManager.getMap("assets/maps/map1.tmx");
 
@@ -49,8 +50,8 @@ public class GameScreen extends BScreen{
         renderer = new OrthogonalTiledMapRenderer(map, mainStage.getBatch());
 
         camera = (OrthographicCamera) mainStage.getCamera();
-        camera.setToOrtho(false, 800,
-                600);
+        camera.setToOrtho(false, Parameters.screenWidth,
+                Parameters.screenHeight);
 
         ArrayList<MapObject> elements = getRectangleList("Inicio");
 
@@ -108,51 +109,44 @@ public class GameScreen extends BScreen{
     }
 
     public void updateBulletsPosition(GameEvent gameEvent){
-        //Number of bullets that have been reported by the server
-        int numberOfBullets = gameEvent.bulletPositions.size() / 2;
-        if(numberOfBullets > 0) {
-            System.out.println("He recibido " + numberOfBullets);
-            System.out.println("Yo tengo " + bullets.size());
-            //Diference between the bullets in the client and the bullets in the server
-            int deltaBullets = numberOfBullets - bullets.size();
-            //Counter so we can get the positions from the ArrayList
-            int i = 0;
-            //If there are more bullets in the server than there are rendered in my client we have to generate them
-            if (deltaBullets > 0) {
-                for (int j = 0; j < deltaBullets; j++) {
-                    //Make new bullets from where we left in the ArrayList using i
-                    bullets.add(new Bullet(gameEvent.bulletPositions.get(i), gameEvent.bulletPositions.get(i + 1), mainStage));
-                    i += 2;
-                }
-            }
-            for (Bullet b : bullets) {
-                if (i < gameEvent.bulletPositions.size()) {
-                    //These bullets were already displayed in my client so we just have to update them
-                    b.moveBy(gameEvent.bulletPositions.get(i) - b.getX(), gameEvent.bulletPositions.get(i + 1) - b.getY());
-                    i += 2;
-                }
+        int bulletsOnServer = gameEvent.bullets.size();
+        int deltaBullets = bulletsOnServer - this.bulletReps.size();
+        if(deltaBullets > 0){
+            for(int i = 0; i<deltaBullets; i++){
+                this.bulletReps.add(new BulletRep(gameEvent.bullets.get(i).getPosition().x, gameEvent.bullets.get(i).getPosition().y, mainStage));
             }
         }
+        for(int i = 0; i<bulletsOnServer; i++){
+            if(gameEvent.bullets.get(i).isEnabled()){
+                this.bulletReps.get(i).moveBy(gameEvent.bullets.get(i).getPosition().x - this.bulletReps.get(i).getX(), gameEvent.bullets.get(i).getPosition().y - this.bulletReps.get(i).getY());
+            }else{
+                    this.bulletReps.get(i).setEnabled(false);
+            }
+        }
+        cleanupDisabledElements();
+    }
+
+    public void cleanupDisabledElements(){
+        soldierReps.removeIf(soldier -> !soldier.getEnabled());
+        bulletReps.removeIf(bullet -> !bullet.getEnabled());
     }
 
     public void updateSoldiersPosition(GameEvent gameEvent){
-        int numberOfSoldiers = gameEvent.soldierPositions.size() / 2;
-        if(numberOfSoldiers > 1){
-            int deltaSoldiers = numberOfSoldiers - soldiers.size();
-            int i = 0;
-            if(deltaSoldiers > 0) {
-                for(int j = 0; j < deltaSoldiers; j++){
-                    soldiers.add(new Soldier(gameEvent.soldierPositions.get(i), gameEvent.soldierPositions.get(i+1), mainStage));
-                    i += 2;
-                }
-            }
-            for(Soldier s :soldiers){
-                if(i < gameEvent.soldierPositions.size()) {
-                    s.moveBy(gameEvent.soldierPositions.get(i) - s.getX(), gameEvent.soldierPositions.get(i + 1) - s.getY());
-                    i += 2;
-                }
+        int soldiersOnServer = gameEvent.soldiers.size();
+        int deltaSoldiers = soldiersOnServer - this.soldierReps.size();
+        if(deltaSoldiers > 0){
+            for(int i = 0; i<deltaSoldiers; i++){
+                this.soldierReps.add(new SoldierRep(gameEvent.soldiers.get(i).getPosition().x,gameEvent.soldiers.get(i).getPosition().y, mainStage));
             }
         }
+        for(int i = 0; i<soldiersOnServer; i++){
+            if(gameEvent.soldiers.get(i).isEnabled()){
+                this.soldierReps.get(i).moveBy(gameEvent.soldiers.get(i).getPosition().x - this.soldierReps.get(i).getX(), gameEvent.soldiers.get(i).getPosition().y - this.soldierReps.get(i).getY());
+            }else{
+                this.soldierReps.get(i).setEnabled(false);
+            }
+        }
+        cleanupDisabledElements();
     }
 
 
@@ -172,19 +166,19 @@ public class GameScreen extends BScreen{
         return list;
     }
 
-    public ArrayList<Bullet> getBullets() {
-        return bullets;
+    public ArrayList<BulletRep> getBulletReps() {
+        return bulletReps;
     }
 
-    public void setBullets(ArrayList<Bullet> bullets) {
-        this.bullets = bullets;
+    public void setBulletReps(ArrayList<BulletRep> bulletReps) {
+        this.bulletReps = bulletReps;
     }
 
-    public ArrayList<Soldier> getSoldiers() {
-        return soldiers;
+    public ArrayList<SoldierRep> getSoldierReps() {
+        return soldierReps;
     }
 
-    public void setSoldiers(ArrayList<Soldier> soldiers) {
-        this.soldiers = soldiers;
+    public void setSoldierReps(ArrayList<SoldierRep> soldierReps) {
+        this.soldierReps = soldierReps;
     }
 }

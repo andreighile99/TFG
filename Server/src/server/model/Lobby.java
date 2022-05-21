@@ -65,17 +65,6 @@ public class Lobby implements ServerMap.onUpdate {
         this.player2.getConnection().sendUDP(gameEvent);
     }
 
-    @Override
-    public void sendToBothClients(RemoveBulletEvent removeBulletEvent) {
-        this.player1.getConnection().sendUDP(removeBulletEvent);
-        this.player2.getConnection().sendUDP(removeBulletEvent);
-    }
-
-    @Override
-    public void sendToBothClients(RemoveEnemyEvent removeEnemyEvent) {
-        this.player1.getConnection().sendUDP(removeEnemyEvent);
-        this.player2.getConnection().sendUDP(removeEnemyEvent);
-    }
 
     public void sendToBothClients(FinishLobby finishLobby){
         try{

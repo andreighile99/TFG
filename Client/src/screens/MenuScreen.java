@@ -2,12 +2,15 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.esotericsoftware.kryonet.Client;
-import elements.Bullet;
+import elements.BulletRep;
+import elements.serverSide.Bullet;
+import elements.serverSide.Soldier;
 import events.game.*;
 import events.lobby.*;
 import handlers.LabelHandler;
@@ -165,12 +168,13 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(PlayerEvent.class);
         client.getKryo().register(PlayerEvent.DIRECTION.class);
         client.getKryo().register(BulletEvent.class);
-        client.getKryo().register(RemoveBulletEvent.class);
-        client.getKryo().register(RemoveEnemyEvent.class);
 
         //Common
         client.getKryo().register(ArrayList.class);
         client.getKryo().register(Vector2.class);
+        client.getKryo().register(Rectangle.class);
+        client.getKryo().register(Bullet.class);
+        client.getKryo().register(Soldier.class);
     }
     public void renderErrorMessage(String errorMessage){
         this.errorLabel.setText(errorMessage);

@@ -9,6 +9,8 @@ public class Bullet {
     private Vector2 bulletDirection;
     private boolean enabled;
 
+    public Bullet() {
+    }
 
     public Bullet(Float positionX, Float positionY, Vector2 bulletDirection) {
         this.enabled = true;

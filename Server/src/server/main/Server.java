@@ -1,7 +1,10 @@
 package server.main;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import server.events.game.*;
+import server.game.elements.Bullet;
+import server.game.elements.Soldier;
 import server.listeners.GameEventListener;
 import server.listeners.LeaveListener;
 import server.listeners.LobbyListener;
@@ -88,12 +91,13 @@ public class Server {
         this.server.getKryo().register(PlayerEvent.class);
         this.server.getKryo().register(PlayerEvent.DIRECTION.class);
         this.server.getKryo().register(BulletEvent.class);
-        this.server.getKryo().register(RemoveBulletEvent.class);
-        this.server.getKryo().register(RemoveEnemyEvent.class);
 
         //Common
         this.server.getKryo().register(ArrayList.class);
         this.server.getKryo().register(Vector2.class);
+        this.server.getKryo().register(Rectangle.class);
+        this.server.getKryo().register(Bullet.class);
+        this.server.getKryo().register(Soldier.class);
 
     }
     public com.esotericsoftware.kryonet.Server getServer() {

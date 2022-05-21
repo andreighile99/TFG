@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-public class Bullet extends Element{
+public class BulletRep extends Element{
 	private Animation<TextureRegion> bullet;
 	
-	public Bullet(float x, float y, Stage s) {
+	public BulletRep(float x, float y, Stage s) {
 		
 	
 		super(x, y, s);

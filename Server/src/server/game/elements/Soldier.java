@@ -9,11 +9,21 @@ public class Soldier {
     private Vector2 position;
     private Rectangle boundRectangle;
     private int hp;
+    private boolean enabled;
+
+    public Soldier() {
+    }
 
     public Soldier(float x, float y) {
+        this.enabled = true;
         this.hp = 5;
         this.position = new Vector2(x,y);
-        this.boundRectangle = new Rectangle(x,y,10, 10);
+        this.boundRectangle = new Rectangle(x,y,20, 20);
+    }
+
+    public void updateSoldierPosition(){
+        Vector2 center = this.boundRectangle.getCenter(this.position);
+        this.boundRectangle.setPosition(center.x, center.y);
     }
 
     public Vector2 getPosition() {
@@ -40,6 +50,11 @@ public class Soldier {
         this.hp = hp;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }

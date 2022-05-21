@@ -6,8 +6,8 @@ public class Parameters {
     //private static int anchoPantalla=1200;
     //private static int altoPantalla=900;
 
-    private static int anchoPantalla=1280;
-    private static int altoPantalla=720;
+    public static int screenWidth=1280;
+    public static int screenHeight=720;
 
     public static boolean debug=false;
 
