@@ -110,40 +110,49 @@ public class GameScreen extends BScreen{
     public void updateBulletsPosition(GameEvent gameEvent){
         //Number of bullets that have been reported by the server
         int numberOfBullets = gameEvent.bulletPositions.size() / 2;
-        //Diference between the bullets in the client and the bullets in the server
-        int deltaBullets = numberOfBullets - bullets.size();
-        //Counter so we can get the positions from the ArrayList
-        int i = 0;
-        for(Bullet b : bullets){
-            //These bullets were already displayed in my client so we just have to update them
-            b.moveBy(gameEvent.bulletPositions.get(i) - b.getX(), gameEvent.bulletPositions.get(i+1) - b.getY());
-            i += 2;
-        }
-        //If there are more bullets in the server than there are rendered in my client we have to generate them
-        if(deltaBullets != 0) {
-            for(int j = 0; j < deltaBullets; j++){
-                //Make new bullets from where we left in the ArrayList using i
-                bullets.add(new Bullet(gameEvent.bulletPositions.get(i), gameEvent.bulletPositions.get(i+1), mainStage));
-                i += 2;
+        if(numberOfBullets > 0) {
+            System.out.println("He recibido " + numberOfBullets);
+            System.out.println("Yo tengo " + bullets.size());
+            //Diference between the bullets in the client and the bullets in the server
+            int deltaBullets = numberOfBullets - bullets.size();
+            //Counter so we can get the positions from the ArrayList
+            int i = 0;
+            //If there are more bullets in the server than there are rendered in my client we have to generate them
+            if (deltaBullets > 0) {
+                for (int j = 0; j < deltaBullets; j++) {
+                    //Make new bullets from where we left in the ArrayList using i
+                    bullets.add(new Bullet(gameEvent.bulletPositions.get(i), gameEvent.bulletPositions.get(i + 1), mainStage));
+                    i += 2;
+                }
+            }
+            for (Bullet b : bullets) {
+                if (i < gameEvent.bulletPositions.size()) {
+                    //These bullets were already displayed in my client so we just have to update them
+                    b.moveBy(gameEvent.bulletPositions.get(i) - b.getX(), gameEvent.bulletPositions.get(i + 1) - b.getY());
+                    i += 2;
+                }
             }
         }
     }
 
     public void updateSoldiersPosition(GameEvent gameEvent){
         int numberOfSoldiers = gameEvent.soldierPositions.size() / 2;
-        int deltaSoldiers = numberOfSoldiers - soldiers.size();
-        int i = 0;
-        for(Soldier s :soldiers){
-            s.moveBy(gameEvent.soldierPositions.get(i) - s.getX(), gameEvent.soldierPositions.get(i+1) - s.getY());
-            i+=2;
-        }
-        if(deltaSoldiers != 0) {
-            for(int j = 0; j < deltaSoldiers; j++){
-                soldiers.add(new Soldier(gameEvent.soldierPositions.get(i), gameEvent.soldierPositions.get(i+1), mainStage));
-                i += 2;
+        if(numberOfSoldiers > 1){
+            int deltaSoldiers = numberOfSoldiers - soldiers.size();
+            int i = 0;
+            if(deltaSoldiers > 0) {
+                for(int j = 0; j < deltaSoldiers; j++){
+                    soldiers.add(new Soldier(gameEvent.soldierPositions.get(i), gameEvent.soldierPositions.get(i+1), mainStage));
+                    i += 2;
+                }
+            }
+            for(Soldier s :soldiers){
+                if(i < gameEvent.soldierPositions.size()) {
+                    s.moveBy(gameEvent.soldierPositions.get(i) - s.getX(), gameEvent.soldierPositions.get(i + 1) - s.getY());
+                    i += 2;
+                }
             }
         }
-
     }
 
 
@@ -169,5 +178,13 @@ public class GameScreen extends BScreen{
 
     public void setBullets(ArrayList<Bullet> bullets) {
         this.bullets = bullets;
+    }
+
+    public ArrayList<Soldier> getSoldiers() {
+        return soldiers;
+    }
+
+    public void setSoldiers(ArrayList<Soldier> soldiers) {
+        this.soldiers = soldiers;
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 import server.events.game.GameEvent;
 import server.events.game.RemoveBulletEvent;
+import server.events.game.RemoveEnemyEvent;
 import server.events.lobby.FinishLobby;
 import server.game.gameServer.GameServer;
 import server.game.map.ServerMap;
@@ -68,6 +69,12 @@ public class Lobby implements ServerMap.onUpdate {
     public void sendToBothClients(RemoveBulletEvent removeBulletEvent) {
         this.player1.getConnection().sendUDP(removeBulletEvent);
         this.player2.getConnection().sendUDP(removeBulletEvent);
+    }
+
+    @Override
+    public void sendToBothClients(RemoveEnemyEvent removeEnemyEvent) {
+        this.player1.getConnection().sendUDP(removeEnemyEvent);
+        this.player2.getConnection().sendUDP(removeEnemyEvent);
     }
 
     public void sendToBothClients(FinishLobby finishLobby){

@@ -89,6 +89,7 @@ public class Server {
         this.server.getKryo().register(PlayerEvent.DIRECTION.class);
         this.server.getKryo().register(BulletEvent.class);
         this.server.getKryo().register(RemoveBulletEvent.class);
+        this.server.getKryo().register(RemoveEnemyEvent.class);
 
         //Common
         this.server.getKryo().register(ArrayList.class);

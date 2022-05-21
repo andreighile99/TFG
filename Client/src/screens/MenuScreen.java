@@ -8,10 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.esotericsoftware.kryonet.Client;
 import elements.Bullet;
-import events.game.BulletEvent;
-import events.game.GameEvent;
-import events.game.PlayerEvent;
-import events.game.RemoveBulletEvent;
+import events.game.*;
 import events.lobby.*;
 import handlers.LabelHandler;
 import listeners.EventListener;
@@ -169,6 +166,7 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(PlayerEvent.DIRECTION.class);
         client.getKryo().register(BulletEvent.class);
         client.getKryo().register(RemoveBulletEvent.class);
+        client.getKryo().register(RemoveEnemyEvent.class);
 
         //Common
         client.getKryo().register(ArrayList.class);

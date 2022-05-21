@@ -40,21 +40,6 @@ public class Soldier {
         this.hp = hp;
     }
 
-    // Check if Polygon intersects Rectangle
-    public boolean isCollision(Rectangle r) {
-        Polygon rPoly = new Polygon(new float[] { 0, 0, r.width, 0, r.width,
-                r.height, 0, r.height });
-        rPoly.setPosition(r.x, r.y);
-
-        Polygon rPolyBound = new Polygon(new float[] { 0, 0, r.width, 0, r.width,
-                r.height, 0, r.height });
-        rPolyBound.setPosition(this.position.x, this.position.y);
-
-        if (Intersector.overlapConvexPolygons(rPolyBound, rPoly)){
-            return true;
-        }
-        return false;
-    }
 
 
 }

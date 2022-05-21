@@ -49,6 +49,8 @@ public class Bullet {
         this.bulletDirection = bulletDirection;
     }
 
+
+
     public void updateBulletRectangle(){
         this.boundRect.x = this.getPosition().x;
         this.boundRect.y = this.getPosition().y;

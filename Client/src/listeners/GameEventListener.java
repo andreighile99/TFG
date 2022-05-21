@@ -43,15 +43,16 @@ public class GameEventListener extends Listener {
                 gameScreen.getBullets().get(i).setEnabled(false);
             }
             //Remove them completely from the ArrayList so they don't collide with further instructions for each bullet
-            gameScreen.getBullets().removeAll(removeBulletEvent.getBulletIndex());
+            removeBulletEvent.getBulletIndex().stream().forEach(i->gameScreen.getBullets().remove(i));
         }
 
         else if(object instanceof RemoveEnemyEvent){
             RemoveEnemyEvent removeEnemyEvent = (RemoveEnemyEvent) object;
             GameScreen gameScreen = (GameScreen) MontessoriSlug.getInstance().getScreen();
             for(Integer i : removeEnemyEvent.getSoldiersIndex()){
-                //ADD Code to remove enemies, just like above
+                gameScreen.getSoldiers().get(i).setEnabled(false);
             }
+            removeEnemyEvent.getSoldiersIndex().stream().forEach(i->gameScreen.getSoldiers().remove(i));
         }
 
     }

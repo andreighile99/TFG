@@ -69,7 +69,6 @@ public class ServerMap {
         Soldier soldier;
         elements = getRectangleList("Soldier");
         this.soldiers = new ArrayList<>();
-        this.solids = new ArrayList<>();
         for (MapObject mapObject : elements) {
             props = mapObject.getProperties();
             soldier = new Soldier((float) props.get("x"), (float) props.get("y"));
@@ -93,24 +92,26 @@ public class ServerMap {
 
     public void update(float deltaTime) {
         this.deltaTime = deltaTime;
+        this.sendGameUpdate();
 
         this.updatePlayersRectangles();
         this.updateBulletsRectangles();
 
         this.preventOverlapping();
         this.removeBullets();
-
+        this.removeEnemies();
         this.updateBulletsPosition();
 
         this.applyGravity();
 
-        this.sendGameUpdate();
     }
 
     public interface onUpdate{
         void sendToBothClients(GameEvent gameEvent);
 
         void sendToBothClients(RemoveBulletEvent removeBulletEvent);
+
+        void sendToBothClients(RemoveEnemyEvent removeEnemyEvent);
     }
 
     public void updatePlayerPosition(PlayerEvent message) {
@@ -287,28 +288,44 @@ public class ServerMap {
                         removeBulletEvent.getBulletIndex().add(this.bullets.indexOf(b));
                     }
                 }
-                bullets.removeAll(removeBulletEvent.getBulletIndex());
-                this.callback.sendToBothClients(removeBulletEvent);
+                if(!removeBulletEvent.getBulletIndex().isEmpty()){
+                    removeBulletEvent.getBulletIndex().stream().forEach(i->bullets.remove(i));
+                    this.callback.sendToBothClients(removeBulletEvent);
+                }
             }
         }
 
-        //Add enemies with damage
+        //If the bullets collide against an enemy we reduce their hp but also disable the bullet
         for(Soldier s : soldiers){
             if(!bullets.isEmpty()){
                 RemoveBulletEvent removeBulletEvent = new RemoveBulletEvent();
                 removeBulletEvent.setBulletIndex(new ArrayList<>());
-                RemoveEnemyEvent removeEnemyEvent = new RemoveEnemyEvent();
-                removeEnemyEvent.setSoldiersIndex(new ArrayList<>());
                 for(Bullet b : bullets){
-                    if(s.isCollision(b.getBoundRect())){
+                    if(s.getBoundRectangle().overlaps(b.getBoundRect())){
                         s.setHp(s.getHp()-1);
                         removeBulletEvent.getBulletIndex().add(this.bullets.indexOf(b));
-                        if(s.getHp() == 0){
-                            removeEnemyEvent.getSoldiersIndex().add(this.soldiers.indexOf(s));
-                        }
                     }
                 }
+                if(!removeBulletEvent.getBulletIndex().isEmpty()){
+                    removeBulletEvent.getBulletIndex().stream().forEach(i->bullets.remove(i));
+                    this.callback.sendToBothClients(removeBulletEvent);
+                }
             }
+        }
+    }
+
+    public void removeEnemies(){
+        RemoveEnemyEvent removeEnemyEvent = new RemoveEnemyEvent();
+        removeEnemyEvent.setSoldiersIndex(new ArrayList<>());
+        //Soldiers
+        for(Soldier s : soldiers){
+            if(s.getHp() <= 0){
+                removeEnemyEvent.getSoldiersIndex().add(this.soldiers.indexOf(s));
+            }
+        }
+        if(!removeEnemyEvent.getSoldiersIndex().isEmpty()) {
+            removeEnemyEvent.getSoldiersIndex().stream().forEach(i -> soldiers.remove(i));
+            this.callback.sendToBothClients(removeEnemyEvent);
         }
     }
 
