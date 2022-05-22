@@ -3,8 +3,6 @@ package server.model;
 import com.badlogic.gdx.backends.headless.HeadlessApplication;
 import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration;
 import server.events.game.GameEvent;
-import server.events.game.RemoveBulletEvent;
-import server.events.game.RemoveEnemyEvent;
 import server.events.lobby.FinishLobby;
 import server.game.gameServer.GameServer;
 import server.game.map.ServerMap;

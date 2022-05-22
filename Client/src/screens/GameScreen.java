@@ -1,13 +1,20 @@
 package screens;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import customRenderer.OrthogonalTiledMapRendererWithBackground;
 import elements.*;
 import events.game.GameEvent;
 import handlers.ResourceManager;
@@ -26,6 +33,12 @@ public class GameScreen extends BScreen{
 
     private Stage mainStage;
     private TiledMap map;
+    private int tileWidth;
+    private int tileHeight;
+    private int mapWidthInTiles;
+    private int mapHeightInTiles;
+    private int mapWidthInPixels;
+    private int mapHeightInPixels;
 
     private float inicioX;
     private float inicioY;
@@ -33,6 +46,7 @@ public class GameScreen extends BScreen{
     private ArrayList<BulletRep> bulletReps;
     private ArrayList<SoldierRep> soldierReps;
     private ArrayList<EnemyBulletRep> enemyBulletReps;
+
 
 
     public GameScreen(MontessoriSlug game, String username1, String username2, String lobbyName) {
@@ -43,14 +57,24 @@ public class GameScreen extends BScreen{
         soldierReps = new ArrayList<>();
         enemyBulletReps = new ArrayList<>();
 
-        map = ResourceManager.getMap("assets/maps/map1.tmx");
+        map = ResourceManager.getMap("assets/maps/firstMap.tmx");
 
         mainStage = new Stage();
-        renderer = new OrthogonalTiledMapRenderer(map, mainStage.getBatch());
+        renderer = new OrthogonalTiledMapRendererWithBackground(map);
+        //renderer = new OrthogonalTiledMapRenderer(map, mainStage.getBatch());
+
+        MapProperties properties = map.getProperties();
+
+        tileWidth = properties.get("tilewidth", Integer.class);
+        tileHeight = properties.get("tileheight", Integer.class);
+        mapWidthInTiles = properties.get("width", Integer.class);
+        mapHeightInTiles = properties.get("height", Integer.class);
+        mapWidthInPixels = tileWidth * mapWidthInTiles;
+        mapHeightInPixels = tileHeight * mapHeightInTiles;
 
         camera = (OrthographicCamera) mainStage.getCamera();
-        camera.setToOrtho(false, Parameters.screenWidth,
-                Parameters.screenHeight);
+        camera.setToOrtho(false, Parameters.cameraWidth,
+                Parameters.cameraHeight);
 
         ArrayList<MapObject> elements = getRectangleList("Inicio");
 
@@ -60,10 +84,12 @@ public class GameScreen extends BScreen{
         this.inicioX = (float) props.get("x");
         this.inicioY = (float) props.get("y");
 
+
         this.player1 = new Player(inicioX, inicioY, mainStage, username1, lobbyName);
         this.player2 = new ManagedPlayer(inicioX, inicioY, mainStage, username2, lobbyName);
 
     }
+
 
 
 
@@ -87,8 +113,21 @@ public class GameScreen extends BScreen{
     }
 
     public void centerCamera() {
-        this.camera.position.x = player1.getX();
-        this.camera.position.y = player1.getY();
+        System.out.println(this.player1.getY());
+        if(this.player1.getX() < Parameters.cameraWidth/2){
+            this.camera.position.x = Parameters.cameraWidth/2;
+        }else if(this.player1.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
+            this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+        }else{
+            this.camera.position.x = player1.getX();
+        }
+
+        if(this.player1.getY() < Parameters.cameraHeight / 2){
+            this.camera.position.y = player1.getY() + (Parameters.cameraHeight / 2 - player1.getY());
+        }else {
+            this.camera.position.y = player1.getY();
+        }
+
         camera.update();
     }
 
@@ -182,6 +221,7 @@ public class GameScreen extends BScreen{
         }
         return list;
     }
+
 
     public ArrayList<BulletRep> getBulletReps() {
         return bulletReps;

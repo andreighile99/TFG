@@ -43,7 +43,7 @@ public class ServerMap {
     public ServerMap(onUpdate callback, ServerPlayer player1, ServerPlayer player2){
 
         ResourceManager.loadAllResources();
-        map = ResourceManager.getMap("assets/maps/map1.tmx");
+        map = ResourceManager.getMap("assets/maps/firstMap.tmx");
 
         elements = new ArrayList<>();
 
@@ -127,14 +127,14 @@ public class ServerMap {
             Vector2 v = player.getPosition();
             switch (message.getDirection()) {
                 case LEFT:
-                    v.x -= deltaTime * 200;
+                    v.x -= deltaTime * 100;
                     break;
                 case RIGHT:
-                    v.x += deltaTime * 200;
+                    v.x += deltaTime * 100;
                     break;
                 case UP:
                     if(player.isOnGround()){
-                        v.y += deltaTime * 1500;
+                        v.y += deltaTime * 3000;
                     }
                     break;
                 default:
@@ -156,7 +156,7 @@ public class ServerMap {
     public void playerShoots(BulletEvent message){
         ServerPlayer player = this.getPlayerByNickName(message);
         if(message.getBulletDirection() != null){
-            Bullet bullet = new Bullet(player.getPosition().x, player.getPosition().y, message.getBulletDirection());
+            Bullet bullet = new Bullet(player.getPosition().x, player.getPosition().y + 5, message.getBulletDirection());
             this.bullets.add(bullet);
         }
     }
@@ -167,6 +167,8 @@ public class ServerMap {
             Random rand = new Random();
             float distanceToP1 = this.distanceBetweenTwoPoints(s.getPosition(), player1.getPosition());
             float distanceToP2 = this.distanceBetweenTwoPoints(s.getPosition(), player2.getPosition());
+            Vector2 vectorToP1 = new Vector2(player1.getPosition().x - s.getPosition().x , player1.getPosition().y - s.getPosition().y).nor();
+            Vector2 vectorToP2 = new Vector2(player2.getPosition().x - s.getPosition().x , player2.getPosition().y - s.getPosition().y).nor();
             if(s.getActionCounter() >= 5){
                 //Soldier shoots
                 Vector2 shootingDirection = null;
@@ -179,15 +181,16 @@ public class ServerMap {
                     this.enemyBullets.add(new EnemyBullet(s.getPosition().x, s.getPosition().y + 10, shootingDirection));
                 }
                 s.setActionCounter(0f);
-            }else{
-                //Move
-                if(distanceToP1 <= 50){
-                    Vector2 runAwayDirection = new Vector2(player1.getPosition().x - s.getPosition().x , player1.getPosition().y - s.getPosition().y).nor();
-                    s.getPosition().x += runAwayDirection.x * -1 * deltaTime * 100;
-                }else if(distanceToP2 <= 50){
-                    Vector2 runAwayDirection = new Vector2(player2.getPosition().x - s.getPosition().x , player2.getPosition().y - s.getPosition().y).nor();
-                    s.getPosition().x += runAwayDirection.x * -1 * deltaTime * 100;
-                }
+            }else if(distanceToP1 <= 50){
+                //Run from player
+                s.getPosition().x -= vectorToP1.x * deltaTime * 100;
+            }else if(distanceToP2 <= 50){
+                s.getPosition().x -= vectorToP2.x * deltaTime * 100;
+            }else if(distanceToP1 >= 200 && distanceToP1 <= 500){
+                //Run towards player
+                s.getPosition().x += vectorToP1.x * deltaTime * 100;
+            }else if(distanceToP2 >= 200 && distanceToP2 <= 500){
+                s.getPosition().x += vectorToP2.x * deltaTime * 100;
             }
         }
     }

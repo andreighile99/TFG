@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -32,7 +33,7 @@ public final class ResourceManager {
 
         //mapas
         assets.setLoader(TiledMap.class, new TmxMapLoader());
-        assets.load("assets/maps/map1.tmx", TiledMap.class);
+        assets.load("assets/maps/firstMap.tmx", TiledMap.class);
 
         assets.load("assets/player/idle.png", Texture.class);
         assets.load("assets/player/Bola.png", Texture.class);

@@ -6,6 +6,7 @@ Centrar hitboxes
 Menú de opciones con 2 o 3 cositas
 Pantalla final
 Al terminar volver al principio
+Añadir sonidos lol
 
 Animaciones de los enemigos
 

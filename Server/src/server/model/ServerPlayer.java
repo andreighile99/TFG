@@ -32,7 +32,7 @@ public class ServerPlayer {
     }
 
     public void init(){
-        this.boundRect = new Rectangle(this.position.x, this.position.y, 20, 20);
+        this.boundRect = new Rectangle(0, 0, 20, 20);
         this.feet = new Rectangle(0, 0, this.boundRect.width / 8, this.boundRect.height / 10);
         this.onGround = false;
     }
@@ -80,8 +80,8 @@ public class ServerPlayer {
     public void updateRectanglePosition(){
         this.boundRect.x = this.position.x;
         this.boundRect.y = this.position.y;
-        this.feet.x = this.position.x + feet.width / 8;
-        this.feet.y = this.position.y - feet.height ;//- 0.1f;
+        this.feet.x = this.position.x + this.boundRect.width/2;
+        this.feet.y = this.position.y - 0.1f;
     }
 
     public Vector2 preventOverlap(Polygon anotherPoly)

@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import events.game.GameEvent;
-import events.game.RemoveBulletEvent;
-import events.game.RemoveEnemyEvent;
 import main.MontessoriSlug;
 import screens.GameScreen;
 

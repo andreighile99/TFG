@@ -6,6 +6,9 @@ public class Parameters {
     //private static int anchoPantalla=1200;
     //private static int altoPantalla=900;
 
+    public static int cameraWidth = 320;
+    public static int cameraHeight = 180;
+
     public static int screenWidth=1280;
     public static int screenHeight=720;
 

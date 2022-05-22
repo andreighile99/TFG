@@ -115,7 +115,7 @@ public class Soldier {
     public void updateRectanglePosition(){
         this.boundRectangle.x = this.position.x;
         this.boundRectangle.y = this.position.y;
-        this.feet.x = this.position.x + feet.width / 8;
+        this.feet.x = this.position.x + this.boundRectangle.x/2;
         this.feet.y = this.position.y - feet.height ;//- 0.1f;
     }
 }

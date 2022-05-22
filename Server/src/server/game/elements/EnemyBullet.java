@@ -52,8 +52,9 @@ public class EnemyBullet {
     }
 
     public void updateEnemyBulletRectangle(){
-        this.boundRect.x = this.position.x;
-        this.boundRect.y = this.position.y;
+        this.boundRect.setCenter(this.position.x, this.position.y);
+        //this.boundRect.x = this.position.x;
+        //this.boundRect.y = this.position.y;
     }
 
     public void moveBy(float x, float y){
