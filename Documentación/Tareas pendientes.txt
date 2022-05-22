@@ -1,0 +1,26 @@
+
+Código:
+
+Generar 1 ó 2 mapas
+Centrar hitboxes
+Menú de opciones con 2 o 3 cositas
+Pantalla final
+Al terminar volver al principio
+
+Animaciones de los enemigos
+
+Testing?
+
+Documentación:
+
+Generar Javadoc
+Generar Gant
+Generar Trello
+Generar Memoria
+Generar Diagrama de C.U
+Generar Diagrama de Clases
+Generar Presentación PPT
+
+Opcional:
+
+Subir a AWS

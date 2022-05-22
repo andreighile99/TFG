@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import server.events.game.*;
 import server.game.elements.Bullet;
+import server.game.elements.EnemyBullet;
 import server.game.elements.Soldier;
 import server.game.elements.Solid;
 import server.handlers.ResourceManager;
@@ -23,8 +24,6 @@ public class ServerMap {
     private onUpdate callback;
 
     private ArrayList<Float> playerPositions;
-    private ArrayList<Float> bulletsPositions;
-    private ArrayList<Float> soldiersPositions;
 
     private ServerPlayer player1;
     private ServerPlayer player2;
@@ -33,10 +32,12 @@ public class ServerMap {
     private float startingY;
 
     private TiledMap map;
+
     private ArrayList<Solid> solids;
     private ArrayList<Soldier> soldiers;
     private ArrayList<MapObject> elements;
     private ArrayList<Bullet> bullets;
+    private ArrayList<EnemyBullet> enemyBullets;
 
 
     public ServerMap(onUpdate callback, ServerPlayer player1, ServerPlayer player2){
@@ -47,6 +48,8 @@ public class ServerMap {
         elements = new ArrayList<>();
 
         bullets = new ArrayList<>();
+
+        enemyBullets = new ArrayList<>();
 
         MapProperties props;
 
@@ -79,8 +82,6 @@ public class ServerMap {
 
 
         this.playerPositions = new ArrayList<>();
-        this.bulletsPositions = new ArrayList<>();
-        this.soldiersPositions = new ArrayList<>();
         this.callback = callback;
 
         this.player1 = player1;
@@ -97,12 +98,12 @@ public class ServerMap {
 
 
         this.updatePlayersRectangles();
-        this.updateBulletsRectangles();
+        this.updateSoldiersRectangles();
 
         this.preventOverlapping();
+        this.soldiersAction(deltaTime);
         this.removeBullets();
         this.removeEnemies();
-        this.soldiersAction();
         this.updateBulletsPosition();
 
         this.applyGravity();
@@ -118,6 +119,7 @@ public class ServerMap {
     public void cleanupDisabledElements(){
         soldiers.removeIf(soldier -> !soldier.isEnabled());
         bullets.removeIf(bullet -> !bullet.isEnabled());
+        enemyBullets.removeIf(enemyBullet -> !enemyBullet.isEnabled());
     }
 
     public void updatePlayerPosition(PlayerEvent message) {
@@ -145,6 +147,12 @@ public class ServerMap {
         this.player2.updateRectanglePosition();
     }
 
+    private void updateSoldiersRectangles(){
+        for(Soldier s : soldiers){
+            s.updateRectanglePosition();
+        }
+    }
+
     public void playerShoots(BulletEvent message){
         ServerPlayer player = this.getPlayerByNickName(message);
         if(message.getBulletDirection() != null){
@@ -153,12 +161,34 @@ public class ServerMap {
         }
     }
 
-    public void soldiersAction(){
+    public void soldiersAction(float delta){
         for(Soldier s : soldiers){
-            s.updateSoldierPosition();
+            s.setActionCounter(s.getActionCounter() + delta);
             Random rand = new Random();
-            int x = rand.nextInt(2) + 1;
-            //decidir las acciones de los soldados
+            float distanceToP1 = this.distanceBetweenTwoPoints(s.getPosition(), player1.getPosition());
+            float distanceToP2 = this.distanceBetweenTwoPoints(s.getPosition(), player2.getPosition());
+            if(s.getActionCounter() >= 5){
+                //Soldier shoots
+                Vector2 shootingDirection = null;
+                if(rand.nextInt(2) + 1 >= 1 && distanceToP1 <= 200){
+                    shootingDirection = new Vector2(player1.getPosition().x - s.getPosition().x , player1.getPosition().y - s.getPosition().y).nor();
+                    this.enemyBullets.add(new EnemyBullet(s.getPosition().x, s.getPosition().y + 10, shootingDirection));
+                    //Add market with direction so we can animate it in the clients
+                }else if(rand.nextInt(2) + 1 < 1 && distanceToP2 <= 200){
+                    shootingDirection = new Vector2(player2.getPosition().x - s.getPosition().x, player2.getPosition().y - s.getPosition().y).nor();
+                    this.enemyBullets.add(new EnemyBullet(s.getPosition().x, s.getPosition().y + 10, shootingDirection));
+                }
+                s.setActionCounter(0f);
+            }else{
+                //Move
+                if(distanceToP1 <= 50){
+                    Vector2 runAwayDirection = new Vector2(player1.getPosition().x - s.getPosition().x , player1.getPosition().y - s.getPosition().y).nor();
+                    s.getPosition().x += runAwayDirection.x * -1 * deltaTime * 100;
+                }else if(distanceToP2 <= 50){
+                    Vector2 runAwayDirection = new Vector2(player2.getPosition().x - s.getPosition().x , player2.getPosition().y - s.getPosition().y).nor();
+                    s.getPosition().x += runAwayDirection.x * -1 * deltaTime * 100;
+                }
+            }
         }
     }
 
@@ -169,15 +199,12 @@ public class ServerMap {
                     b.getPosition().y += b.getBulletDirection().y * deltaTime * 350;
                     b.updateBulletRectangle();
                 }
-
             }
-    }
 
-    public void updateBulletsRectangles(){
-            for(Bullet b : bullets){
-                if(b.isEnabled()){
-                    b.updateBulletRectangle();
-                }
+            for(EnemyBullet eb : enemyBullets){
+                eb.getPosition().x += eb.getBulletDirection().x * deltaTime * 200;
+                eb.getPosition().y += eb.getBulletDirection().y * deltaTime * 200;
+                eb.updateEnemyBulletRectangle();
             }
     }
 
@@ -207,35 +234,16 @@ public class ServerMap {
        this.playerPositions.add(this.player2.getPosition().y);
     }
 
-    public void gatherBulletsPositions(){
-        bulletsPositions.clear();
-        for(Bullet b : bullets){
-            bulletsPositions.add(b.getPosition().x);
-            bulletsPositions.add(b.getPosition().y);
-        }
-    }
-
-    public void gatherSoldiersPositions(){
-        if(!soldiers.isEmpty()){
-            soldiersPositions.clear();
-            for(Soldier s : soldiers){
-                soldiersPositions.add(s.getPosition().x);
-                soldiersPositions.add(s.getPosition().y);
-            }
-        }
-    }
-
     private void sendGameUpdate(){
         GameEvent gameEvent = new GameEvent();
         this.gatherPlayerPositions();
-        this.gatherBulletsPositions();
-        this.gatherSoldiersPositions();
 
         gameEvent.playerPositions = this.playerPositions;
         gameEvent.player1 = this.player1.getUsername();
         gameEvent.player2 = this.player2.getUsername();
         gameEvent.bullets = this.bullets;
-        gameEvent.soldiers= this.soldiers;
+        gameEvent.soldiers = this.soldiers;
+        gameEvent.enemyBullets = this.enemyBullets;
 
         this.callback.sendToBothClients(gameEvent);
     }
@@ -265,6 +273,12 @@ public class ServerMap {
             Vector2 v = this.player2.getPosition();
             v.y -= 1;
         }
+        for(Soldier s : soldiers){
+            if(!s.isOnGround()){
+                Vector2 v = s.getPosition();
+                v.y -= 1;
+            }
+        }
     }
 
     private void preventOverlapping(){
@@ -283,6 +297,15 @@ public class ServerMap {
             if(s.isCollision(this.player2.getFeet())){
                 this.player2.setOnGround(true);
             }
+            for(Soldier soldier : this.soldiers){
+                soldier.setOnGround(false);
+                if(s.isCollision(soldier.getBoundRectangle())){
+                    soldier.preventOverlap(s.getColision());
+                }
+                if(s.isCollision(soldier.getFeet())){
+                    soldier.setOnGround(true);
+                }
+            }
         }
     }
 
@@ -291,6 +314,11 @@ public class ServerMap {
             for(Bullet b : bullets){
                 if(s.isCollision(b.getBoundRect())){
                     b.setEnabled(false);
+                }
+            }
+            for(EnemyBullet eb : enemyBullets){
+                if(eb.isEnabled() && s.isCollision(eb.getBoundRect())){
+                    eb.setEnabled(false);
                 }
             }
         }
@@ -304,6 +332,16 @@ public class ServerMap {
             }
         }
 
+        for(EnemyBullet eb : enemyBullets){
+            if(eb.isEnabled() && eb.getBoundRect().overlaps(player1.getBoundRect())){
+                //Add damage to the player
+                eb.setEnabled(false);
+            }else if(eb.isEnabled() && eb.getBoundRect().overlaps(player2.getBoundRect())){
+                //Add damage to the player
+                eb.setEnabled(false);
+            }
+        }
+
     }
 
     public void removeEnemies(){
@@ -313,6 +351,10 @@ public class ServerMap {
                 s.setEnabled(false);
             }
         }
+    }
+
+    public float distanceBetweenTwoPoints(Vector2 vec1, Vector2 vec2){
+        return (float) (Math.sqrt((vec1.x-vec2.x)*(vec1.x-vec2.x) + (vec1.y-vec2.y)*(vec1.y-vec2.y)));
     }
 
 }

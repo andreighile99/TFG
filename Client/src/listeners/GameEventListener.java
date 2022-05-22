@@ -28,6 +28,7 @@ public class GameEventListener extends Listener {
                     Gdx.app.postRunnable(()->{
                         //New bullets positions inside Gdx app so we have a GL20 context (Can render)
                         gameScreen.updateBulletsPosition(gameEvent);
+                        gameScreen.updateEnemyBulletsPosition(gameEvent);
                         gameScreen.updateSoldiersPosition(gameEvent);
                     });
             }catch (ClassCastException e){

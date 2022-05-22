@@ -26,7 +26,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Capa de Objetos 1">
-  <object id="1" x="24.5" y="223.5" width="27.5" height="23.5">
+  <object id="1" x="24.5" y="272.5" width="27.5" height="23.5">
    <properties>
     <property name="name" value="Inicio"/>
    </properties>
@@ -36,12 +36,7 @@
     <property name="name" value="Solid"/>
    </properties>
   </object>
-  <object id="8" x="305.5" y="-1.5" width="14.5" height="304.5">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="12" x="251" y="264" width="28.5" height="31">
+  <object id="12" x="243" y="72.5" width="28.5" height="25">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>

@@ -14,7 +14,7 @@ public class Bullet {
 
     public Bullet(Float positionX, Float positionY, Vector2 bulletDirection) {
         this.enabled = true;
-        this.boundRect = new Rectangle(positionX, positionY, 1, 1);
+        this.boundRect = new Rectangle(positionX, positionY, 2, 2);
         this.position = new Vector2(positionX, positionY);
         this.bulletDirection = bulletDirection;
     }
@@ -52,8 +52,8 @@ public class Bullet {
     }
 
     public void updateBulletRectangle(){
-        this.boundRect.x = this.getPosition().x;
-        this.boundRect.y = this.getPosition().y;
+        this.boundRect.x = this.position.x;
+        this.boundRect.y = this.position.y;
     }
 
     public void moveBy(float x, float y){

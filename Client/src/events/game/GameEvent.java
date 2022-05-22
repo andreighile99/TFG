@@ -1,6 +1,7 @@
 package events.game;
 
 import elements.serverSide.Bullet;
+import elements.serverSide.EnemyBullet;
 import elements.serverSide.Soldier;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class GameEvent {
     public String player2;
     public ArrayList<Bullet> bullets;
     public ArrayList<Soldier> soldiers;
+    public ArrayList<EnemyBullet> enemyBullets;
 
     public GameEvent() {
     }

@@ -12,4 +12,35 @@ public class Bullet {
     public Bullet() {
     }
 
+    public Rectangle getBoundRect() {
+        return boundRect;
+    }
+
+    public void setBoundRect(Rectangle boundRect) {
+        this.boundRect = boundRect;
+    }
+
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public void setPosition(Vector2 position) {
+        this.position = position;
+    }
+
+    public Vector2 getBulletDirection() {
+        return bulletDirection;
+    }
+
+    public void setBulletDirection(Vector2 bulletDirection) {
+        this.bulletDirection = bulletDirection;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import server.events.game.*;
 import server.game.elements.Bullet;
+import server.game.elements.EnemyBullet;
 import server.game.elements.Soldier;
 import server.listeners.GameEventListener;
 import server.listeners.LeaveListener;
@@ -98,6 +99,7 @@ public class Server {
         this.server.getKryo().register(Rectangle.class);
         this.server.getKryo().register(Bullet.class);
         this.server.getKryo().register(Soldier.class);
+        this.server.getKryo().register(EnemyBullet.class);
 
     }
     public com.esotericsoftware.kryonet.Server getServer() {

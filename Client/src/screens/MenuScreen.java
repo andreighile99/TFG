@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.esotericsoftware.kryonet.Client;
-import elements.BulletRep;
 import elements.serverSide.Bullet;
+import elements.serverSide.EnemyBullet;
 import elements.serverSide.Soldier;
 import events.game.*;
 import events.lobby.*;
@@ -175,6 +175,7 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(Rectangle.class);
         client.getKryo().register(Bullet.class);
         client.getKryo().register(Soldier.class);
+        client.getKryo().register(EnemyBullet.class);
     }
     public void renderErrorMessage(String errorMessage){
         this.errorLabel.setText(errorMessage);

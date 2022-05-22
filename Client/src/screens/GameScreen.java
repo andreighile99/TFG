@@ -8,10 +8,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import elements.BulletRep;
-import elements.ManagedPlayer;
-import elements.Player;
-import elements.SoldierRep;
+import elements.*;
 import events.game.GameEvent;
 import handlers.ResourceManager;
 import main.MontessoriSlug;
@@ -35,6 +32,7 @@ public class GameScreen extends BScreen{
 
     private ArrayList<BulletRep> bulletReps;
     private ArrayList<SoldierRep> soldierReps;
+    private ArrayList<EnemyBulletRep> enemyBulletReps;
 
 
     public GameScreen(MontessoriSlug game, String username1, String username2, String lobbyName) {
@@ -43,6 +41,7 @@ public class GameScreen extends BScreen{
 
         bulletReps = new ArrayList<>();
         soldierReps = new ArrayList<>();
+        enemyBulletReps = new ArrayList<>();
 
         map = ResourceManager.getMap("assets/maps/map1.tmx");
 
@@ -108,6 +107,24 @@ public class GameScreen extends BScreen{
         }
     }
 
+    public void updateEnemyBulletsPosition(GameEvent gameEvent){
+        int enemyBulletsOnServer = gameEvent.enemyBullets.size();
+        int deltaEnemyBullets = enemyBulletsOnServer - this.enemyBulletReps.size();
+        if(deltaEnemyBullets > 0){
+            for(int i = 0; i<deltaEnemyBullets; i++){
+                this.enemyBulletReps.add(new EnemyBulletRep(gameEvent.enemyBullets.get(i).getPosition().x, gameEvent.enemyBullets.get(i).getPosition().y, mainStage));
+            }
+        }
+        for(int i = 0; i<enemyBulletsOnServer; i++){
+            if(gameEvent.enemyBullets.get(i).isEnabled()){
+                this.enemyBulletReps.get(i).moveBy(gameEvent.enemyBullets.get(i).getPosition().x - this.enemyBulletReps.get(i).getX(), gameEvent.enemyBullets.get(i).getPosition().y - this.enemyBulletReps.get(i).getY());
+            }else{
+                this.enemyBulletReps.get(i).setEnabled(false);
+            }
+        }
+        cleanupDisabledElements();
+    }
+
     public void updateBulletsPosition(GameEvent gameEvent){
         int bulletsOnServer = gameEvent.bullets.size();
         int deltaBullets = bulletsOnServer - this.bulletReps.size();
@@ -124,11 +141,6 @@ public class GameScreen extends BScreen{
             }
         }
         cleanupDisabledElements();
-    }
-
-    public void cleanupDisabledElements(){
-        soldierReps.removeIf(soldier -> !soldier.getEnabled());
-        bulletReps.removeIf(bullet -> !bullet.getEnabled());
     }
 
     public void updateSoldiersPosition(GameEvent gameEvent){
@@ -149,6 +161,11 @@ public class GameScreen extends BScreen{
         cleanupDisabledElements();
     }
 
+    public void cleanupDisabledElements(){
+        soldierReps.removeIf(soldier -> !soldier.getEnabled());
+        bulletReps.removeIf(bullet -> !bullet.getEnabled());
+        enemyBulletReps.removeIf(enemyBulletRep -> !enemyBulletRep.getEnabled());
+    }
 
     public ArrayList<MapObject> getRectangleList(String propertyName) {
         ArrayList<MapObject> list = new ArrayList<MapObject>();
