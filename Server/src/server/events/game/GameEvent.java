@@ -1,7 +1,7 @@
 package server.events.game;
 
 import server.game.elements.Bullet;
-import server.model.ServerPlayerData;
+import server.game.elements.ServerPlayerData;
 
 import java.util.ArrayList;
 

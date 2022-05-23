@@ -1,7 +1,10 @@
 package screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -14,11 +17,13 @@ import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import customRenderer.OrthogonalTiledMapRendererWithBackground;
 import elements.*;
 import elements.serverSide.ServerPlayerData;
 import events.game.EnemyEvent;
 import events.game.GameEvent;
+import handlers.FontSizeHandler;
 import handlers.ResourceManager;
 import main.MontessoriSlug;
 import parameters.Parameters;
@@ -32,6 +37,10 @@ public class GameScreen extends BScreen{
 
     private Player player1;
     private ManagedPlayer player2;
+
+    private final Texture fullBulletH;
+    private final Texture halfBulletH;
+    private final Texture hpBackground;
 
     private Stage mainStage;
     private TiledMap map;
@@ -49,10 +58,19 @@ public class GameScreen extends BScreen{
     private ArrayList<SoldierRep> soldierReps;
     private ArrayList<EnemyBulletRep> enemyBulletReps;
 
+    private ArrayList<Texture> lifeRepresentation;
+
+    private final BitmapFont font;
+
 
 
     public GameScreen(MontessoriSlug game, String username1, String username2, String lobbyName) {
         super(game);
+        this.fullBulletH = ResourceManager.getTexture("assets/player/hp/FullBulletH.png");
+        this.halfBulletH = ResourceManager.getTexture("assets/player/hp/HalfBulletH.png");
+        this.hpBackground = ResourceManager.getTexture("assets/player/hp/HpBackground.png");
+        this.font = FontSizeHandler.INSTANCE.getFont(32, Color.BLACK);
+        lifeRepresentation = new ArrayList<>();
 
         bulletReps = new ArrayList<>();
         soldierReps = new ArrayList<>();
@@ -114,8 +132,11 @@ public class GameScreen extends BScreen{
         renderer.setView(camera);
         renderer.render();
 
+        calculateHpRepresentation();
+
         mainStage.draw();
         uiStage.draw();
+        drawHpRepresentation();
 
 
 
@@ -172,8 +193,36 @@ public class GameScreen extends BScreen{
             }
         }
 
-
         camera.update();
+    }
+
+    public void calculateHpRepresentation(){
+        int temporalHP = player1.getHp();
+        if(!lifeRepresentation.isEmpty()) {
+            lifeRepresentation.clear();
+        }
+        while((temporalHP - 20) >= 0){
+            lifeRepresentation.add(fullBulletH);
+            temporalHP -= 20;
+        }
+        while((temporalHP - 10) >= 0){
+            lifeRepresentation.add(halfBulletH);
+            temporalHP -= 10;
+        }
+    }
+
+    public void drawHpRepresentation(){
+        uiStage.getBatch().begin();
+        float offset = 0;
+
+        uiStage.getBatch().draw(hpBackground, 0, Parameters.screenHeight - 50, 276, 50);
+        font.draw(uiStage.getBatch(), "HP", 10, Parameters.screenHeight - 16);
+        for(Texture texture : lifeRepresentation){
+            uiStage.getBatch().draw(texture, 62 + offset, Parameters.screenHeight - 40, 30, 30);
+            offset += 40;
+        }
+        uiStage.getBatch().end();
+
     }
 
 
@@ -222,7 +271,8 @@ public class GameScreen extends BScreen{
         int deltaBullets = bulletsOnServer - this.bulletReps.size();
         if(deltaBullets > 0){
             for(int i = 0; i<deltaBullets; i++){
-                this.bulletReps.add(new BulletRep(gameEvent.bullets.get(i).getPosition().x, gameEvent.bullets.get(i).getPosition().y, mainStage));
+                //- (anchura bala - anchura bala servidor)/2
+                this.bulletReps.add(new BulletRep(gameEvent.bullets.get(i).getPosition().x , gameEvent.bullets.get(i).getPosition().y, mainStage));
             }
         }
         for(int i = 0; i<bulletsOnServer; i++){

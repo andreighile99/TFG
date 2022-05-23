@@ -37,9 +37,13 @@ public final class ResourceManager {
         assets.load("assets/maps/secondMap.tmx", TiledMap.class);
 
         assets.load("assets/images/background.png", Texture.class);
+        assets.load("assets/enemies/spider.png", Texture.class);
+
         assets.load("assets/player/idle.png", Texture.class);
         assets.load("assets/player/Bola.png", Texture.class);
-        assets.load("assets/enemies/spider.png", Texture.class);
+        assets.load("assets/player/hp/FullBulletH.png", Texture.class);
+        assets.load("assets/player/hp/HalfBulletH.png", Texture.class);
+        assets.load("assets/player/hp/HpBackground.png", Texture.class);
 
         assets.finishLoading();
 

@@ -72,7 +72,7 @@ public class ServerPlayer {
     public void updateRectanglePosition(){
         this.boundRect.x = this.position.x;
         this.boundRect.y = this.position.y;
-        this.feet.x = this.position.x + this.boundRect.width/2;
+        this.feet.x = this.position.x + this.boundRect.width/2 - feet.width/2;
         this.feet.y = this.position.y - 0.1f;
     }
 

@@ -13,7 +13,7 @@ import server.game.elements.Soldier;
 import server.game.elements.Solid;
 import server.handlers.ResourceManager;
 import server.model.ServerPlayer;
-import server.model.ServerPlayerData;
+import server.game.elements.ServerPlayerData;
 
 import java.util.ArrayList;
 import java.util.Random;

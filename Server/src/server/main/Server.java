@@ -2,7 +2,6 @@ package server.main;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.esotericsoftware.kryonet.Connection;
 import server.events.game.*;
 import server.game.elements.Bullet;
 import server.game.elements.EnemyBullet;
@@ -11,8 +10,7 @@ import server.listeners.GameEventListener;
 import server.listeners.LeaveListener;
 import server.listeners.LobbyListener;
 import server.events.lobby.*;
-import server.model.ServerPlayer;
-import server.model.ServerPlayerData;
+import server.game.elements.ServerPlayerData;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -23,16 +23,8 @@ public class Bullet {
         return boundRect;
     }
 
-    public void setBoundRect(Rectangle boundRect) {
-        this.boundRect = boundRect;
-    }
-
     public Vector2 getPosition() {
         return position;
-    }
-
-    public void setPosition(Vector2 position) {
-        this.position = position;
     }
 
     public boolean isEnabled() {
@@ -47,9 +39,6 @@ public class Bullet {
         return bulletDirection;
     }
 
-    public void setBulletDirection(Vector2 bulletDirection) {
-        this.bulletDirection = bulletDirection;
-    }
 
     public void updateBulletRectangle(){
         this.boundRect.setCenter(this.position.x, this.position.y);
