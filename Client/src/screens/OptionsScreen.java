@@ -45,8 +45,6 @@ public class OptionsScreen extends BScreen{
         this.table = new Table();
         this.table.setBounds(0,0,Parameters.screenWidth,Parameters.screenHeight);
 
-
-
         //Download new skin
         final Skin skin = new Skin(Gdx.files.internal("assets/ui-skin/uiskin.json"));
 

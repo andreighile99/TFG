@@ -80,4 +80,14 @@ public class GameServer extends Game implements ServerMap.notifyGameServer{
         }
 
     }
+
+    @Override
+    public void endLobby() {
+        FinishLobby finishLobby = new FinishLobby();
+        finishLobby.code = "01";
+        this.player1.getConnection().sendTCP(finishLobby);
+        this.player2.getConnection().sendTCP(finishLobby);
+        LobbyHandler.INSTANCE.finishLobbyByName(this.lobbyName);
+    }
+
 }

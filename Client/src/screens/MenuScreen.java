@@ -10,8 +10,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.esotericsoftware.kryonet.Client;
+import com.esotericsoftware.kryonet.Connection;
 import elements.serverSide.Bullet;
 import elements.serverSide.EnemyBullet;
+import elements.serverSide.ServerPlayerData;
 import elements.serverSide.Soldier;
 import events.game.*;
 import events.lobby.*;
@@ -42,6 +44,7 @@ public class MenuScreen extends BScreen {
     private final TextButton newLobbyButton;
     private final TextButton joinLobbyButton;
     private final TextButton optionsButton;
+    private final TextButton exitGame;
 
     private final Label errorLabel;
 
@@ -148,6 +151,16 @@ public class MenuScreen extends BScreen {
             }
         });
 
+        this.exitGame = new TextButton("Salir", skin);
+        this.exitGame.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                MontessoriSlug.getInstance().dispose();
+                Gdx.app.exit();
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
+
         this.errorLabel = LabelHandler.INSTANCE.createLabel(null, 16, Color.RED);
         this.ipAddressLabel  = LabelHandler.INSTANCE.createLabel("Direccion IP ", 16, Color.WHITE);
         this.lobbyNameLabel = LabelHandler.INSTANCE.createLabel("Nombre de la sala ", 16, Color.WHITE);
@@ -171,9 +184,11 @@ public class MenuScreen extends BScreen {
         this.table.add().width(200);
         this.table.add(this.newLobbyButton).size(250, 50).padTop(50).row();
         this.table.add().width(200);
-        this.table.add(this.joinLobbyButton).size(250, 50).padTop(50).row();
+        this.table.add(this.joinLobbyButton).size(250, 50).padTop(30).row();
         this.table.add().width(200);
-        this.table.add(this.optionsButton).size(250, 50).padTop(50).row();
+        this.table.add(this.optionsButton).size(250, 50).padTop(30).row();
+        this.table.add().width(200);
+        this.table.add(this.exitGame).size(250, 50).padTop(30).row();
         this.table.add(this.errorLabel).padTop(50);
     }
 
@@ -212,6 +227,7 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(PlayerEvent.DIRECTION.class);
         client.getKryo().register(BulletEvent.class);
         client.getKryo().register(EnemyEvent.class);
+        client.getKryo().register(ServerPlayerData.class);
 
         //Common
         client.getKryo().register(ArrayList.class);
@@ -220,6 +236,7 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(Bullet.class);
         client.getKryo().register(Soldier.class);
         client.getKryo().register(EnemyBullet.class);
+        client.getKryo().register(Connection.class);
     }
 
     public void renderErrorMessage(String errorMessage){

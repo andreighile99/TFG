@@ -13,6 +13,7 @@ import server.game.elements.Soldier;
 import server.game.elements.Solid;
 import server.handlers.ResourceManager;
 import server.model.ServerPlayer;
+import server.model.ServerPlayerData;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -134,7 +135,7 @@ public class ServerMap {
 
     public void update(float deltaTime) {
         this.deltaTime = deltaTime;
-
+        this.removePlayers();
 
         this.updatePlayersRectangles();
         this.updateSoldiersRectangles();
@@ -203,20 +204,21 @@ public class ServerMap {
 
     public void soldiersAction(float delta){
         for(Soldier s : soldiers){
-            s.setActionCounter(s.getActionCounter() + delta);
             Random rand = new Random();
+            s.setActionCounter(s.getActionCounter() + delta);
+
             float distanceToP1 = this.distanceBetweenTwoPoints(s.getPosition(), player1.getPosition());
             float distanceToP2 = this.distanceBetweenTwoPoints(s.getPosition(), player2.getPosition());
             Vector2 vectorToP1 = new Vector2(player1.getPosition().x - s.getPosition().x , player1.getPosition().y - s.getPosition().y).nor();
             Vector2 vectorToP2 = new Vector2(player2.getPosition().x - s.getPosition().x , player2.getPosition().y - s.getPosition().y).nor();
-            if(s.getActionCounter() >= 2){
+            if(s.getActionCounter() >= (rand.nextInt(40 - 3) + 1 ) + 3){
                 //Soldier shoots
                 Vector2 shootingDirection = null;
-                if(rand.nextInt(2) + 1 >= 1 && distanceToP1 <= 200){
+                if(distanceToP1 <= 200 && player1.isEnabled()){
                     shootingDirection = new Vector2(player1.getPosition().x - s.getPosition().x , player1.getPosition().y - s.getPosition().y).nor();
                     this.enemyBullets.add(new EnemyBullet(s.getPosition().x, s.getPosition().y + 10, shootingDirection));
                     //Add market with direction so we can animate it in the clients
-                }else if(rand.nextInt(2) + 1 < 1 && distanceToP2 <= 200){
+                }else if(distanceToP2 <= 200 && player2.isEnabled()){
                     shootingDirection = new Vector2(player2.getPosition().x - s.getPosition().x, player2.getPosition().y - s.getPosition().y).nor();
                     this.enemyBullets.add(new EnemyBullet(s.getPosition().x, s.getPosition().y + 10, shootingDirection));
                 }
@@ -262,23 +264,12 @@ public class ServerMap {
         }
     }
 
-    public void gatherPlayerPositions(){
-        if(!this.playerPositions.isEmpty()){
-            this.playerPositions.clear();
-        }
-       this.playerPositions.add(this.player1.getPosition().x);
-       this.playerPositions.add(this.player1.getPosition().y);
-       this.playerPositions.add(this.player2.getPosition().x);
-       this.playerPositions.add(this.player2.getPosition().y);
-    }
 
     private void sendGameUpdate(){
         GameEvent gameEvent = new GameEvent();
-        this.gatherPlayerPositions();
-
-        gameEvent.playerPositions = this.playerPositions;
-        gameEvent.player1 = this.player1.getUsername();
-        gameEvent.player2 = this.player2.getUsername();
+        gameEvent.players = new ArrayList<>();
+        gameEvent.players.add(new ServerPlayerData(player1.getUsername(), player1.getPosition(), player1.getHp(), player1.isEnabled()));
+        gameEvent.players.add(new ServerPlayerData(player2.getUsername(), player2.getPosition(), player2.getHp(), player2.isEnabled()));
         gameEvent.bullets = this.bullets;
         this.onUpdateCallback.sendToBothClients(gameEvent);
 
@@ -387,11 +378,13 @@ public class ServerMap {
         for(EnemyBullet eb : enemyBullets){
             if(eb.getPosition().x > this.mapWidthInPixels || eb.getPosition().y > this.mapHeightInPixels){
                 eb.setEnabled(false);
-            }else if(eb.isEnabled() && eb.getBoundRect().overlaps(player1.getBoundRect())){
+            }else if(eb.isEnabled() && eb.getBoundRect().overlaps(player1.getBoundRect()) && player1.isEnabled()){
                 //Add damage to the player
+                player1.setHp(player1.getHp() - 10);
                 eb.setEnabled(false);
-            }else if(eb.isEnabled() && eb.getBoundRect().overlaps(player2.getBoundRect())){
+            }else if(eb.isEnabled() && eb.getBoundRect().overlaps(player2.getBoundRect()) && player2.isEnabled()){
                 //Add damage to the player
+                player2.setHp(player2.getHp() - 10);
                 eb.setEnabled(false);
             }
         }
@@ -418,12 +411,22 @@ public class ServerMap {
         }
     }
 
+    public void removePlayers(){
+        if(player1.getHp() <= 0){
+            player1.setEnabled(false);
+        }
+        if(player2.getHp() <= 0){
+            player2.setEnabled(false);
+        }
+    }
+
     public float distanceBetweenTwoPoints(Vector2 vec1, Vector2 vec2){
         return (float) (Math.sqrt((vec1.x-vec2.x)*(vec1.x-vec2.x) + (vec1.y-vec2.y)*(vec1.y-vec2.y)));
     }
 
     public interface notifyGameServer{
         void switchLevel();
+        void endLobby();
     }
 
     public void checkEnding(){
@@ -431,6 +434,8 @@ public class ServerMap {
             this.notifyGameServerCallback.switchLevel();
         }else if(this.end.isCollision(player2.getBoundRect())){
             this.notifyGameServerCallback.switchLevel();
+        }else if(!this.player1.isEnabled() && !this.player2.isEnabled()){
+            this.notifyGameServerCallback.endLobby();
         }
     }
 

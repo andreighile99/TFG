@@ -1,17 +1,13 @@
 package server.events.game;
 
 import server.game.elements.Bullet;
-import server.game.elements.EnemyBullet;
-import server.game.elements.Soldier;
+import server.model.ServerPlayerData;
 
 import java.util.ArrayList;
 
 public class GameEvent {
 
-    //x1, y1, x2, y2
-    public ArrayList<Float> playerPositions;
-    public String player1;
-    public String player2;
+    public ArrayList<ServerPlayerData> players;
     public ArrayList<Bullet> bullets;
 
     public GameEvent() {

@@ -10,20 +10,13 @@ import main.MontessoriSlug;
 public class ManagedPlayer extends Element{
     private String username;
     private String lobbyName;
-
-    private Vector2 position;
-
     private Animation<TextureRegion> idle;
+    private int hp;
 
-    private Element feet;
-    private boolean onGround;
 
-    private Client myClient;
 
     public ManagedPlayer(float x, float y, Stage s, String username, String lobbyName) {
         super(x, y, s);
-        this.position = new Vector2(x,y);
-        this.myClient = MontessoriSlug.getInstance().getClient();
         this.username = username;
         this.lobbyName = lobbyName;
 
@@ -43,5 +36,13 @@ public class ManagedPlayer extends Element{
 
     public String getUsername() {
         return username;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 }

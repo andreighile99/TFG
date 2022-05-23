@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="256" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="247">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="256" height="21" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="248">
  <objectgroup id="4" name="Solidos">
   <object id="10" x="1" y="275" width="682" height="18">
    <properties>
@@ -198,7 +198,7 @@
     <property name="name" value="Inicio"/>
    </properties>
   </object>
-  <object id="246" x="219" y="232.167" width="22" height="40.6667">
+  <object id="247" x="4018.5" y="22.1667" width="22" height="40.6667">
    <properties>
     <property name="name" value="End"/>
    </properties>

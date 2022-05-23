@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import customRenderer.OrthogonalTiledMapRendererWithBackground;
 import elements.*;
+import elements.serverSide.ServerPlayerData;
 import events.game.EnemyEvent;
 import events.game.GameEvent;
 import handlers.ResourceManager;
@@ -71,7 +72,6 @@ public class GameScreen extends BScreen{
 
         mainStage = new Stage();
         renderer = new OrthogonalTiledMapRendererWithBackground(map);
-        //renderer = new OrthogonalTiledMapRenderer(map, mainStage.getBatch());
 
         MapProperties props = map.getProperties();
 
@@ -122,36 +122,57 @@ public class GameScreen extends BScreen{
     }
 
     public void centerCamera() {
-        System.out.println(this.player1.getY());
-        if(this.player1.getX() < Parameters.cameraWidth/2){
-            this.camera.position.x = Parameters.cameraWidth/2;
-        }else if(this.player1.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
-            this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+        if(this.player1.getEnabled()){
+            if(this.player1.getX() < Parameters.cameraWidth/2){
+                this.camera.position.x = Parameters.cameraWidth/2;
+            }else if(this.player1.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
+                this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+            }else{
+                this.camera.position.x = player1.getX();
+            }
+            if(this.player1.getY() < Parameters.cameraHeight / 2){
+                this.camera.position.y = player1.getY() + (Parameters.cameraHeight / 2 - player1.getY());
+            }else {
+                this.camera.position.y = player1.getY();
+            }
         }else{
-            this.camera.position.x = player1.getX();
-        }
-
-        if(this.player1.getY() < Parameters.cameraHeight / 2){
-            this.camera.position.y = player1.getY() + (Parameters.cameraHeight / 2 - player1.getY());
-        }else {
-            this.camera.position.y = player1.getY();
+            if(this.player2.getX() < Parameters.cameraWidth/2){
+                this.camera.position.x = Parameters.cameraWidth/2;
+            }else if(this.player2.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
+                this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+            }else{
+                this.camera.position.x = player2.getX();
+            }
+            if(this.player2.getY() < Parameters.cameraHeight / 2){
+                this.camera.position.y = player2.getY() + (Parameters.cameraHeight / 2 - player2.getY());
+            }else {
+                this.camera.position.y = player2.getY();
+            }
         }
 
         camera.update();
     }
 
 
-    public void updatePlayersPosition(GameEvent gameEvent){
-        if(gameEvent.player1.equalsIgnoreCase(this.player1.getUsername())){
-            player1.setX(gameEvent.playerPositions.get(0));
-            player1.setY(gameEvent.playerPositions.get(1));
-            player2.setX(gameEvent.playerPositions.get(2));
-            player2.setY(gameEvent.playerPositions.get(3));
-        }else{
-            player2.setX(gameEvent.playerPositions.get(0));
-            player2.setY(gameEvent.playerPositions.get(1));
-            player1.setX(gameEvent.playerPositions.get(2));
-            player1.setY(gameEvent.playerPositions.get(3));
+    public void updatePlayersStatus(GameEvent gameEvent){
+        for(ServerPlayerData serverPlayerData : gameEvent.players){
+            if(serverPlayerData.getUsername().equalsIgnoreCase(this.player1.getUsername()) && serverPlayerData.isEnabled()){
+                player1.setX(serverPlayerData.getPosition().x);
+                player1.setY(serverPlayerData.getPosition().y);
+                player1.setHp(serverPlayerData.getHp());
+            }else if(serverPlayerData.getUsername().equalsIgnoreCase(this.player2.getUsername()) && serverPlayerData.isEnabled()){
+                player2.setX(serverPlayerData.getPosition().x);
+                player2.setY(serverPlayerData.getPosition().y);
+                player2.setHp(serverPlayerData.getHp());
+            }
+        }
+
+        if(this.player1.getHp() <= 0){
+            this.player1.setEnabled(false);
+        }
+
+        if(this.player2.getHp() <= 0){
+            this.player2.setEnabled(false);
         }
     }
 

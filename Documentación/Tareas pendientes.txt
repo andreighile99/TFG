@@ -1,10 +1,10 @@
 
 Código:
 
+UI del jugador con su vida
 Generar 1 mapa más
 Centrar hitboxes, creo que ya está
 Menú de opciones revisar el scroll
-Pantalla final
 
 Añadir sonidos lol
 Animaciones

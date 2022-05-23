@@ -25,7 +25,7 @@ public class GameEventListener extends Listener {
             try{
                 GameScreen gameScreen = (GameScreen) MontessoriSlug.getInstance().getScreen();
                 //New player positions
-                gameScreen.updatePlayersPosition(gameEvent);
+                gameScreen.updatePlayersStatus(gameEvent);
                     Gdx.app.postRunnable(()->{
                         //New bullets positions inside Gdx app so we have a GL20 context (Can render)
                         gameScreen.updateBulletsPosition(gameEvent);

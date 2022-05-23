@@ -9,6 +9,7 @@ import events.lobby.LobbyJoinedEvent;
 import events.lobby.LobbyStartEvent;
 import main.MontessoriSlug;
 import parameters.Parameters;
+import screens.EndingScreen;
 import screens.GameScreen;
 import screens.LobbyScreen;
 import screens.MenuScreen;
@@ -89,16 +90,18 @@ public class EventListener extends Listener {
             }
         }else if(object instanceof FinishLobby){
             FinishLobby finishLobby = (FinishLobby) object;
+            System.out.println(finishLobby.code);
+
             if(!finishLobby.code.equalsIgnoreCase("00")){
                 Gdx.app.postRunnable(()->{
-                    MontessoriSlug.getInstance().setScreen(new MenuScreen(MontessoriSlug.getInstance()));
+                    MontessoriSlug.getInstance().setScreen(new EndingScreen(MontessoriSlug.getInstance()));
                     return;
                 });
-            }else{
+            } else if(!(MontessoriSlug.getInstance().getScreen() instanceof EndingScreen)){
                 Gdx.app.postRunnable(()->{
                     MontessoriSlug.getInstance().setScreen(new MenuScreen(MontessoriSlug.getInstance()));
-                    MenuScreen menuScreen = (MenuScreen) MontessoriSlug.getInstance().getScreen();
-                    menuScreen.renderErrorMessage("Ha ocurrido un error de conexion y se ha terminado la partida");
+                    //MenuScreen menuScreen = (MenuScreen) MontessoriSlug.getInstance().getScreen();
+                    //menuScreen.renderErrorMessage("Ha ocurrido un error de conexion y se ha terminado la partida");
                     return;
                 });
             }

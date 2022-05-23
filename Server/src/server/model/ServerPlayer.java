@@ -18,12 +18,14 @@ public class ServerPlayer {
 
     private Vector2 position;
 
-    public ServerPlayer(String username, Connection connection) {
-        this.username = username;
-        this.connection = connection;
-    }
+    private int hp;
 
-    public ServerPlayer(Connection connection) {
+    private boolean enabled;
+
+    public ServerPlayer(String username, Connection connection) {
+        this.enabled = true;
+        this.hp = 100;
+        this.username = username;
         this.connection = connection;
     }
 
@@ -32,6 +34,8 @@ public class ServerPlayer {
     }
 
     public void init(){
+        this.enabled = true;
+        this.hp = 100;
         this.boundRect = new Rectangle(0, 0, 10, 20);
         this.feet = new Rectangle(0, 0, this.boundRect.width / 8, this.boundRect.height / 10);
         this.onGround = false;
@@ -49,24 +53,12 @@ public class ServerPlayer {
         return position;
     }
 
-    public void setPosition(Vector2 position) {
-        this.position = position;
-    }
-
     public Rectangle getBoundRect() {
         return boundRect;
     }
 
-    public void setBoundRect(Rectangle boundRect) {
-        this.boundRect = boundRect;
-    }
-
     public Rectangle getFeet() {
         return feet;
-    }
-
-    public void setFeet(Rectangle feet) {
-        this.feet = feet;
     }
 
     public boolean isOnGround() {
@@ -113,4 +105,19 @@ public class ServerPlayer {
         }
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
 }
