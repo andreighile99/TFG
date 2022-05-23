@@ -34,6 +34,7 @@ public final class ResourceManager {
         //mapas
         assets.setLoader(TiledMap.class, new TmxMapLoader());
         assets.load("assets/maps/firstMap.tmx", TiledMap.class);
+        assets.load("assets/maps/secondMap.tmx", TiledMap.class);
 
         assets.load("assets/images/background.png", Texture.class);
         assets.load("assets/player/idle.png", Texture.class);

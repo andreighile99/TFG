@@ -62,7 +62,7 @@ public class ServerMap {
                 map = ResourceManager.getMap("assets/maps/firstMap.tmx");
                 break;
             case 2:
-                map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+                map = ResourceManager.getMap("assets/maps/secondMap.tmx");
                 break;
             default:
                 map = ResourceManager.getMap("assets/maps/firstMap.tmx");
@@ -135,6 +135,8 @@ public class ServerMap {
 
     public void update(float deltaTime) {
         this.deltaTime = deltaTime;
+        this.sendGameUpdate();
+        this.cleanupDisabledElements();
         this.removePlayers();
 
         this.updatePlayersRectangles();
@@ -149,8 +151,6 @@ public class ServerMap {
         this.applyGravity();
 
         this.checkEnding();
-        this.sendGameUpdate();
-        this.cleanupDisabledElements();
     }
 
     public interface onUpdate{
@@ -342,39 +342,6 @@ public class ServerMap {
     }
 
     private void removeBullets(){
-        /**
-        for(Solid s : solids){
-            for(Bullet b : bullets){
-                if(s.isCollision(b.getBoundRect())){
-                    b.setEnabled(false);
-                }
-            }
-            for(EnemyBullet eb : enemyBullets){
-                if(eb.isEnabled() && s.isCollision(eb.getBoundRect())){
-                    eb.setEnabled(false);
-                }
-            }
-        }
-        //If the bullets collide against an enemy, reduce their hp but also disable the bullet
-        for(Soldier s : soldiers){
-            for(Bullet b : bullets){
-                if(s.getBoundRectangle().overlaps(b.getBoundRect())){
-                    s.setHp(s.getHp()-1);
-                    b.setEnabled(false);
-                }
-            }
-        }
-
-        for(EnemyBullet eb : enemyBullets){
-            if(eb.isEnabled() && eb.getBoundRect().overlaps(player1.getBoundRect())){
-                //Add damage to the player
-                eb.setEnabled(false);
-            }else if(eb.isEnabled() && eb.getBoundRect().overlaps(player2.getBoundRect())){
-                //Add damage to the player
-                eb.setEnabled(false);
-            }
-        }
-    **/
         for(EnemyBullet eb : enemyBullets){
             if(eb.getPosition().x > this.mapWidthInPixels || eb.getPosition().y > this.mapHeightInPixels){
                 eb.setEnabled(false);

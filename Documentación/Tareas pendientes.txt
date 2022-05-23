@@ -2,7 +2,7 @@
 Código:
 
 UI del jugador con su vida
-Generar 1 mapa más
+Añadir nuevo objeto EndGame
 Centrar hitboxes, creo que ya está
 Menú de opciones revisar el scroll
 

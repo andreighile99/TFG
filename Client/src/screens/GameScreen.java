@@ -63,7 +63,7 @@ public class GameScreen extends BScreen{
                 map = ResourceManager.getMap("assets/maps/firstMap.tmx");
                 break;
             case 2:
-                map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+                map = ResourceManager.getMap("assets/maps/secondMap.tmx");
                 break;
             default:
                 map = ResourceManager.getMap("assets/maps/firstMap.tmx");
@@ -122,33 +122,56 @@ public class GameScreen extends BScreen{
     }
 
     public void centerCamera() {
-        if(this.player1.getEnabled()){
-            if(this.player1.getX() < Parameters.cameraWidth/2){
-                this.camera.position.x = Parameters.cameraWidth/2;
-            }else if(this.player1.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
-                this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+        if(Parameters.level == 1){
+            if(this.player1.getEnabled()){
+                if(this.player1.getX() < Parameters.cameraWidth/2){
+                    this.camera.position.x = Parameters.cameraWidth/2;
+                }else if(this.player1.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
+                    this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+                }else{
+                    this.camera.position.x = player1.getX();
+                }
+                if(this.player1.getY() < Parameters.cameraHeight / 2){
+                    this.camera.position.y = player1.getY() + (Parameters.cameraHeight / 2 - player1.getY());
+                }else {
+                    this.camera.position.y = player1.getY();
+                }
             }else{
-                this.camera.position.x = player1.getX();
+                if(this.player2.getX() < Parameters.cameraWidth/2){
+                    this.camera.position.x = Parameters.cameraWidth/2;
+                }else if(this.player2.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
+                    this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+                }else{
+                    this.camera.position.x = player2.getX();
+                }
+                if(this.player2.getY() < Parameters.cameraHeight / 2){
+                    this.camera.position.y = player2.getY() + (Parameters.cameraHeight / 2 - player2.getY());
+                }else {
+                    this.camera.position.y = player2.getY();
+                }
             }
-            if(this.player1.getY() < Parameters.cameraHeight / 2){
-                this.camera.position.y = player1.getY() + (Parameters.cameraHeight / 2 - player1.getY());
-            }else {
-                this.camera.position.y = player1.getY();
-            }
-        }else{
-            if(this.player2.getX() < Parameters.cameraWidth/2){
-                this.camera.position.x = Parameters.cameraWidth/2;
-            }else if(this.player2.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
-                this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+        }else if(Parameters.level == 2){
+            if(this.player1.getEnabled()){
+                if(this.player1.getX() < Parameters.cameraWidth/2){
+                    this.camera.position.x = Parameters.cameraWidth/2;
+                }else if(this.player1.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
+                    this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+                }else{
+                    this.camera.position.x = player1.getX();
+                }
+                this.camera.position.y = this.player1.getY()+80;
             }else{
-                this.camera.position.x = player2.getX();
-            }
-            if(this.player2.getY() < Parameters.cameraHeight / 2){
-                this.camera.position.y = player2.getY() + (Parameters.cameraHeight / 2 - player2.getY());
-            }else {
-                this.camera.position.y = player2.getY();
+                if(this.player2.getX() < Parameters.cameraWidth/2){
+                    this.camera.position.x = Parameters.cameraWidth/2;
+                }else if(this.player2.getX() > mapWidthInPixels - Parameters.cameraWidth/2){
+                    this.camera.position.x = mapWidthInPixels - Parameters.cameraWidth/2;
+                }else{
+                    this.camera.position.x = player2.getX();
+                }
+                this.camera.position.y = this.player1.getY()+80;
             }
         }
+
 
         camera.update();
     }

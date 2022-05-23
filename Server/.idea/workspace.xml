@@ -2,51 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ed0264e-32ec-41bb-b951-8da0de5cba67" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Client/src/elements/serverSide/ServerPlayerData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/model/ServerPlayerData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/assets/maps/background2.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/assets/maps/images/MetalSlug2-Mission3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client/assets/maps/secondMap.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Server_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/maps/secondMap.tmx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/Server_jar/Server.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/elements/ManagedPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/elements/ManagedPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/elements/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/elements/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/events/game/GameEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/events/game/GameEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/listeners/EventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/listeners/EventListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/listeners/GameEventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/listeners/GameEventListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/EndingScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/EndingScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/handlers/ResourceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/handlers/ResourceManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/GameScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/GameScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/MenuScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/out/production/Client/screens/OptionsScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/elements/ManagedPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/elements/ManagedPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/elements/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/elements/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/events/game/GameEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/events/game/GameEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/handlers/ResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/handlers/ResourceManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/src/listeners/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/listeners/EventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/listeners/GameEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/listeners/GameEventListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/screens/EndingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/EndingScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/src/screens/GameScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/GameScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/screens/MenuScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/MenuScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/screens/OptionsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/screens/OptionsScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Documentación/Tareas pendientes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Documentación/Tareas pendientes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/maps/firstMap.tmx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/maps/firstMap.tmx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/server/events/game/GameEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/events/game/GameEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/server/game/gameServer/GameServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/game/gameServer/GameServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$notifyGameServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap$notifyGameServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/game/map/ServerMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Server/server/main/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/main/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/handlers/LobbyHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/handlers/LobbyHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Server/server/handlers/ResourceManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/handlers/ResourceManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Server/server/model/ServerPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Server/server/model/ServerPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/events/game/GameEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/events/game/GameEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/game/gameServer/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/game/gameServer/GameServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/game/map/ServerMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/game/map/ServerMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/main/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/main/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/ServerPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/model/ServerPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/handlers/LobbyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/handlers/LobbyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/handlers/ResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/handlers/ResourceManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +53,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/maps" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -149,7 +127,7 @@
       <workItem from="1653160776899" duration="4363000" />
       <workItem from="1653239650570" duration="3119000" />
       <workItem from="1653247967761" duration="10584000" />
-      <workItem from="1653287812048" duration="16498000" />
+      <workItem from="1653287812048" duration="19813000" />
     </task>
     <servers />
   </component>

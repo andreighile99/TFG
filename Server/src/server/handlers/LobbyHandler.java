@@ -18,10 +18,6 @@ public class LobbyHandler {
         return lobbies;
     }
 
-    public void setLobbies(LinkedHashMap<String, Lobby> lobbies) {
-        this.lobbies = lobbies;
-    }
-
     public void finishLobbyByConnection(Connection conn){
         Lobby lobbyToDelete = null;
         for(Lobby lobby : lobbies.values()){
