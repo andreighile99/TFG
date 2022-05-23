@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import customRenderer.OrthogonalTiledMapRendererWithBackground;
 import elements.*;
+import events.game.EnemyEvent;
 import events.game.GameEvent;
 import handlers.ResourceManager;
 import main.MontessoriSlug;
@@ -51,24 +52,33 @@ public class GameScreen extends BScreen{
 
     public GameScreen(MontessoriSlug game, String username1, String username2, String lobbyName) {
         super(game);
-        ResourceManager.loadAllResources();
 
         bulletReps = new ArrayList<>();
         soldierReps = new ArrayList<>();
         enemyBulletReps = new ArrayList<>();
 
-        map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+        switch(Parameters.level){
+            case 1:
+                map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+                break;
+            case 2:
+                map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+                break;
+            default:
+                map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+                break;
+        }
 
         mainStage = new Stage();
         renderer = new OrthogonalTiledMapRendererWithBackground(map);
         //renderer = new OrthogonalTiledMapRenderer(map, mainStage.getBatch());
 
-        MapProperties properties = map.getProperties();
+        MapProperties props = map.getProperties();
 
-        tileWidth = properties.get("tilewidth", Integer.class);
-        tileHeight = properties.get("tileheight", Integer.class);
-        mapWidthInTiles = properties.get("width", Integer.class);
-        mapHeightInTiles = properties.get("height", Integer.class);
+        tileWidth = props.get("tilewidth", Integer.class);
+        tileHeight = props.get("tileheight", Integer.class);
+        mapWidthInTiles = props.get("width", Integer.class);
+        mapHeightInTiles = props.get("height", Integer.class);
         mapWidthInPixels = tileWidth * mapWidthInTiles;
         mapHeightInPixels = tileHeight * mapHeightInTiles;
 
@@ -79,7 +89,6 @@ public class GameScreen extends BScreen{
         ArrayList<MapObject> elements = getRectangleList("Inicio");
 
         //Add starting x and y
-        MapProperties props;
         props = elements.get(0).getProperties();
         this.inicioX = (float) props.get("x");
         this.inicioY = (float) props.get("y");
@@ -146,17 +155,17 @@ public class GameScreen extends BScreen{
         }
     }
 
-    public void updateEnemyBulletsPosition(GameEvent gameEvent){
-        int enemyBulletsOnServer = gameEvent.enemyBullets.size();
+    public void updateEnemyBulletsPosition(EnemyEvent enemyEvent){
+        int enemyBulletsOnServer = enemyEvent.enemyBullets.size();
         int deltaEnemyBullets = enemyBulletsOnServer - this.enemyBulletReps.size();
         if(deltaEnemyBullets > 0){
             for(int i = 0; i<deltaEnemyBullets; i++){
-                this.enemyBulletReps.add(new EnemyBulletRep(gameEvent.enemyBullets.get(i).getPosition().x, gameEvent.enemyBullets.get(i).getPosition().y, mainStage));
+                this.enemyBulletReps.add(new EnemyBulletRep(enemyEvent.enemyBullets.get(i).getPosition().x, enemyEvent.enemyBullets.get(i).getPosition().y, mainStage));
             }
         }
         for(int i = 0; i<enemyBulletsOnServer; i++){
-            if(gameEvent.enemyBullets.get(i).isEnabled()){
-                this.enemyBulletReps.get(i).moveBy(gameEvent.enemyBullets.get(i).getPosition().x - this.enemyBulletReps.get(i).getX(), gameEvent.enemyBullets.get(i).getPosition().y - this.enemyBulletReps.get(i).getY());
+            if(enemyEvent.enemyBullets.get(i).isEnabled()){
+                this.enemyBulletReps.get(i).moveBy(enemyEvent.enemyBullets.get(i).getPosition().x - this.enemyBulletReps.get(i).getX(), enemyEvent.enemyBullets.get(i).getPosition().y - this.enemyBulletReps.get(i).getY());
             }else{
                 this.enemyBulletReps.get(i).setEnabled(false);
             }
@@ -182,17 +191,17 @@ public class GameScreen extends BScreen{
         cleanupDisabledElements();
     }
 
-    public void updateSoldiersPosition(GameEvent gameEvent){
-        int soldiersOnServer = gameEvent.soldiers.size();
+    public void updateSoldiersPosition(EnemyEvent enemyEvent){
+        int soldiersOnServer = enemyEvent.soldiers.size();
         int deltaSoldiers = soldiersOnServer - this.soldierReps.size();
         if(deltaSoldiers > 0){
             for(int i = 0; i<deltaSoldiers; i++){
-                this.soldierReps.add(new SoldierRep(gameEvent.soldiers.get(i).getPosition().x,gameEvent.soldiers.get(i).getPosition().y, mainStage));
+                this.soldierReps.add(new SoldierRep(enemyEvent.soldiers.get(i).getPosition().x,enemyEvent.soldiers.get(i).getPosition().y, mainStage));
             }
         }
         for(int i = 0; i<soldiersOnServer; i++){
-            if(gameEvent.soldiers.get(i).isEnabled()){
-                this.soldierReps.get(i).moveBy(gameEvent.soldiers.get(i).getPosition().x - this.soldierReps.get(i).getX(), gameEvent.soldiers.get(i).getPosition().y - this.soldierReps.get(i).getY());
+            if(enemyEvent.soldiers.get(i).isEnabled()){
+                this.soldierReps.get(i).moveBy(enemyEvent.soldiers.get(i).getPosition().x - this.soldierReps.get(i).getX(), enemyEvent.soldiers.get(i).getPosition().y - this.soldierReps.get(i).getY());
             }else{
                 this.soldierReps.get(i).setEnabled(false);
             }
@@ -223,19 +232,11 @@ public class GameScreen extends BScreen{
     }
 
 
-    public ArrayList<BulletRep> getBulletReps() {
-        return bulletReps;
+    public Player getPlayer1() {
+        return player1;
     }
 
-    public void setBulletReps(ArrayList<BulletRep> bulletReps) {
-        this.bulletReps = bulletReps;
-    }
-
-    public ArrayList<SoldierRep> getSoldierReps() {
-        return soldierReps;
-    }
-
-    public void setSoldierReps(ArrayList<SoldierRep> soldierReps) {
-        this.soldierReps = soldierReps;
+    public ManagedPlayer getPlayer2() {
+        return player2;
     }
 }

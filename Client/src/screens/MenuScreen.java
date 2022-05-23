@@ -2,6 +2,8 @@ package screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,6 +16,7 @@ import elements.serverSide.Soldier;
 import events.game.*;
 import events.lobby.*;
 import handlers.LabelHandler;
+import handlers.ResourceManager;
 import listeners.EventListener;
 import listeners.GameEventListener;
 import main.MontessoriSlug;
@@ -22,15 +25,23 @@ import parameters.Parameters;
 import java.util.ArrayList;
 
 public class MenuScreen extends BScreen {
+    private static Texture backgroundTexture;
+    private SpriteBatch spriteBatch;
+
     private Table table;
 
-    private final TextField ipAddressLabel;
-    private final TextField portLabel;
-    private final TextField lobbyNameLabel;
-    private final TextField usernameLabel;
+    private final Label ipAddressLabel;
+    private final TextField ipAddressTextField;
+    private final Label portLabel;
+    private final TextField portTextField;
+    private final Label lobbyNameLabel;
+    private final TextField lobbyNameTextField;
+    private final Label usernameLabel;
+    private final TextField usernameTextField;
 
     private final TextButton newLobbyButton;
     private final TextButton joinLobbyButton;
+    private final TextButton optionsButton;
 
     private final Label errorLabel;
 
@@ -38,18 +49,22 @@ public class MenuScreen extends BScreen {
     public MenuScreen(MontessoriSlug game) {
         super(game);
 
+
+        this.backgroundTexture = ResourceManager.getTexture("assets/images/background.png");
+        this.spriteBatch = new SpriteBatch();
+
         this.table = new Table();
-        this.table.setBounds(0,0,800,600);
+        this.table.setBounds(0,0,Parameters.screenWidth,Parameters.screenHeight);
 
 
 
         //Download new skin
         final Skin skin = new Skin(Gdx.files.internal("assets/ui-skin/uiskin.json"));
 
-        this.ipAddressLabel = new TextField("localhost", skin);
-        this.portLabel = new TextField("9998", skin);
-        this.usernameLabel = new TextField("Username", skin);
-        this.lobbyNameLabel = new TextField("Nombre de la sala", skin);
+        this.ipAddressTextField = new TextField("localhost", skin);
+        this.portTextField = new TextField("9998", skin);
+        this.usernameTextField = new TextField("Usuario", skin);
+        this.lobbyNameTextField = new TextField("Sala", skin);
 
         this.newLobbyButton = new TextButton("Crear sala", skin);
         this.newLobbyButton.addListener(new ClickListener() {
@@ -64,20 +79,21 @@ public class MenuScreen extends BScreen {
 
                 try {
                     client.start();
-                    client.connect(15000, ipAddressLabel.getText(), Integer.parseInt(portLabel.getText()),  Integer.parseInt(portLabel.getText()));
+                    client.connect(15000, ipAddressTextField.getText(), Integer.parseInt(portTextField.getText()),  Integer.parseInt(portTextField.getText()));
                 } catch (Exception e) {
                     errorLabel.setText(e.getMessage());
                     return super.touchDown(event, x, y, pointer, button);
                 }
 
-                Parameters.actualNickname = usernameLabel.getText();
+                Parameters.actualNickname = usernameTextField.getText();
+                Parameters.lobbyName = lobbyNameTextField.getText();
 
                 // Connection established with the server
                 MontessoriSlug.getInstance().setClient(client);
 
                 CreateNewLobbyEvent createNewLobbyEvent = new CreateNewLobbyEvent();
-                createNewLobbyEvent.lobbyName = lobbyNameLabel.getText();
-                createNewLobbyEvent.username = usernameLabel.getText();
+                createNewLobbyEvent.lobbyName = lobbyNameTextField.getText();
+                createNewLobbyEvent.username = usernameTextField.getText();
 
                 client.sendTCP(createNewLobbyEvent);
 
@@ -101,20 +117,21 @@ public class MenuScreen extends BScreen {
 
                 try {
                     client.start();
-                    client.connect(15000, ipAddressLabel.getText(), Integer.parseInt(portLabel.getText()),  Integer.parseInt(portLabel.getText()));
+                    client.connect(15000, ipAddressTextField.getText(), Integer.parseInt(portTextField.getText()),  Integer.parseInt(portTextField.getText()));
                 } catch (Exception e) {
                     errorLabel.setText(e.getMessage());
                     return super.touchDown(event, x, y, pointer, button);
                 }
 
-                Parameters.actualNickname = usernameLabel.getText();
+                Parameters.actualNickname = usernameTextField.getText();
+                Parameters.lobbyName = lobbyNameTextField.getText();
 
                 // Connection established with the server so set the client to the main game class
                 MontessoriSlug.getInstance().setClient(client);
 
                 JoinLobbyEvent joinLobbyEvent = new JoinLobbyEvent();
-                joinLobbyEvent.lobbyName = lobbyNameLabel.getText();
-                joinLobbyEvent.username = usernameLabel.getText();
+                joinLobbyEvent.lobbyName = lobbyNameTextField.getText();
+                joinLobbyEvent.username = usernameTextField.getText();
 
                 client.sendTCP(joinLobbyEvent);
 
@@ -122,8 +139,20 @@ public class MenuScreen extends BScreen {
             }
         });
 
-        this.errorLabel = LabelHandler.INSTANCE.createLabel(null, 16, Color.RED);
+        this.optionsButton = new TextButton("Opciones", skin);
+        this.optionsButton.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                MontessoriSlug.getInstance().setScreen(new OptionsScreen(MontessoriSlug.getInstance()));
+                return super.touchDown(event, x, y, pointer, button);
+            }
+        });
 
+        this.errorLabel = LabelHandler.INSTANCE.createLabel(null, 16, Color.RED);
+        this.ipAddressLabel  = LabelHandler.INSTANCE.createLabel("Direccion IP ", 16, Color.WHITE);
+        this.lobbyNameLabel = LabelHandler.INSTANCE.createLabel("Nombre de la sala ", 16, Color.WHITE);
+        this.portLabel= LabelHandler.INSTANCE.createLabel("Puerto ", 16, Color.WHITE);
+        this.usernameLabel = LabelHandler.INSTANCE.createLabel("Nombre de usuario ", 16, Color.WHITE);
         this.uiStage.addActor(table);
 
         this.setToDefault();
@@ -131,18 +160,31 @@ public class MenuScreen extends BScreen {
 
     public void setToDefault() {
         this.table.clear();
-        this.table.add(this.ipAddressLabel).width(250).row();
-        this.table.add(this.portLabel).width(250).padTop(25).row();
-        this.table.add(this.usernameLabel).width(250).padTop(25).row();
-        this.table.add(this.lobbyNameLabel).width(250).padTop(25).row();
-        this.table.add(this.newLobbyButton).size(250, 50).padTop(100).row();
-        this.table.add(this.joinLobbyButton).size(250, 50).padTop(100).row();
+        this.table.add(this.ipAddressLabel).width(200).padTop(12);
+        this.table.add(this.ipAddressTextField).width(250).row();
+        this.table.add(this.portLabel).width(200).padTop(12);
+        this.table.add(this.portTextField).width(250).padTop(25).row();
+        this.table.add(this.usernameLabel).width(200).padTop(12);
+        this.table.add(this.usernameTextField).width(250).padTop(25).row();
+        this.table.add(this.lobbyNameLabel).width(200).padTop(12);
+        this.table.add(this.lobbyNameTextField).width(250).padTop(25).row();
+        this.table.add().width(200);
+        this.table.add(this.newLobbyButton).size(250, 50).padTop(50).row();
+        this.table.add().width(200);
+        this.table.add(this.joinLobbyButton).size(250, 50).padTop(50).row();
+        this.table.add().width(200);
+        this.table.add(this.optionsButton).size(250, 50).padTop(50).row();
         this.table.add(this.errorLabel).padTop(50);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
+
+        spriteBatch.begin();
+        spriteBatch.draw(backgroundTexture, 0,0, Parameters.screenWidth, Parameters.screenHeight);
+        spriteBatch.end();
+
         uiStage.act();
         uiStage.draw();
     }
@@ -162,12 +204,14 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(LobbyJoinedEvent.class);
         client.getKryo().register(LobbyStartEvent.class);
         client.getKryo().register(FinishLobby.class);
+        client.getKryo().register(SwitchLevel.class);
 
         //Events happening in-game
         client.getKryo().register(GameEvent.class);
         client.getKryo().register(PlayerEvent.class);
         client.getKryo().register(PlayerEvent.DIRECTION.class);
         client.getKryo().register(BulletEvent.class);
+        client.getKryo().register(EnemyEvent.class);
 
         //Common
         client.getKryo().register(ArrayList.class);
@@ -177,6 +221,7 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(Soldier.class);
         client.getKryo().register(EnemyBullet.class);
     }
+
     public void renderErrorMessage(String errorMessage){
         this.errorLabel.setText(errorMessage);
     }

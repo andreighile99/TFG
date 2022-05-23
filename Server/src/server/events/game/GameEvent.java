@@ -13,8 +13,6 @@ public class GameEvent {
     public String player1;
     public String player2;
     public ArrayList<Bullet> bullets;
-    public ArrayList<Soldier> soldiers;
-    public ArrayList<EnemyBullet> enemyBullets;
 
     public GameEvent() {
     }

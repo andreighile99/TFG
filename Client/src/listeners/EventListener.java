@@ -88,12 +88,21 @@ public class EventListener extends Listener {
                 });
             }
         }else if(object instanceof FinishLobby){
-            Gdx.app.postRunnable(()->{
-                MontessoriSlug.getInstance().setScreen(new MenuScreen(MontessoriSlug.getInstance()));
-                MenuScreen menuScreen = (MenuScreen) MontessoriSlug.getInstance().getScreen();
-                menuScreen.renderErrorMessage("Ha ocurrido un error de conexion y se ha terminado la partida");
-                return;
-            });
+            FinishLobby finishLobby = (FinishLobby) object;
+            if(!finishLobby.code.equalsIgnoreCase("00")){
+                Gdx.app.postRunnable(()->{
+                    MontessoriSlug.getInstance().setScreen(new MenuScreen(MontessoriSlug.getInstance()));
+                    return;
+                });
+            }else{
+                Gdx.app.postRunnable(()->{
+                    MontessoriSlug.getInstance().setScreen(new MenuScreen(MontessoriSlug.getInstance()));
+                    MenuScreen menuScreen = (MenuScreen) MontessoriSlug.getInstance().getScreen();
+                    menuScreen.renderErrorMessage("Ha ocurrido un error de conexion y se ha terminado la partida");
+                    return;
+                });
+            }
+
         }
     }
 }

@@ -63,7 +63,10 @@ public class Player extends Element{
             bulletEvent.setBulletDirection(this.lookingDirection.nor());
             this.myClient.sendUDP(bulletEvent);
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+            this.lookingDirection.set(0, 1);
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             playerEvent.setDirection(PlayerEvent.DIRECTION.UP);
             this.myClient.sendUDP(playerEvent);
         }
@@ -82,21 +85,10 @@ public class Player extends Element{
 
     }
 
-    public Vector2 getPosition() {
-        return position;
-    }
-
-    public void setPosition(Vector2 position) {
-        this.position = position;
-    }
-
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
 
 }

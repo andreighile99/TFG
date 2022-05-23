@@ -1,14 +1,13 @@
 
 Código:
 
-Generar 1 ó 2 mapas
-Centrar hitboxes
-Menú de opciones con 2 o 3 cositas
+Generar 1 mapa más
+Centrar hitboxes, creo que ya está
+Menú de opciones revisar el scroll
 Pantalla final
-Al terminar volver al principio
-Añadir sonidos lol
 
-Animaciones de los enemigos
+Añadir sonidos lol
+Animaciones
 
 Testing?
 

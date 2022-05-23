@@ -33,5 +33,17 @@ public class LobbyHandler {
         this.lobbies.values().remove(lobbyToDelete);
     }
 
+    public void finishLobbyByName(String lobbyName){
+        Lobby lobbyToDelete = null;
+        for(Lobby lobby : lobbies.values()){
+            if(lobby.getLobbyName().equalsIgnoreCase(lobbyName)){
+                lobby.finish();
+                lobbyToDelete = lobby;
+            }
+        }
+        this.lobbies.values().remove(lobbyToDelete);
+    }
+
+
 
 }

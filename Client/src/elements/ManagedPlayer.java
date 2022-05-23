@@ -41,12 +41,7 @@ public class ManagedPlayer extends Element{
 
     }
 
-
-    public Vector2 getPosition() {
-        return position;
-    }
-
-    public void setPosition(Vector2 position) {
-        this.position = position;
+    public String getUsername() {
+        return username;
     }
 }

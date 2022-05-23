@@ -105,10 +105,9 @@ public class LobbyListener extends Listener {
                 System.out.println("LOG - Se comienza a ejecutar la partida de la sala [ " + lobbyStartEvent.lobbyName + " ]");
                 LobbyHandler.INSTANCE.getLobbies().get(lobbyStartEvent.lobbyName).getPlayer1().getConnection().sendTCP(lobbyStartEventResponse);
                 LobbyHandler.INSTANCE.getLobbies().get(lobbyStartEvent.lobbyName).getPlayer2().getConnection().sendTCP(lobbyStartEventResponse);
-                LobbyHandler.INSTANCE.getLobbies().get(lobbyStartEvent.lobbyName).startLobbyGame();
+                LobbyHandler.INSTANCE.getLobbies().get(lobbyStartEvent.lobbyName).startLobbyGame(lobbyStartEvent.lobbyName);
                 return;
             }
         }
-
     }
 }

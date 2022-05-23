@@ -3,8 +3,11 @@ package listeners;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
+import events.game.EnemyEvent;
 import events.game.GameEvent;
+import events.game.SwitchLevel;
 import main.MontessoriSlug;
+import parameters.Parameters;
 import screens.GameScreen;
 
 public class GameEventListener extends Listener {
@@ -26,12 +29,31 @@ public class GameEventListener extends Listener {
                     Gdx.app.postRunnable(()->{
                         //New bullets positions inside Gdx app so we have a GL20 context (Can render)
                         gameScreen.updateBulletsPosition(gameEvent);
-                        gameScreen.updateEnemyBulletsPosition(gameEvent);
-                        gameScreen.updateSoldiersPosition(gameEvent);
                     });
             }catch (ClassCastException e){
                 System.out.println("LOG - Todavía no había cambiado la screen en el cliente");
             }
+        }else if(object instanceof EnemyEvent){
+            EnemyEvent enemyEvent = (EnemyEvent) object;
+            try{
+                GameScreen gameScreen = (GameScreen) MontessoriSlug.getInstance().getScreen();
+                Gdx.app.postRunnable(()->{
+                    //New bullets positions inside Gdx app so we have a GL20 context (Can render)
+                    gameScreen.updateEnemyBulletsPosition(enemyEvent);
+                    gameScreen.updateSoldiersPosition(enemyEvent);
+                });
+            }catch (ClassCastException e){
+                System.out.println("LOG - Todavía no había cambiado la screen en el cliente");
+            }
+        }else if(object instanceof SwitchLevel){
+            Parameters.level += 1;
+                GameScreen gameScreen = (GameScreen) MontessoriSlug.getInstance().getScreen();
+                String username1 = gameScreen.getPlayer1().getUsername();
+                String username2 = gameScreen.getPlayer2().getUsername();
+                MontessoriSlug.getInstance().getScreen().dispose();
+                Gdx.app.postRunnable(()->{
+                    MontessoriSlug.getInstance().setScreen(new GameScreen(MontessoriSlug.getInstance(), username1, username2, Parameters.lobbyName));
+                });
         }
 
     }

@@ -86,12 +86,14 @@ public class Server {
         this.server.getKryo().register(LobbyJoinedEvent.class);
         this.server.getKryo().register(LobbyStartEvent.class);
         this.server.getKryo().register(FinishLobby.class);
+        this.server.getKryo().register(SwitchLevel.class);
 
         //Game events
         this.server.getKryo().register(GameEvent.class);
         this.server.getKryo().register(PlayerEvent.class);
         this.server.getKryo().register(PlayerEvent.DIRECTION.class);
         this.server.getKryo().register(BulletEvent.class);
+        this.server.getKryo().register(EnemyEvent.class);
 
         //Common
         this.server.getKryo().register(ArrayList.class);

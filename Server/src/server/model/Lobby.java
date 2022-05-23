@@ -8,11 +8,13 @@ import server.game.gameServer.GameServer;
 import server.game.map.ServerMap;
 
 public class Lobby implements ServerMap.onUpdate {
-    String lobbyName;
+    private String lobbyName;
 
-    GameServer gameServer;
-    ServerPlayer player1;
-    ServerPlayer player2;
+    private GameServer gameServer;
+    private ServerPlayer player1;
+    private ServerPlayer player2;
+
+
 
     public void createLobby(final ServerPlayer serverPlayer) {
         this.player1 = serverPlayer;
@@ -22,8 +24,9 @@ public class Lobby implements ServerMap.onUpdate {
         this.player2 = serverPlayer;
     }
 
-    public void startLobbyGame(){
-        this.gameServer = new GameServer(this, player1, player2);
+    public void startLobbyGame(String lobbyName){
+        this.lobbyName = lobbyName;
+        this.gameServer = new GameServer(this.lobbyName,this, player1, player2);
         //Headless Application
         HeadlessApplicationConfiguration conf = new HeadlessApplicationConfiguration();
         //60 Renders per second
@@ -33,34 +36,10 @@ public class Lobby implements ServerMap.onUpdate {
 
     }
 
-    public ServerPlayer getPlayer1() {
-        return player1;
-    }
-
-    public void setPlayer1(ServerPlayer player1) {
-        this.player1 = player1;
-    }
-
-    public ServerPlayer getPlayer2() {
-        return player2;
-    }
-
-    public void setPlayer2(ServerPlayer player2) {
-        this.player2 = player2;
-    }
-
-    public String getLobbyName() {
-        return lobbyName;
-    }
-
-    public void setLobbyName(String lobbyName) {
-        this.lobbyName = lobbyName;
-    }
-
     @Override
-    public void sendToBothClients(GameEvent gameEvent) {
-        this.player1.getConnection().sendUDP(gameEvent);
-        this.player2.getConnection().sendUDP(gameEvent);
+    public void sendToBothClients(Object object) {
+        this.player1.getConnection().sendUDP(object);
+        this.player2.getConnection().sendUDP(object);
     }
 
 
@@ -87,18 +66,12 @@ public class Lobby implements ServerMap.onUpdate {
         }
     }
 
-    public GameServer getGameServer() {
-        return gameServer;
-    }
-
-    public void setGameServer(GameServer gameServer) {
-        this.gameServer = gameServer;
-    }
-
     //End the instance and prepare it for deletion
     public void finish(){
         System.out.println("LOG - Terminando el lobby y notificando a los clientes");
-        this.sendToBothClients(new FinishLobby());
+        FinishLobby finishLobby = new FinishLobby();
+        finishLobby.code = "00";
+        this.sendToBothClients(finishLobby);
         try{
             //Close both connections
             this.player1.getConnection().close();
@@ -108,5 +81,37 @@ public class Lobby implements ServerMap.onUpdate {
 
         }
 
+    }
+
+    public String getLobbyName() {
+        return lobbyName;
+    }
+
+    public void setLobbyName(String lobbyName) {
+        this.lobbyName = lobbyName;
+    }
+
+    public GameServer getGameServer() {
+        return gameServer;
+    }
+
+    public void setGameServer(GameServer gameServer) {
+        this.gameServer = gameServer;
+    }
+
+    public ServerPlayer getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer1(ServerPlayer player1) {
+        this.player1 = player1;
+    }
+
+    public ServerPlayer getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(ServerPlayer player2) {
+        this.player2 = player2;
     }
 }

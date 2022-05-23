@@ -2,38 +2,41 @@ package parameters;
 
 public class Parameters {
 
-//Screen
-    //private static int anchoPantalla=1200;
-    //private static int altoPantalla=900;
-
+    //Screen
     public static int cameraWidth = 320;
     public static int cameraHeight = 180;
 
-    public static int screenWidth=1280;
-    public static int screenHeight=720;
+    public static int screenWidth=Resolutions.RES1.width;
+    public static int screenHeight=Resolutions.RES1.height;
 
+    //Debug
     public static boolean debug=false;
 
-    //Audio;
-    public static float musicVolume=0.1f;
+    //Audio
+    public static float musicVolume=1;
     public static float soundVolume=1;
 
-
-    // public static float zoom=0.24f;
-    public static float zoom=0.30f;
-
     //variables de juego
+    public static int level=1;
 
-    public static int nivel=0;
-
-    public static int gravedad=-290;
-    public static float jugadorx=0;
-    public static float jugadory=0;
-    public static int vida=100;
-    public static int maxVida=100;
-    public static float puntuacion;
+    public static int hp=100;
 
     public static String actualNickname = "";
+    public static String lobbyName = "";
+
+    public enum Resolutions{
+        RES1(800, 600),
+        RES2(1280, 720),
+        RES3(1920, 1080);
+
+        public final int width;
+        public final int height;
+
+        Resolutions(int width, int height) {
+            this.width = width;
+            this.height = height;
+        }
+    }
 
 
 

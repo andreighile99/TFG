@@ -21,7 +21,8 @@ public class ServerMap {
 
     private float deltaTime = 0;
 
-    private onUpdate callback;
+    private onUpdate onUpdateCallback;
+    private notifyGameServer notifyGameServerCallback;
 
     private ArrayList<Float> playerPositions;
 
@@ -32,6 +33,12 @@ public class ServerMap {
     private float startingY;
 
     private TiledMap map;
+    private int tileWidth;
+    private int tileHeight;
+    private int mapWidthInTiles;
+    private int mapHeightInTiles;
+    private int mapWidthInPixels;
+    private int mapHeightInPixels;
 
     private ArrayList<Solid> solids;
     private ArrayList<Soldier> soldiers;
@@ -39,11 +46,28 @@ public class ServerMap {
     private ArrayList<Bullet> bullets;
     private ArrayList<EnemyBullet> enemyBullets;
 
+    private Solid end;
 
-    public ServerMap(onUpdate callback, ServerPlayer player1, ServerPlayer player2){
+
+    public ServerMap(onUpdate onUpdateCallback, notifyGameServer notifyGameServerCallback, ServerPlayer player1, ServerPlayer player2, int level){
 
         ResourceManager.loadAllResources();
-        map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+        this.onUpdateCallback = onUpdateCallback;
+        this.notifyGameServerCallback = notifyGameServerCallback;
+
+
+        switch(level){
+            case 1:
+                map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+                break;
+            case 2:
+                map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+                break;
+            default:
+                map = ResourceManager.getMap("assets/maps/firstMap.tmx");
+                break;
+        }
+
 
         elements = new ArrayList<>();
 
@@ -51,7 +75,14 @@ public class ServerMap {
 
         enemyBullets = new ArrayList<>();
 
-        MapProperties props;
+        MapProperties props = map.getProperties();
+
+        tileWidth = props.get("tilewidth", Integer.class);
+        tileHeight = props.get("tileheight", Integer.class);
+        mapWidthInTiles = props.get("width", Integer.class);
+        mapHeightInTiles = props.get("height", Integer.class);
+        mapWidthInPixels = tileWidth * mapWidthInTiles;
+        mapHeightInPixels = tileHeight * mapHeightInTiles;
 
         elements = getRectangleList("Inicio");
         props = elements.get(0).getProperties();
@@ -70,6 +101,15 @@ public class ServerMap {
             solids.add(solid);
         }
 
+        //Add map switch
+        elements = getRectangleList("End");
+        if(!elements.isEmpty()) {
+            props = elements.get(0).getProperties();
+            end = new Solid((float) props.get("x"), (float) props.get("y"), (float) props.get("width"),
+                    (float) props.get("height"));
+        }
+
+
         //Add soldiers
         Soldier soldier;
         elements = getRectangleList("Soldier");
@@ -82,7 +122,6 @@ public class ServerMap {
 
 
         this.playerPositions = new ArrayList<>();
-        this.callback = callback;
 
         this.player1 = player1;
         this.player1.setStartingPoint(startingX, startingY);
@@ -108,12 +147,13 @@ public class ServerMap {
 
         this.applyGravity();
 
+        this.checkEnding();
         this.sendGameUpdate();
         this.cleanupDisabledElements();
     }
 
     public interface onUpdate{
-        void sendToBothClients(GameEvent gameEvent);
+        void sendToBothClients(Object object);
     }
 
     public void cleanupDisabledElements(){
@@ -169,7 +209,7 @@ public class ServerMap {
             float distanceToP2 = this.distanceBetweenTwoPoints(s.getPosition(), player2.getPosition());
             Vector2 vectorToP1 = new Vector2(player1.getPosition().x - s.getPosition().x , player1.getPosition().y - s.getPosition().y).nor();
             Vector2 vectorToP2 = new Vector2(player2.getPosition().x - s.getPosition().x , player2.getPosition().y - s.getPosition().y).nor();
-            if(s.getActionCounter() >= 5){
+            if(s.getActionCounter() >= 2){
                 //Soldier shoots
                 Vector2 shootingDirection = null;
                 if(rand.nextInt(2) + 1 >= 1 && distanceToP1 <= 200){
@@ -186,11 +226,6 @@ public class ServerMap {
                 s.getPosition().x -= vectorToP1.x * deltaTime * 100;
             }else if(distanceToP2 <= 50){
                 s.getPosition().x -= vectorToP2.x * deltaTime * 100;
-            }else if(distanceToP1 >= 200 && distanceToP1 <= 500){
-                //Run towards player
-                s.getPosition().x += vectorToP1.x * deltaTime * 100;
-            }else if(distanceToP2 >= 200 && distanceToP2 <= 500){
-                s.getPosition().x += vectorToP2.x * deltaTime * 100;
             }
         }
     }
@@ -245,10 +280,13 @@ public class ServerMap {
         gameEvent.player1 = this.player1.getUsername();
         gameEvent.player2 = this.player2.getUsername();
         gameEvent.bullets = this.bullets;
-        gameEvent.soldiers = this.soldiers;
-        gameEvent.enemyBullets = this.enemyBullets;
+        this.onUpdateCallback.sendToBothClients(gameEvent);
 
-        this.callback.sendToBothClients(gameEvent);
+        EnemyEvent enemyEvent = new EnemyEvent();
+        enemyEvent.soldiers = this.soldiers;
+        enemyEvent.enemyBullets = this.enemyBullets;
+        this.onUpdateCallback.sendToBothClients(enemyEvent);
+
     }
 
     private ArrayList<MapObject> getRectangleList(String propertyName) {
@@ -313,6 +351,7 @@ public class ServerMap {
     }
 
     private void removeBullets(){
+        /**
         for(Solid s : solids){
             for(Bullet b : bullets){
                 if(s.isCollision(b.getBoundRect())){
@@ -344,7 +383,30 @@ public class ServerMap {
                 eb.setEnabled(false);
             }
         }
+    **/
+        for(EnemyBullet eb : enemyBullets){
+            if(eb.getPosition().x > this.mapWidthInPixels || eb.getPosition().y > this.mapHeightInPixels){
+                eb.setEnabled(false);
+            }else if(eb.isEnabled() && eb.getBoundRect().overlaps(player1.getBoundRect())){
+                //Add damage to the player
+                eb.setEnabled(false);
+            }else if(eb.isEnabled() && eb.getBoundRect().overlaps(player2.getBoundRect())){
+                //Add damage to the player
+                eb.setEnabled(false);
+            }
+        }
 
+        for(Bullet b : bullets){
+            if(b.getPosition().x > this.mapWidthInPixels || b.getPosition().y > this.mapHeightInPixels){
+                b.setEnabled(false);
+            }
+            for(Soldier s : soldiers){
+                if(s.getBoundRectangle().overlaps(b.getBoundRect())){
+                    s.setHp(s.getHp()-1);
+                    b.setEnabled(false);
+                }
+            }
+        }
     }
 
     public void removeEnemies(){
@@ -358,6 +420,18 @@ public class ServerMap {
 
     public float distanceBetweenTwoPoints(Vector2 vec1, Vector2 vec2){
         return (float) (Math.sqrt((vec1.x-vec2.x)*(vec1.x-vec2.x) + (vec1.y-vec2.y)*(vec1.y-vec2.y)));
+    }
+
+    public interface notifyGameServer{
+        void switchLevel();
+    }
+
+    public void checkEnding(){
+        if(this.end.isCollision(player1.getBoundRect())){
+            this.notifyGameServerCallback.switchLevel();
+        }else if(this.end.isCollision(player2.getBoundRect())){
+            this.notifyGameServerCallback.switchLevel();
+        }
     }
 
 }

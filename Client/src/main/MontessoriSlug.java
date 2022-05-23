@@ -14,6 +14,7 @@ public class MontessoriSlug extends Game {
 
     @Override
     public void create() {
+        ResourceManager.loadAllResources();
         InputMultiplexer im = new InputMultiplexer();
         Gdx.input.setInputProcessor(im);
         this.setScreen(new MenuScreen(this));
