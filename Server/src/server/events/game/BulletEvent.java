@@ -2,6 +2,12 @@ package server.events.game;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Clase que se utiliza para enviar los datos de una bala al cliente
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class BulletEvent {
     private String lobbyName;
     private String username;

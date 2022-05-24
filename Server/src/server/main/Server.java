@@ -19,6 +19,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
+/**
+ * Clase principal que instancia el servidor y configura los parametros de este
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class Server {
     public static Server instance;
 
@@ -66,6 +73,9 @@ public class Server {
     }
 
 
+    /**
+     * Le añade los listeners al servidor
+     */
     public void addListeners(){
         /** Listeners **/
 
@@ -77,6 +87,10 @@ public class Server {
         this.server.addListener(new GameEventListener());
     }
 
+    /**
+     * Registra las instancias de las clases de los tipos de mensajes que pueda enviar o recibir el servidor
+     * 
+     */
     public void registerClasses(){
         /** Events register **/
 

@@ -5,6 +5,12 @@ import server.model.Lobby;
 
 import java.util.LinkedHashMap;
 
+/**
+ * Clase que gestiona y almacena las instancias de todas las partidas
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class LobbyHandler {
     public static final LobbyHandler INSTANCE = new LobbyHandler();
 

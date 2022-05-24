@@ -6,6 +6,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+/**
+ * Clase utilizada para definir los solidos en el servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class Solid{
 	private float width;
 	private float height;

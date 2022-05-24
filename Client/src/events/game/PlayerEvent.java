@@ -1,8 +1,6 @@
 package events.game;
 
 
-import com.badlogic.gdx.math.Vector2;
-
 /**
  * Clase mensajera que se utiliza para enviar datos al servidor
  * 

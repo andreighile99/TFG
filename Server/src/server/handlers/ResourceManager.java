@@ -4,6 +4,12 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
+/**
+ * Clase que carga en memoria los mapas para el servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public final class ResourceManager {
     private ResourceManager() {}
     public static AssetManager assets=new AssetManager();

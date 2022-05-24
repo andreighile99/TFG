@@ -4,6 +4,12 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import server.handlers.LobbyHandler;
 
+/**
+ * Clase listener para eventos de desconexión
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class LeaveListener extends Listener {
 
     @Override

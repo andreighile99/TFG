@@ -6,6 +6,12 @@ import server.events.lobby.FinishLobby;
 import server.game.gameServer.GameServer;
 import server.game.map.ServerMap;
 
+/**
+ * Clase modelo para cada una de las salas del servidor, compuestas de un nombre de servidor, una partida y 2 jugadores
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class Lobby implements ServerMap.onUpdate {
     private String lobbyName;
 

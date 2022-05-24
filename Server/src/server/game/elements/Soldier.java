@@ -5,6 +5,12 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Clase utilizada para definir los enemigos en el servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class Soldier {
     private Vector2 position;
     private Rectangle boundRectangle;

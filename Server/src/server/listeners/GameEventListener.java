@@ -6,6 +6,12 @@ import server.events.game.BulletEvent;
 import server.events.game.PlayerEvent;
 import server.handlers.LobbyHandler;
 
+/**
+ * Clase listener para eventos de la partida
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class GameEventListener extends Listener {
     @Override
     public void received(Connection connection, Object object) {

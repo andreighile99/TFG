@@ -7,6 +7,13 @@ import server.model.Lobby;
 import server.model.ServerPlayer;
 import server.events.lobby.*;
 
+
+/**
+ * Clase listener para eventos de los lobbys y gestion de las partidas
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class LobbyListener extends Listener {
     @Override
     public void received(Connection connection, Object object) {

@@ -3,6 +3,12 @@ package server.game.elements;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Clase utilizada para definir las balas de los enemigos en el servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class EnemyBullet {
     private Rectangle boundRect;
     private Vector2 position;
