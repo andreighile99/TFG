@@ -1,3 +1,4 @@
+
 package screens;
 
 import com.badlogic.gdx.Gdx;
@@ -19,29 +20,52 @@ import main.MontessoriSlug;
 import parameters.Parameters;
 
 /**
- * Clase que instancia la pantalla de la sala
- * 
- * @author Eduard Andrei Ghile
+ * Clase que instancia la pantalla de la sala.
  *
+ * @author Eduard Andrei Ghile
  */
 public class LobbyScreen extends BScreen{
+    
+    /** The background texture. */
     private static Texture backgroundTexture;
+    
+    /** The sprite batch. */
     private SpriteBatch spriteBatch;
 
+    /** The table. */
     private Table table;
 
+    /** The label lobby name. */
     private final Label labelLobbyName;
+    
+    /** The lobby name. */
     private final Label lobbyName;
 
+    /** The label player 1 name. */
     private final Label labelPlayer1Name;
+    
+    /** The label player 2 name. */
     private final Label labelPlayer2Name;
+    
+    /** The player 1 name. */
     private final Label player1Name;
+    
+    /** The player 2 name. */
     private final Label player2Name;
 
+    /** The start game button. */
     private final TextButton startGameButton;
 
+    /** The error label. */
     private final Label errorLabel;
 
+    /**
+     * Instantiates a new lobby screen.
+     *
+     * @param game the game
+     * @param player1Name the player 1 name
+     * @param lobbyName the lobby name
+     */
     public LobbyScreen(MontessoriSlug game, String player1Name, String lobbyName) {
 
             super(game);
@@ -83,6 +107,9 @@ public class LobbyScreen extends BScreen{
             this.setToDefault();
     }
 
+    /**
+     * Sets the to default.
+     */
     public void setToDefault() {
         this.table.clear();
         this.table.add(this.labelLobbyName).width(200).padTop(12);
@@ -95,6 +122,11 @@ public class LobbyScreen extends BScreen{
         this.table.add(this.errorLabel).padTop(50);
     }
 
+    /**
+     * Update player 2 name.
+     *
+     * @param username the username
+     */
     public void updatePlayer2Name(String username){
         this.player2Name.setText(username);
     }
@@ -113,18 +145,38 @@ public class LobbyScreen extends BScreen{
 
     }
 
+    /**
+     * Render error message.
+     *
+     * @param errorMessage the error message
+     */
     public void renderErrorMessage(String errorMessage){
         this.errorLabel.setText(errorMessage);
     }
 
+    /**
+     * Gets the player 1 name.
+     *
+     * @return the player 1 name
+     */
     public Label getPlayer1Name() {
         return player1Name;
     }
 
+    /**
+     * Gets the player 2 name.
+     *
+     * @return the player 2 name
+     */
     public Label getPlayer2Name() {
         return player2Name;
     }
 
+    /**
+     * Gets the lobby name.
+     *
+     * @return the lobby name
+     */
     public Label getLobbyName() {
         return lobbyName;
     }

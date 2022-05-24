@@ -1,3 +1,4 @@
+
 package screens;
 
 import com.badlogic.gdx.Gdx;
@@ -27,34 +28,66 @@ import parameters.Parameters;
 import java.util.ArrayList;
 
 /**
- * Clase que instancia la pantalla de menu
- * 
- * @author Eduard Andrei Ghile
+ * Clase que instancia la pantalla de menu.
  *
+ * @author Eduard Andrei Ghile
  */
 public class MenuScreen extends BScreen {
+    
+    /** The background texture. */
     private static Texture backgroundTexture;
+    
+    /** The sprite batch. */
     private SpriteBatch spriteBatch;
 
+    /** The table. */
     private Table table;
 
+    /** The ip address label. */
     private final Label ipAddressLabel;
+    
+    /** The ip address text field. */
     private final TextField ipAddressTextField;
+    
+    /** The port label. */
     private final Label portLabel;
+    
+    /** The port text field. */
     private final TextField portTextField;
+    
+    /** The lobby name label. */
     private final Label lobbyNameLabel;
+    
+    /** The lobby name text field. */
     private final TextField lobbyNameTextField;
+    
+    /** The username label. */
     private final Label usernameLabel;
+    
+    /** The username text field. */
     private final TextField usernameTextField;
 
+    /** The new lobby button. */
     private final TextButton newLobbyButton;
+    
+    /** The join lobby button. */
     private final TextButton joinLobbyButton;
+    
+    /** The options button. */
     private final TextButton optionsButton;
+    
+    /** The exit game. */
     private final TextButton exitGame;
 
+    /** The error label. */
     private final Label errorLabel;
 
 
+    /**
+     * Instantiates a new menu screen.
+     *
+     * @param game the game
+     */
     public MenuScreen(MontessoriSlug game) {
         super(game);
 
@@ -177,6 +210,9 @@ public class MenuScreen extends BScreen {
         this.setToDefault();
     }
 
+    /**
+     * Sets the to default.
+     */
     public void setToDefault() {
         this.table.clear();
         this.table.add(this.ipAddressLabel).width(200).padTop(12);
@@ -210,6 +246,11 @@ public class MenuScreen extends BScreen {
         uiStage.draw();
     }
 
+    /**
+     * Adds the listeners.
+     *
+     * @param client the client
+     */
     private void addListeners(Client client){
         //Add the new listener that retrieves the lobby stuff
         client.addListener(new EventListener());
@@ -217,6 +258,11 @@ public class MenuScreen extends BScreen {
         client.addListener(new GameEventListener());
     }
 
+    /**
+     * Register classes.
+     *
+     * @param client the client
+     */
     private void registerClasses(Client client){
         //Lobby management
         client.getKryo().register(CreateNewLobbyEvent.class);
@@ -245,6 +291,11 @@ public class MenuScreen extends BScreen {
         client.getKryo().register(Connection.class);
     }
 
+    /**
+     * Render error message.
+     *
+     * @param errorMessage the error message
+     */
     public void renderErrorMessage(String errorMessage){
         this.errorLabel.setText(errorMessage);
     }

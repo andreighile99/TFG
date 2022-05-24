@@ -1,3 +1,4 @@
+
 package elements;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -9,20 +10,27 @@ import main.MontessoriSlug;
 
 /**
  * Clase para instanciar la representación del jugador que no mueve el cliente
- * local en los clientes
- * 
- * @author Eduard Andrei Ghile
+ * local en los clientes.
  *
+ * @author Eduard Andrei Ghile
  */
 public class ManagedPlayer extends Element {
+	
+	/** The username. */
 	private String username;
+	
+	/** The lobby name. */
 	private String lobbyName;
+	
+	/** The idle. */
 	private Animation<TextureRegion> idle;
+	
+	/** The hp. */
 	private int hp;
 
 	/**
-	 * Constructor de la clase
-	 * 
+	 * Constructor de la clase.
+	 *
 	 * @param x         Posicion en el eje x de la pantalla
 	 * @param y         Posicion en el eje y de la pantalla
 	 * @param s         Stage al que pertenece la representacion del jugador
@@ -45,14 +53,29 @@ public class ManagedPlayer extends Element {
 
 	}
 
+	/**
+	 * Gets the username.
+	 *
+	 * @return the username
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * Gets the hp.
+	 *
+	 * @return the hp
+	 */
 	public int getHp() {
 		return hp;
 	}
 
+	/**
+	 * Sets the hp.
+	 *
+	 * @param hp the new hp
+	 */
 	public void setHp(int hp) {
 		this.hp = hp;
 	}

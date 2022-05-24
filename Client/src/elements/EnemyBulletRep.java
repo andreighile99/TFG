@@ -1,3 +1,4 @@
+
 package elements;
 
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -7,17 +8,18 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 
 /**
  * Clase para instanciar la representacion de una bala de los enemigos en los
- * clientes
- * 
- * @author Eduard Andrei Ghile
+ * clientes.
  *
+ * @author Eduard Andrei Ghile
  */
 public class EnemyBulletRep extends Element {
+	
+	/** The bullet. */
 	private Animation<TextureRegion> bullet;
 
 	/**
-	 * Constructor de la clase
-	 * 
+	 * Constructor de la clase.
+	 *
 	 * @param x Posicion en el eje x de la pantalla
 	 * @param y Posicion en el eje y de la pantalla
 	 * @param s Stage al que pertenece la bala

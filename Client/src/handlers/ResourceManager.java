@@ -1,3 +1,4 @@
+
 package handlers;
 
 import com.badlogic.gdx.Gdx;
@@ -20,22 +21,29 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 
 /**
- * Clase utilizada para cargar y gestionar los recursos de la aplicacion
- * 
- * @author Eduard Andrei Ghile
+ * Clase utilizada para cargar y gestionar los recursos de la aplicacion.
  *
+ * @author Eduard Andrei Ghile
  */
 public final class ResourceManager {
+	
+	/**
+	 * Instantiates a new resource manager.
+	 */
 	private ResourceManager() {
 	}
 
+	/** The assets. */
 	public static AssetManager assets = new AssetManager();
+	
+	/** The button style. */
 	public static LabelStyle buttonStyle;
+	
+	/** The text button style. */
 	public static TextButtonStyle textButtonStyle;
 
 	/**
-	 * Metodo que carga todos los recursos de la aplicacion en un Asset Manager
-	 * 
+	 * Metodo que carga todos los recursos de la aplicacion en un Asset Manager.
 	 */
 	public static void loadAllResources() {
 
@@ -58,27 +66,27 @@ public final class ResourceManager {
 	}
 
 	/**
-	 * Metodo update
-	 * 
-	 * @return
+	 * Metodo update.
+	 *
+	 * @return true, if successful
 	 */
 	public static boolean update() {
 		return assets.update();
 	}
 
 	/**
-	 * Metodo que devuelve una textura en base a una ruta dada
-	 * 
+	 * Metodo que devuelve una textura en base a una ruta dada.
+	 *
 	 * @param path Ruta en la que se encuentra la textura
-	 * @return
+	 * @return the texture
 	 */
 	public static Texture getTexture(String path) {
 		return assets.get(path, Texture.class);
 	}
 
 	/**
-	 * Metodo que devuelve una musica en base a una ruta dada
-	 * 
+	 * Metodo que devuelve una musica en base a una ruta dada.
+	 *
 	 * @param path Ruta en la que se encuentra la musica
 	 * @return Una musica
 	 */
@@ -87,8 +95,8 @@ public final class ResourceManager {
 	}
 
 	/**
-	 * Metodo que devuelve un sonido en base a una ruta dada
-	 * 
+	 * Metodo que devuelve un sonido en base a una ruta dada.
+	 *
 	 * @param path Ruta en la que se encuentra el sonido
 	 * @return Un sonido
 	 */
@@ -97,8 +105,8 @@ public final class ResourceManager {
 	}
 
 	/**
-	 * Metodo que devuelve un mapa de tiled en base a una ruta dada
-	 * 
+	 * Metodo que devuelve un mapa de tiled en base a una ruta dada.
+	 *
 	 * @param path Ruta en la que se encuentra el sonido
 	 * @return Un mapa de tiled
 	 */
@@ -106,6 +114,9 @@ public final class ResourceManager {
 		return assets.get(path, TiledMap.class);
 	}
 
+	/**
+	 * Dispose.
+	 */
 	public static void dispose() {
 		assets.dispose();
 	}

@@ -1,3 +1,4 @@
+
 package main;
 
 import com.badlogic.gdx.Game;
@@ -8,14 +9,16 @@ import handlers.ResourceManager;
 import screens.MenuScreen;
 
 /**
- * Clase que instancia el juego
- * 
- * @author Eduard Andrei Ghile
+ * Clase que instancia el juego.
  *
+ * @author Eduard Andrei Ghile
  */
 public class MontessoriSlug extends Game {
 
+    /** The resource manager. */
     public ResourceManager resourceManager;
+    
+    /** The client. */
     private Client client;
 
     @Override
@@ -30,14 +33,29 @@ public class MontessoriSlug extends Game {
 
     }
 
+    /**
+     * Gets the single instance of MontessoriSlug.
+     *
+     * @return single instance of MontessoriSlug
+     */
     public static MontessoriSlug getInstance() {
         return (MontessoriSlug) Gdx.app.getApplicationListener();
     }
 
+    /**
+     * Gets the client.
+     *
+     * @return the client
+     */
     public Client getClient() {
         return client;
     }
 
+    /**
+     * Sets the client.
+     *
+     * @param client the new client
+     */
     public void setClient(Client client) {
         this.client = client;
     }

@@ -1,10 +1,10 @@
+/*
+ * @author Eduard Andrei Ghile
+ */
 package server.events.game;
 
 /**
- * Clase mensajera que se utiliza para enviar un cambio de mapa a los clientes
- * 
- * @author Eduard Andrei Ghile
- *
+ * The Class SwitchLevel.
  */
 public class SwitchLevel {
 }

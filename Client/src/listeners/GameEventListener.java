@@ -1,3 +1,4 @@
+
 package listeners;
 
 import com.badlogic.gdx.Gdx;
@@ -11,10 +12,9 @@ import parameters.Parameters;
 import screens.GameScreen;
 
 /**
- * Clase listener para eventos de dentro del juego
- * 
- * @author Eduard Andrei Ghile
+ * Clase listener para eventos de dentro del juego.
  *
+ * @author Eduard Andrei Ghile
  */
 public class GameEventListener extends Listener {
 

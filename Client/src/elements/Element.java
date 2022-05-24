@@ -1,3 +1,4 @@
+
 package elements;
 
 import com.badlogic.gdx.graphics.Color;
@@ -20,30 +21,64 @@ import handlers.ResourceManager;
 import parameters.Parameters;
 
 /**
- * Clase para la gestion de los elementos visibles de la aplicacion
- * 
- * @author Eduard ANdrei Ghile
+ * Clase para la gestion de los elementos visibles de la aplicacion.
  *
+ * @author Eduard ANdrei Ghile
  */
 public class Element extends Actor {
+	
+	/** The animation. */
 	private Animation<TextureRegion> animation;
+	
+	/** The animation time. */
 	private float animationTime;
+	
+	/** The enabled. */
 	private boolean enabled;
+	
+	/** The colision. */
 	protected Polygon colision;
+	
+	/** The shape renderer. */
 	private ShapeRenderer shapeRenderer;
+	
+	/** The poly width. */
 	private float polyWidth;
+	
+	/** The poly high. */
 	private float polyHigh;
+	
+	/** The pad Y. */
 	private float padY = 0;
+	
+	/** The pad X. */
 	private float padX = 0;
 
+	/**
+	 * Gets the enabled.
+	 *
+	 * @return the enabled
+	 */
 	public boolean getEnabled() {
 		return enabled;
 	}
 
+	/**
+	 * Sets the enabled.
+	 *
+	 * @param enabled the new enabled
+	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
+	/**
+	 * Instantiates a new element.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param s the s
+	 */
 	public Element(float x, float y, Stage s) {
 
 		this.setPosition(x, y);
@@ -55,8 +90,8 @@ public class Element extends Actor {
 	}
 
 	/**
-	 * Constructor de la clase
-	 * 
+	 * Constructor de la clase.
+	 *
 	 * @param x Posicion en el eje x de la pantalla
 	 * @param y Posicion en el eje y de la pantalla
 	 * @param s Stage al que pertenece el objeto
@@ -93,6 +128,11 @@ public class Element extends Actor {
 
 	}
 
+	/**
+	 * Gets the boundary polygon.
+	 *
+	 * @return the boundary polygon
+	 */
 	public Polygon getBoundaryPolygon() {
 		colision.setPosition(getX() + this.padX, getY() + this.padY);
 		colision.setOrigin(getOriginX(), getOriginY());
@@ -101,6 +141,11 @@ public class Element extends Actor {
 		return colision;
 	}
 
+	/**
+	 * Pintar caja.
+	 *
+	 * @param batch the batch
+	 */
 	public void pintarCaja(Batch batch) {
 		batch.end();
 		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
@@ -131,6 +176,11 @@ public class Element extends Actor {
 		}
 	}
 
+	/**
+	 * Sets the animation.
+	 *
+	 * @param anim the new animation
+	 */
 	public void setAnimation(Animation<TextureRegion> anim) {
 		animation = anim;
 		if (anim == null) {
@@ -149,6 +199,16 @@ public class Element extends Actor {
 			setRectangle();
 	}
 
+	/**
+	 * Load full animation.
+	 *
+	 * @param name the name
+	 * @param rows the rows
+	 * @param cols the cols
+	 * @param frameDuration the frame duration
+	 * @param loop the loop
+	 * @return the animation
+	 */
 	public Animation<TextureRegion> loadFullAnimation(String name, int rows, int cols, float frameDuration,
 			boolean loop) {
 
@@ -180,6 +240,9 @@ public class Element extends Actor {
 		return anim;
 	}
 
+	/**
+	 * Sets the rectangle.
+	 */
 	public void setRectangle() {
 		float w, h;
 		if (this.polyWidth != getWidth() && this.polyWidth > 0) {
@@ -197,6 +260,14 @@ public class Element extends Actor {
 		this.setOrigin(w / 2, h / 2);
 	}
 
+	/**
+	 * Sets the rectangle.
+	 *
+	 * @param polyWidth the poly width
+	 * @param polyHigh the poly high
+	 * @param padX the pad X
+	 * @param padY the pad Y
+	 */
 	public void setRectangle(float polyWidth, float polyHigh, float padX, float padY) {
 		this.polyWidth = polyWidth;
 		this.polyHigh = polyHigh;
@@ -205,6 +276,11 @@ public class Element extends Actor {
 		setRectangle();
 	}
 
+	/**
+	 * Sets the polygon.
+	 *
+	 * @param numSides the new polygon
+	 */
 	public void setPolygon(int numSides) {
 		this.setOrigin(polyWidth / 2, polyHigh / 2);
 		float[] vertices = new float[2 * numSides];

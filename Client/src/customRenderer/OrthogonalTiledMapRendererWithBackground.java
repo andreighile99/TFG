@@ -1,3 +1,4 @@
+
 package customRenderer;
 
 import com.badlogic.gdx.maps.MapObject;
@@ -6,12 +7,17 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 /**
- * Clase render personalizada que permite la renderización de Map Objects de forma directa
- * 
- * @author Eduard Andrei Ghile
+ * Clase render personalizada que permite la renderización de Map Objects de forma directa.
  *
+ * @author Eduard Andrei Ghile
  */
 public class OrthogonalTiledMapRendererWithBackground extends OrthogonalTiledMapRenderer {
+    
+    /**
+     * Instantiates a new orthogonal tiled map renderer with background.
+     *
+     * @param map the map
+     */
     public OrthogonalTiledMapRendererWithBackground(TiledMap map) {
         super(map);
     }

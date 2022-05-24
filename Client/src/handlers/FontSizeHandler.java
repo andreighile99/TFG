@@ -1,3 +1,4 @@
+
 package handlers;
 
 import com.badlogic.gdx.Gdx;
@@ -19,12 +20,20 @@ import java.util.Map;
  */
 public class FontSizeHandler {
 
+    /** The instance. */
     public static FontSizeHandler INSTANCE = new FontSizeHandler("assets/fonts/LRpixel.ttf");
 
+    /** The fonts. */
     private final Map<Integer, BitmapFont> fonts = new HashMap<>();
 
+    /** The font path. */
     private final String fontPath;
 
+    /**
+     * Instantiates a new font size handler.
+     *
+     * @param fontPath the font path
+     */
     public FontSizeHandler(String fontPath) {
         this.fontPath = fontPath;
     }

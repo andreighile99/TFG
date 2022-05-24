@@ -1,3 +1,4 @@
+
 package screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -14,18 +15,32 @@ import main.MontessoriSlug;
 
 
 /**
- * Clase padre de todas las pantallas del juego
- * 
- * @author Eduard Andrei Ghile
+ * Clase padre de todas las pantallas del juego.
  *
+ * @author Eduard Andrei Ghile
  */
 public class BScreen implements Screen, InputProcessor{
+	
+	/** The game. */
 	private final MontessoriSlug game;
+	
+	/** The resource manager. */
 	public final ResourceManager resourceManager;
+	
+	/** The ui style. */
 	public final LabelStyle uiStyle;
+	
+	/** The im. */
 	private InputMultiplexer im;
+	
+	/** The ui stage. */
 	public Stage uiStage;
 
+	/**
+	 * Instantiates a new b screen.
+	 *
+	 * @param game the game
+	 */
 	public BScreen(MontessoriSlug game){
 		this.uiStage=new Stage();
 		BitmapFont font= FontSizeHandler.INSTANCE.getFont(5, Color.WHITE);

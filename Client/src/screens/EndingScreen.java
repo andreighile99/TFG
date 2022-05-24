@@ -1,3 +1,4 @@
+
 package screens;
 
 import com.badlogic.gdx.Gdx;
@@ -16,23 +17,35 @@ import main.MontessoriSlug;
 import parameters.Parameters;
 
 /**
- * Clase que instancia la pantalla de fin del juego
- * 
- * @author Eduard Andrei Ghile
+ * Clase que instancia la pantalla de fin del juego.
  *
+ * @author Eduard Andrei Ghile
  */
 public class EndingScreen extends BScreen{
+    
+    /** The background texture. */
     private static Texture backgroundTexture;
+    
+    /** The sprite batch. */
     private SpriteBatch spriteBatch;
 
+    /** The table. */
     private Table table;
 
+    /** The title label. */
     private final Label titleLabel;
 
+    /** The return to menu. */
     private final TextButton returnToMenu;
 
+    /** The exit game. */
     private final TextButton exitGame;
 
+    /**
+     * Instantiates a new ending screen.
+     *
+     * @param game the game
+     */
     public EndingScreen(MontessoriSlug game) {
         super(game);
 
@@ -71,6 +84,9 @@ public class EndingScreen extends BScreen{
         this.setToDefault();
     }
 
+    /**
+     * Sets the to default.
+     */
     public void setToDefault() {
         this.table.clear();
         this.table.add(titleLabel).padBottom(100).row();

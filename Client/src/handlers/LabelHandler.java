@@ -1,16 +1,17 @@
+
 package handlers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 /**
- * Clase utilizada para generar etiquetas mediante unos parametros predefinidos
- * 
- * @author Eduard Andrei Ghile
+ * Clase utilizada para generar etiquetas mediante unos parametros predefinidos.
  *
+ * @author Eduard Andrei Ghile
  */
 public class LabelHandler {
 
+	/** The instance. */
 	public static LabelHandler INSTANCE = new LabelHandler();
 
 	/**

@@ -1,3 +1,6 @@
+/*
+ * @author Eduard Andrei Ghile
+ */
 package server.events.game;
 
 import server.game.elements.Bullet;
@@ -6,16 +9,19 @@ import server.game.elements.ServerPlayerData;
 import java.util.ArrayList;
 
 /**
- * Clase que se utiliza para enviar los datos de los jugadores y las balas de estos a los clientes
- * 
- * @author Eduard Andrei Ghile
- *
+ * The Class GameEvent.
  */
 public class GameEvent {
 
+    /** The players. */
     public ArrayList<ServerPlayerData> players;
+    
+    /** The bullets. */
     public ArrayList<Bullet> bullets;
 
+    /**
+     * Instantiates a new game event.
+     */
     public GameEvent() {
     }
 

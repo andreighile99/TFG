@@ -1,3 +1,4 @@
+
 package screens;
 
 import com.badlogic.gdx.Gdx;
@@ -31,45 +32,88 @@ import parameters.Parameters;
 import java.util.ArrayList;
 
 /**
- * Clase que instancia la pantalla de juego
- * 
- * @author Eduard Andrei Ghile
+ * Clase que instancia la pantalla de juego.
  *
+ * @author Eduard Andrei Ghile
  */
 public class GameScreen extends BScreen{
 
+    /** The camera. */
     private static OrthographicCamera camera;
+    
+    /** The renderer. */
     private OrthogonalTiledMapRenderer renderer;
 
+    /** The player 1. */
     private Player player1;
+    
+    /** The player 2. */
     private ManagedPlayer player2;
 
+    /** The full bullet H. */
     private final Texture fullBulletH;
+    
+    /** The half bullet H. */
     private final Texture halfBulletH;
+    
+    /** The hp background. */
     private final Texture hpBackground;
 
+    /** The main stage. */
     private Stage mainStage;
+    
+    /** The map. */
     private TiledMap map;
+    
+    /** The tile width. */
     private int tileWidth;
+    
+    /** The tile height. */
     private int tileHeight;
+    
+    /** The map width in tiles. */
     private int mapWidthInTiles;
+    
+    /** The map height in tiles. */
     private int mapHeightInTiles;
+    
+    /** The map width in pixels. */
     private int mapWidthInPixels;
+    
+    /** The map height in pixels. */
     private int mapHeightInPixels;
 
+    /** The inicio X. */
     private float inicioX;
+    
+    /** The inicio Y. */
     private float inicioY;
 
+    /** The bullet reps. */
     private ArrayList<BulletRep> bulletReps;
+    
+    /** The soldier reps. */
     private ArrayList<SoldierRep> soldierReps;
+    
+    /** The enemy bullet reps. */
     private ArrayList<EnemyBulletRep> enemyBulletReps;
 
+    /** The life representation. */
     private ArrayList<Texture> lifeRepresentation;
 
+    /** The font. */
     private final BitmapFont font;
 
 
 
+    /**
+     * Instantiates a new game screen.
+     *
+     * @param game the game
+     * @param username1 the username 1
+     * @param username2 the username 2
+     * @param lobbyName the lobby name
+     */
     public GameScreen(MontessoriSlug game, String username1, String username2, String lobbyName) {
         super(game);
         this.fullBulletH = ResourceManager.getTexture("assets/player/hp/FullBulletH.png");
@@ -148,6 +192,9 @@ public class GameScreen extends BScreen{
 
     }
 
+    /**
+     * Center camera.
+     */
     public void centerCamera() {
         if(Parameters.level == 1){
             if(this.player1.getEnabled()){
@@ -202,6 +249,9 @@ public class GameScreen extends BScreen{
         camera.update();
     }
 
+    /**
+     * Calculate hp representation.
+     */
     public void calculateHpRepresentation(){
         int temporalHP = player1.getHp();
         if(!lifeRepresentation.isEmpty()) {
@@ -217,6 +267,9 @@ public class GameScreen extends BScreen{
         }
     }
 
+    /**
+     * Draw hp representation.
+     */
     public void drawHpRepresentation(){
         uiStage.getBatch().begin();
         float offset = 0;
@@ -232,6 +285,11 @@ public class GameScreen extends BScreen{
     }
 
 
+    /**
+     * Update players status.
+     *
+     * @param gameEvent the game event
+     */
     public void updatePlayersStatus(GameEvent gameEvent){
         for(ServerPlayerData serverPlayerData : gameEvent.players){
             if(serverPlayerData.getUsername().equalsIgnoreCase(this.player1.getUsername()) && serverPlayerData.isEnabled()){
@@ -254,6 +312,11 @@ public class GameScreen extends BScreen{
         }
     }
 
+    /**
+     * Update enemy bullets position.
+     *
+     * @param enemyEvent the enemy event
+     */
     public void updateEnemyBulletsPosition(EnemyEvent enemyEvent){
         int enemyBulletsOnServer = enemyEvent.enemyBullets.size();
         int deltaEnemyBullets = enemyBulletsOnServer - this.enemyBulletReps.size();
@@ -272,6 +335,11 @@ public class GameScreen extends BScreen{
         cleanupDisabledElements();
     }
 
+    /**
+     * Update bullets position.
+     *
+     * @param gameEvent the game event
+     */
     public void updateBulletsPosition(GameEvent gameEvent){
         int bulletsOnServer = gameEvent.bullets.size();
         int deltaBullets = bulletsOnServer - this.bulletReps.size();
@@ -291,6 +359,11 @@ public class GameScreen extends BScreen{
         cleanupDisabledElements();
     }
 
+    /**
+     * Update soldiers position.
+     *
+     * @param enemyEvent the enemy event
+     */
     public void updateSoldiersPosition(EnemyEvent enemyEvent){
         int soldiersOnServer = enemyEvent.soldiers.size();
         int deltaSoldiers = soldiersOnServer - this.soldierReps.size();
@@ -309,12 +382,21 @@ public class GameScreen extends BScreen{
         cleanupDisabledElements();
     }
 
+    /**
+     * Cleanup disabled elements.
+     */
     public void cleanupDisabledElements(){
         soldierReps.removeIf(soldier -> !soldier.getEnabled());
         bulletReps.removeIf(bullet -> !bullet.getEnabled());
         enemyBulletReps.removeIf(enemyBulletRep -> !enemyBulletRep.getEnabled());
     }
 
+    /**
+     * Gets the rectangle list.
+     *
+     * @param propertyName the property name
+     * @return the rectangle list
+     */
     public ArrayList<MapObject> getRectangleList(String propertyName) {
         ArrayList<MapObject> list = new ArrayList<MapObject>();
         for (MapLayer layer : map.getLayers()) {
@@ -332,10 +414,20 @@ public class GameScreen extends BScreen{
     }
 
 
+    /**
+     * Gets the player 1.
+     *
+     * @return the player 1
+     */
     public Player getPlayer1() {
         return player1;
     }
 
+    /**
+     * Gets the player 2.
+     *
+     * @return the player 2
+     */
     public ManagedPlayer getPlayer2() {
         return player2;
     }
