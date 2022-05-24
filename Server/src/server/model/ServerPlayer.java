@@ -37,6 +37,15 @@ public class ServerPlayer {
 	/** The enabled. */
 	private boolean enabled;
 
+	private Vector2 lookingDirection;
+
+	private boolean isMoving;
+
+	private boolean isShooting;
+
+	private float animationLock;
+
+
 	/**
 	 * Constructor del jugador en el servidor.
 	 *
@@ -48,6 +57,7 @@ public class ServerPlayer {
 		this.hp = 100;
 		this.username = username;
 		this.connection = connection;
+		this.lookingDirection = new Vector2(0,0);
 	}
 
 	/**
@@ -66,9 +76,11 @@ public class ServerPlayer {
 	public void init() {
 		this.enabled = true;
 		this.hp = 100;
-		this.boundRect = new Rectangle(0, 0, 10, 20);
+		this.boundRect = new Rectangle(0, 0, 18, 40);
 		this.feet = new Rectangle(0, 0, this.boundRect.width / 8, this.boundRect.height / 10);
 		this.onGround = false;
+		this.isShooting = false;
+		this.animationLock = 0;
 	}
 
 	/**
@@ -217,5 +229,37 @@ public class ServerPlayer {
 	 */
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+
+	public Vector2 getLookingDirection() {
+		return lookingDirection;
+	}
+
+	public void setLookingDirection(Vector2 lookingDirection) {
+		this.lookingDirection = lookingDirection;
+	}
+
+	public boolean isMoving() {
+		return isMoving;
+	}
+
+	public void setMoving(boolean moving) {
+		isMoving = moving;
+	}
+
+	public boolean isShooting() {
+		return isShooting;
+	}
+
+	public void setShooting(boolean shooting) {
+		isShooting = shooting;
+	}
+
+	public float getAnimationLock() {
+		return animationLock;
+	}
+
+	public void setAnimationLock(float animationLock) {
+		this.animationLock = animationLock;
 	}
 }

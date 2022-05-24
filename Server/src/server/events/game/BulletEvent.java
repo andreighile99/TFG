@@ -15,9 +15,7 @@ public class BulletEvent {
     
     /**  */
     private String username;
-    
-    /**  */
-    private Vector2 bulletDirection;
+
 
 
     /**
@@ -62,21 +60,4 @@ public class BulletEvent {
         this.username = username;
     }
 
-    /**
-     * 
-     *
-     * @return 
-     */
-    public Vector2 getBulletDirection() {
-        return bulletDirection;
-    }
-
-    /**
-     * 
-     *
-     * @param bulletDirection 
-     */
-    public void setBulletDirection(Vector2 bulletDirection) {
-        this.bulletDirection = bulletDirection;
-    }
 }

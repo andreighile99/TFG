@@ -286,10 +286,46 @@ public class GameScreen extends BScreen{
     public void updatePlayersStatus(GameEvent gameEvent){
         for(ServerPlayerData serverPlayerData : gameEvent.players){
             if(serverPlayerData.getUsername().equalsIgnoreCase(this.player1.getUsername()) && serverPlayerData.isEnabled()){
+                if(serverPlayerData.isMoving) {
+                    if (player1.getLookingDirection().x > 0) {
+                        player1.setAnimation(player1.getRightWalk());
+                    } else if (player1.getLookingDirection().x < 0) {
+                        player1.setAnimation(player1.getLeftWalk());
+                    }else if(player1.getLookingDirection().y > 0 && player1.getLookingDirection().x == 0){
+
+                    }
+                }else{
+                    if(!serverPlayerData.isShooting) player1.setAnimation(player1.getIdle());
+                }
+
+                if(serverPlayerData.isShooting && player1.getLookingDirection().x > 0){
+                    player1.setAnimation(player1.getRightShoot());
+                }else if(serverPlayerData.isShooting && player1.getLookingDirection().x < 0){
+                    player1.setAnimation(player1.getLeftShoot());
+                }
                 player1.setX(serverPlayerData.getPosition().x);
                 player1.setY(serverPlayerData.getPosition().y);
                 player1.setHp(serverPlayerData.getHp());
             }else if(serverPlayerData.getUsername().equalsIgnoreCase(this.player2.getUsername()) && serverPlayerData.isEnabled()){
+                player2.setLookingDirection(serverPlayerData.lookingDirection);
+                if(serverPlayerData.isMoving) {
+                    if (player2.getLookingDirection().x > 0) {
+                        player2.setAnimation(player2.getRightWalk());
+                    } else if (player2.getLookingDirection().x < 0) {
+                        player2.setAnimation(player2.getLeftWalk());
+                    }else if(player2.getLookingDirection().y > 0 && player2.getLookingDirection().x == 0){
+
+                    }
+                }else{
+                    if(!serverPlayerData.isShooting) player2.setAnimation(player2.getIdle());
+                }
+
+
+                if(serverPlayerData.isShooting && player2.getLookingDirection().x > 0){
+                    player2.setAnimation(player2.getRightShoot());
+                }else if(serverPlayerData.isShooting && player2.getLookingDirection().x < 0){
+                    player2.setAnimation(player2.getLeftShoot());
+                }
                 player2.setX(serverPlayerData.getPosition().x);
                 player2.setY(serverPlayerData.getPosition().y);
                 player2.setHp(serverPlayerData.getHp());
@@ -346,7 +382,7 @@ public class GameScreen extends BScreen{
             if(gameEvent.bullets.get(i).isEnabled()){
                 this.bulletReps.get(i).moveBy(gameEvent.bullets.get(i).getPosition().x - this.bulletReps.get(i).getX(), gameEvent.bullets.get(i).getPosition().y - this.bulletReps.get(i).getY());
             }else{
-                    this.bulletReps.get(i).setEnabled(false);
+                this.bulletReps.get(i).setEnabled(false);
             }
         }
         cleanupDisabledElements();

@@ -1,21 +1,27 @@
-/*
- * @author Eduard Andrei Ghile
- */
 package server.events.game;
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
- * The Class PlayerEvent.
+ * Clase mensajera que se utiliza para enviar datos al servidor.
+ *
+ * @author Eduard Andrei Ghile
  */
 public class PlayerEvent {
 
     /** The loby name. */
     private String lobyName;
-    
+
     /** The username. */
     private String username;
-    
+
     /** The direction. */
     private DIRECTION direction;
+
+    private Vector2 lookingDirection;
+
+
+    private boolean isMoving;
 
 
 
@@ -23,15 +29,13 @@ public class PlayerEvent {
      * The Enum DIRECTION.
      */
     public enum DIRECTION {
-        
+
         /** The left. */
-        LEFT, 
- 
- /** The right. */
- RIGHT, 
- 
- /** The up. */
- UP
+        LEFT,
+        /** The right. */
+        RIGHT,
+        /** The up. */
+        UP
     }
 
     /**
@@ -94,4 +98,18 @@ public class PlayerEvent {
     public void setLobyName(String lobyName) {
         this.lobyName = lobyName;
     }
+
+    public void setLookingDirection(Vector2 lookingDirection) {
+        this.lookingDirection = lookingDirection;
+    }
+
+    public Vector2 getLookingDirection() {
+        return lookingDirection;
+    }
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+
 }

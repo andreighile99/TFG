@@ -9,7 +9,7 @@ import com.esotericsoftware.kryonet.Client;
 import main.MontessoriSlug;
 
 /**
- * Clase para instanciar la representación del jugador que no mueve el cliente
+ * Clase para instanciar la representaciï¿½n del jugador que no mueve el cliente
  * local en los clientes.
  *
  * @author Eduard Andrei Ghile
@@ -21,12 +21,23 @@ public class ManagedPlayer extends Element {
 	
 	/** The lobby name. */
 	private String lobbyName;
-	
+
 	/** The idle. */
 	private Animation<TextureRegion> idle;
+
+	/** The walkingRightAnimation. */
+	private Animation<TextureRegion> rightWalk;
+
+	/** The walkingLeftAnimation. */
+	private Animation<TextureRegion> leftWalk;
+
+	private Animation<TextureRegion> leftShoot;
+	private Animation<TextureRegion> rightShoot;
 	
 	/** The hp. */
 	private int hp;
+
+	private Vector2 lookingDirection;
 
 	/**
 	 * Constructor de la clase.
@@ -42,8 +53,13 @@ public class ManagedPlayer extends Element {
 		super(x, y, s);
 		this.username = username;
 		this.lobbyName = lobbyName;
+		this.lookingDirection = new Vector2(0,0);
 
-		idle = this.loadFullAnimation("assets/player/idle.png", 1, 1, 0.2f, true);
+		idle = this.loadFullAnimation("assets/player/idle.png", 1, 1, 0.2f, false);
+		rightWalk = this.loadFullAnimation("assets/player/PlayerCaminaDerecha.png", 1, 5, 0.3f, true);
+		leftWalk = this.loadFullAnimation("assets/player/PlayerCaminaIzquierda.png", 1, 5, 0.3f, true);
+		rightShoot = this.loadFullAnimation("assets/player/PlayerDisparaDerecha.png", 1, 1, 0.1f, false);
+		leftShoot = this.loadFullAnimation("assets/player/PlayerDisparaIzquierda.png", 1, 1, 0.1f, false);
 		this.setPolygon(8);
 	}
 
@@ -78,5 +94,33 @@ public class ManagedPlayer extends Element {
 	 */
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+
+	public Vector2 getLookingDirection() {
+		return lookingDirection;
+	}
+
+	public void setLookingDirection(Vector2 lookingDirection) {
+		this.lookingDirection = lookingDirection;
+	}
+
+	public Animation<TextureRegion> getIdle() {
+		return idle;
+	}
+
+	public Animation<TextureRegion> getRightWalk() {
+		return rightWalk;
+	}
+
+	public Animation<TextureRegion> getLeftWalk() {
+		return leftWalk;
+	}
+
+	public Animation<TextureRegion> getLeftShoot() {
+		return leftShoot;
+	}
+
+	public Animation<TextureRegion> getRightShoot() {
+		return rightShoot;
 	}
 }

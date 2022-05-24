@@ -174,21 +174,26 @@ public class ServerMap {
 	public void updatePlayerPosition(PlayerEvent message) {
 		ServerPlayer player = this.getPlayerByNickName(message.getUsername());
 		Vector2 v = player.getPosition();
-		switch (message.getDirection()) {
-		case LEFT:
-			v.x -= deltaTime * 100;
-			break;
-		case RIGHT:
-			v.x += deltaTime * 100;
-			break;
-		case UP:
-			if (player.isOnGround()) {
-				v.y += deltaTime * 3000;
+		player.setLookingDirection(message.getLookingDirection());
+		player.setMoving(message.isMoving());
+		if(message.getDirection() != null){
+			switch (message.getDirection()) {
+				case LEFT:
+					v.x -= deltaTime * 100;
+					break;
+				case RIGHT:
+					v.x += deltaTime * 100;
+					break;
+				case UP:
+					if (player.isOnGround()) {
+						v.y += deltaTime * 2000;
+					}
+					break;
+				default:
+					break;
 			}
-			break;
-		default:
-			break;
 		}
+
 	}
 
 	/**
@@ -218,8 +223,9 @@ public class ServerMap {
 	 */
 	public void playerShoots(BulletEvent message) {
 		ServerPlayer player = this.getPlayerByNickName(message.getUsername());
-		Bullet bullet = new Bullet(message.getUsername(), player.getPosition().x, player.getPosition().y + 5,
-					message.getBulletDirection());
+		player.setShooting(true);
+		Bullet bullet = new Bullet(message.getUsername(), player.getPosition().x + 25, player.getPosition().y + 22,
+					player.getLookingDirection());
 		this.bullets.add(bullet);
 	}
 
@@ -306,9 +312,22 @@ public class ServerMap {
 		GameEvent gameEvent = new GameEvent();
 		gameEvent.players = new ArrayList<>();
 		gameEvent.players.add(new ServerPlayerData(player1.getUsername(), player1.getPosition(), player1.getHp(),
-				player1.isEnabled()));
+				player1.isEnabled(),player1.getLookingDirection(), player1.isMoving(), player1.isShooting()));
+		if(player1.isShooting() && player1.getAnimationLock() < 0.1f){
+			player1.setAnimationLock(player1.getAnimationLock() + deltaTime);
+		}else{
+			player1.setShooting(false);
+			player1.setAnimationLock(0);
+		}
+
 		gameEvent.players.add(new ServerPlayerData(player2.getUsername(), player2.getPosition(), player2.getHp(),
-				player2.isEnabled()));
+				player2.isEnabled(), player2.getLookingDirection(),player2.isMoving(), player2.isShooting()));
+		if(player2.isShooting() && player2.getAnimationLock() < 0.1f){
+			player2.setAnimationLock(player2.getAnimationLock() + deltaTime);
+		}else{
+			player2.setShooting(false);
+			player2.setAnimationLock(0);
+		}
 		gameEvent.bullets = this.bullets;
 		this.onUpdateCallback.sendToBothClients(gameEvent);
 

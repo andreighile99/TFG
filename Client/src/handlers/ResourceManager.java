@@ -57,6 +57,10 @@ public final class ResourceManager {
 
 		assets.load("assets/player/idle.png", Texture.class);
 		assets.load("assets/player/Bola.png", Texture.class);
+		assets.load("assets/player/PlayerCaminaIzquierda.png", Texture.class);
+		assets.load("assets/player/PlayerCaminaDerecha.png", Texture.class);
+		assets.load("assets/player/PlayerDisparaIzquierda.png", Texture.class);
+		assets.load("assets/player/PlayerDisparaDerecha.png", Texture.class);
 		assets.load("assets/player/hp/FullBulletH.png", Texture.class);
 		assets.load("assets/player/hp/HalfBulletH.png", Texture.class);
 		assets.load("assets/player/hp/HpBackground.png", Texture.class);

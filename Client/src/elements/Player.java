@@ -13,7 +13,7 @@ import events.game.PlayerEvent;
 import main.MontessoriSlug;
 
 /**
- * Clase para instanciar la representación del jugador que mueve el cliente
+ * Clase para instanciar la representaciï¿½n del jugador que mueve el cliente
  * local en los clientes.
  *
  * @author Eduard Andrei Ghile
@@ -35,6 +35,15 @@ public class Player extends Element {
 	/** The idle. */
 	private Animation<TextureRegion> idle;
 
+	/** The walkingRightAnimation. */
+	private Animation<TextureRegion> rightWalk;
+
+	/** The walkingLeftAnimation. */
+	private Animation<TextureRegion> leftWalk;
+
+	private Animation<TextureRegion> leftShoot;
+	private Animation<TextureRegion> rightShoot;
+
 	/** The my client. */
 	private Client myClient;
 
@@ -54,12 +63,16 @@ public class Player extends Element {
 	public Player(float x, float y, Stage s, String username, String lobbyName) {
 		super(x, y, s);
 		this.stage = s;
-		this.lookingDirection = new Vector2(1, 0);
+		this.lookingDirection = new Vector2(0, 0);
 		this.myClient = MontessoriSlug.getInstance().getClient();
 		this.username = username;
 		this.lobbyName = lobbyName;
 
 		idle = this.loadFullAnimation("assets/player/idle.png", 1, 1, 0.2f, false);
+		rightWalk = this.loadFullAnimation("assets/player/PlayerCaminaDerecha.png", 1, 5, 0.2f, true);
+		leftWalk = this.loadFullAnimation("assets/player/PlayerCaminaIzquierda.png", 1, 5, 0.2f, true);
+		rightShoot = this.loadFullAnimation("assets/player/PlayerDisparaDerecha.png", 1, 1, 0.1f, false);
+		leftShoot = this.loadFullAnimation("assets/player/PlayerDisparaIzquierda.png", 1, 1, 0.1f, false);
 		this.setPolygon(8);
 	}
 
@@ -85,24 +98,35 @@ public class Player extends Element {
 				BulletEvent bulletEvent = new BulletEvent();
 				bulletEvent.setLobbyName(this.lobbyName);
 				bulletEvent.setUsername(this.username);
-				bulletEvent.setBulletDirection(this.lookingDirection.nor());
 				this.myClient.sendUDP(bulletEvent);
 			}
-			if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 				this.lookingDirection.set(0, 1);
+				playerEvent.setMoving(true);
+				playerEvent.setLookingDirection(this.lookingDirection);
+				this.myClient.sendUDP(playerEvent);
 			}
-			if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			else if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+				playerEvent.setMoving(false);
 				playerEvent.setDirection(PlayerEvent.DIRECTION.UP);
 				this.myClient.sendUDP(playerEvent);
 			}
-			if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.A)) {
 				this.lookingDirection.set(-1, 0);
+				playerEvent.setMoving(true);
 				playerEvent.setDirection(PlayerEvent.DIRECTION.LEFT);
+				playerEvent.setLookingDirection(this.lookingDirection);
 				this.myClient.sendUDP(playerEvent);
 			}
-			if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+			else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
 				this.lookingDirection.set(1, 0);
+				playerEvent.setMoving(true);
 				playerEvent.setDirection(PlayerEvent.DIRECTION.RIGHT);
+				playerEvent.setLookingDirection(this.lookingDirection);
+				this.myClient.sendUDP(playerEvent);
+			}else{
+				playerEvent.setMoving(false);
+				playerEvent.setLookingDirection(this.lookingDirection);
 				this.myClient.sendUDP(playerEvent);
 			}
 		}
@@ -133,5 +157,34 @@ public class Player extends Element {
 	 */
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+
+	/**
+	 * Gets the looking direction
+	 *
+	 * @return the looking direction
+	 */
+	public Vector2 getLookingDirection() {
+		return lookingDirection;
+	}
+
+	public Animation<TextureRegion> getRightWalk() {
+		return rightWalk;
+	}
+
+	public Animation<TextureRegion> getIdle() {
+		return idle;
+	}
+
+	public Animation<TextureRegion> getLeftWalk() {
+		return leftWalk;
+	}
+
+	public Animation<TextureRegion> getLeftShoot() {
+		return leftShoot;
+	}
+
+	public Animation<TextureRegion> getRightShoot() {
+		return rightShoot;
 	}
 }

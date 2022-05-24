@@ -292,4 +292,17 @@ public class Element extends Actor {
 
 		}
 	}
+
+	public boolean overlaps(Element elemento)
+	{
+		Polygon poly1 = this.getBoundaryPolygon();
+		Polygon poly2 = elemento.getBoundaryPolygon();
+
+		// initial test to improve performance
+		if ( !poly1.getBoundingRectangle().overlaps(poly2.getBoundingRectangle()) )
+			return false;
+
+		return Intersector.overlapConvexPolygons( poly1, poly2 );
+	}
+
 }

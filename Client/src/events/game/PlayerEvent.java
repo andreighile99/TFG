@@ -2,6 +2,8 @@
 package events.game;
 
 
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * Clase mensajera que se utiliza para enviar datos al servidor.
  *
@@ -17,6 +19,10 @@ public class PlayerEvent {
     
     /** The direction. */
     private DIRECTION direction;
+
+    private Vector2 lookingDirection;
+
+    private boolean isMoving;
 
 
 
@@ -92,5 +98,17 @@ public class PlayerEvent {
      */
     public void setLobyName(String lobyName) {
         this.lobyName = lobyName;
+    }
+
+    public void setLookingDirection(Vector2 lookingDirection) {
+        this.lookingDirection = lookingDirection;
+    }
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
     }
 }

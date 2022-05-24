@@ -22,6 +22,13 @@ public class ServerPlayerData {
     /** The enabled. */
     private boolean enabled;
 
+    public Vector2 lookingDirection;
+
+    public boolean isMoving;
+
+
+    public boolean isShooting;
+
     /**
      * Instantiates a new server player data.
      */
@@ -100,4 +107,11 @@ public class ServerPlayerData {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public Vector2 getLookingDirection() {
+        return lookingDirection;
+    }
+
+
+
 }

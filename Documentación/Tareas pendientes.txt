@@ -10,7 +10,8 @@ Testing?
 
 Documentación:
 
-Generar Javadoc
+//Generar Javadoc
+
 Generar Gant
 Generar Trello
 Generar Memoria

@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>server</OriginalElement>
+  <nodes>
+    <node x="1655.5487637362637" y="132.0">server.game.elements.Bullet</node>
+    <node x="2250.5406111249877" y="3452.0">server.listeners.LobbyListener</node>
+    <node x="1209.7220487845502" y="868.0">server.handlers.ResourceManager</node>
+    <node x="2456.411153776779" y="637.0">server.model.ServerPlayer</node>
+    <node x="2221.411153776779" y="890.5">server.game.map.ServerMap.onUpdate</node>
+    <node x="2059.2906111249877" y="3214.5">server.events.lobby.LobbyCreatedEvent</node>
+    <node x="2904.6868728493737" y="3203.5">server.events.lobby.LobbyJoinedEvent</node>
+    <node x="1860.2906111249877" y="3236.5">server.events.lobby.CreateNewLobbyEvent</node>
+    <node x="982.7220487845501" y="780.0">server.game.elements.Solid</node>
+    <node x="1665.936334498836" y="2389.0">server.game.gameServer.GameServer</node>
+    <node x="1138.03274919525" y="1843.5">server.events.game.SwitchLevel</node>
+    <node x="573.6595487845501" y="879.5">server.events.game.EnemyEvent</node>
+    <node x="1425.2906111249877" y="3452.0">server.listeners.LeaveListener</node>
+    <node x="1630.60774919525" y="1831.5">server.model.Headless</node>
+    <node x="2733.6868728493737" y="3225.5">server.events.lobby.LobbyStartEvent</node>
+    <node x="1298.60774919525" y="1424.0">server.game.map.ServerMap</node>
+    <node x="10.5" y="802.0">server.events.game.PlayerEvent</node>
+    <node x="233.5" y="802.0">server.events.game.BulletEvent</node>
+    <node x="88.0" y="3452.0">server.listeners.GameEventListener</node>
+    <node x="1964.411153776779" y="879.5">server.events.game.GameEvent</node>
+    <node x="1696.2906111249877" y="3236.5">server.events.lobby.JoinLobbyEvent</node>
+    <node x="57.5" y="231.5">server.events.game.PlayerEvent.DIRECTION</node>
+    <node x="792.5263254107018" y="0.0">server.game.elements.Soldier</node>
+    <node x="2053.798763736264" y="220.5">server.game.elements.ServerPlayerData</node>
+    <node x="2057.2906111249877" y="2806.0">server.model.Lobby</node>
+    <node x="1639.7696678321693" y="879.5">server.game.map.ServerMap.notifyGameServer</node>
+    <node x="2277.6868728493737" y="1831.5">server.events.lobby.FinishLobby</node>
+    <node x="1308.2072777916542" y="154.0">server.game.elements.EnemyBullet</node>
+    <node x="1949.9744297369311" y="3642.0">server.main.Server</node>
+    <node x="1388.2906111249877" y="3203.0">server.handlers.LobbyHandler</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="server.main.Server" target="server.events.lobby.FinishLobby">
+      <point x="54.0" y="-91.5" />
+      <point x="2089.474429736931" y="3592.0" />
+      <point x="3073.1868728493737" y="3592.0" />
+      <point x="3073.1868728493737" y="2369.0" />
+      <point x="2388.3868728493735" y="2369.0" />
+      <point x="49.19999999999982" y="25.0" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.game.elements.Soldier">
+      <point x="-94.71428571428578" y="-432.5" />
+      <point x="1359.8934634809643" y="1344.0" />
+      <point x="950.2220487845501" y="1344.0" />
+      <point x="950.2220487845501" y="597.0" />
+      <point x="910.0263254107018" y="597.0" />
+      <point x="0.0" y="278.5" />
+    </edge>
+    <edge source="server.listeners.GameEventListener" target="server.handlers.LobbyHandler">
+      <point x="76.0" y="-25.0" />
+      <point x="278.0" y="3432.0" />
+      <point x="1436.2906111249877" y="3432.0" />
+      <point x="-96.0" y="69.5" />
+    </edge>
+    <edge source="server.main.Server" target="server.listeners.LeaveListener">
+      <point x="-9.0" y="-91.5" />
+      <point x="2026.4744297369311" y="3542.0" />
+      <point x="1532.2906111249877" y="3542.0" />
+      <point x="0.0" y="25.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.game.elements.EnemyBullet">
+      <point x="-36.0" y="-91.5" />
+      <point x="1999.4744297369311" y="3572.0" />
+      <point x="501.44877761127805" y="3572.0" />
+      <point x="501.44877761127805" y="607.0" />
+      <point x="1331.807277791654" y="607.0" />
+      <point x="-94.40000000000009" y="124.5" />
+    </edge>
+    <edge source="server.listeners.LobbyListener" target="server.model.Lobby">
+      <point x="-9.5" y="-25.0" />
+      <point x="2355.0406111249877" y="3372.0" />
+      <point x="2234.7906111249877" y="3372.0" />
+      <point x="2234.7906111249877" y="3183.0" />
+      <point x="2209.7906111249877" y="3183.0" />
+      <point x="30.5" y="168.5" />
+    </edge>
+    <edge source="server.model.Lobby" target="server.game.map.ServerMap.onUpdate">
+      <point x="45.75" y="-168.5" />
+      <point x="2225.0406111249877" y="2766.0" />
+      <point x="2411.1868728493737" y="2766.0" />
+      <point x="2411.1868728493737" y="1344.0" />
+      <point x="2414.911153776779" y="1344.0" />
+      <point x="86.0" y="25.0" />
+    </edge>
+    <edge source="server.model.Lobby" target="server.game.gameServer.GameServer">
+      <point x="-76.25" y="-168.5" />
+      <point x="2103.0406111249877" y="2776.0" />
+      <point x="1797.811334498836" y="2776.0" />
+      <point x="26.375" y="168.5" />
+    </edge>
+    <edge source="server.events.game.EnemyEvent" target="server.game.elements.Soldier">
+      <point x="-62.25" y="-36.0" />
+      <point x="635.9095487845501" y="597.0" />
+      <point x="863.0263254107018" y="597.0" />
+      <point x="-47.0" y="278.5" />
+    </edge>
+    <edge source="server.listeners.LobbyListener" target="server.model.ServerPlayer">
+      <point x="28.5" y="-25.0" />
+      <point x="2393.0406111249877" y="3372.0" />
+      <point x="2723.1868728493737" y="3372.0" />
+      <point x="2723.1868728493737" y="1404.0" />
+      <point x="2663.4825823482074" y="1404.0" />
+      <point x="95.57142857142844" y="278.5" />
+    </edge>
+    <edge source="server.listeners.LobbyListener" target="server.events.lobby.LobbyJoinedEvent">
+      <point x="104.5" y="-25.0" />
+      <point x="2469.0406111249877" y="3422.0" />
+      <point x="2983.6868728493737" y="3422.0" />
+      <point x="0.0" y="69.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.game.SwitchLevel">
+      <point x="-18.0" y="-91.5" />
+      <point x="2017.4744297369311" y="3552.0" />
+      <point x="921.6113344988358" y="3552.0" />
+      <point x="921.6113344988358" y="2369.0" />
+      <point x="1158.53274919525" y="2369.0" />
+      <point x="-41.0" y="13.0" />
+    </edge>
+    <edge source="server.model.Lobby" target="server.events.lobby.FinishLobby">
+      <point x="-15.25" y="-168.5" />
+      <point x="2164.0406111249877" y="2746.0" />
+      <point x="2339.1868728493737" y="2746.0" />
+      <point x="0.0" y="25.0" />
+    </edge>
+    <edge source="server.listeners.LobbyListener" target="server.events.lobby.LobbyStartEvent">
+      <point x="66.5" y="-25.0" />
+      <point x="2431.0406111249877" y="3392.0" />
+      <point x="2809.1868728493737" y="3392.0" />
+      <point x="0.0" y="47.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.game.BulletEvent">
+      <point x="-54.0" y="-91.5" />
+      <point x="1981.4744297369311" y="3592.0" />
+      <point x="340.5" y="3592.0" />
+      <point x="0.0" y="113.5" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.game.PlayerEvent">
+      <point x="-72.0" y="-91.5" />
+      <point x="1963.4744297369311" y="3612.0" />
+      <point x="50.25" y="3612.0" />
+      <point x="50.25" y="1404.0" />
+      <point x="44.33333333333326" y="1404.0" />
+      <point x="-67.66666666666674" y="113.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.game.elements.EnemyBullet">
+      <point x="-5.571428571428669" y="-432.5" />
+      <point x="1449.0363206238214" y="1264.0" />
+      <point x="1399.2220487845502" y="1264.0" />
+      <point x="1399.2220487845502" y="617.0" />
+      <point x="1426.2072777916542" y="617.0" />
+      <point x="0.0" y="124.5" />
+    </edge>
+    <edge source="server.handlers.LobbyHandler" target="server.model.Lobby">
+      <point x="96.0" y="-69.5" />
+      <point x="1628.2906111249877" y="3183.0" />
+      <point x="2148.7906111249877" y="3183.0" />
+      <point x="-30.5" y="168.5" />
+    </edge>
+    <edge source="server.main.Server" target="server.listeners.GameEventListener">
+      <point x="-63.0" y="-91.5" />
+      <point x="1972.4744297369311" y="3602.0" />
+      <point x="202.0" y="3602.0" />
+      <point x="0.0" y="25.0" />
+    </edge>
+    <edge source="server.game.gameServer.GameServer" target="server.game.map.ServerMap">
+      <point x="-32.46153846153857" y="-168.5" />
+      <point x="1738.9747960372974" y="2329.0" />
+      <point x="1558.60774919525" y="2329.0" />
+      <point x="104.0" y="432.5" />
+    </edge>
+    <edge source="server.events.game.GameEvent" target="server.game.elements.ServerPlayerData">
+      <point x="59.25" y="-36.0" />
+      <point x="2142.161153776779" y="617.0" />
+      <point x="2132.798763736264" y="617.0" />
+      <point x="0.0" y="58.0" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.game.elements.Bullet">
+      <point x="50.14285714285711" y="-432.5" />
+      <point x="1504.7506063381072" y="1254.0" />
+      <point x="1608.9072777916542" y="1254.0" />
+      <point x="1608.9072777916542" y="607.0" />
+      <point x="1755.5487637362637" y="607.0" />
+      <point x="0.0" y="146.5" />
+    </edge>
+    <edge source="server.game.gameServer.GameServer" target="server.game.map.ServerMap.onUpdate">
+      <point x="32.46153846153857" y="-168.5" />
+      <point x="1803.8978729603746" y="2329.0" />
+      <point x="2152.615444277945" y="2329.0" />
+      <point x="2152.615444277945" y="1344.0" />
+      <point x="2371.911153776779" y="1344.0" />
+      <point x="43.0" y="25.0" />
+    </edge>
+    <edge source="server.model.Lobby" target="server.model.ServerPlayer">
+      <point x="106.75" y="-168.5" />
+      <point x="2286.0406111249877" y="2786.0" />
+      <point x="2433.1868728493737" y="2786.0" />
+      <point x="2433.1868728493737" y="1404.0" />
+      <point x="2631.6254394910648" y="1404.0" />
+      <point x="63.71428571428578" y="278.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.game.map.ServerMap.notifyGameServer">
+      <point x="83.57142857142844" y="-432.5" />
+      <point x="1538.1791777666785" y="1284.0" />
+      <point x="1718.7696678321693" y="1284.0" />
+      <point x="0.0" y="36.0" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.game.elements.Solid">
+      <point x="-50.14285714285711" y="-432.5" />
+      <point x="1404.464892052393" y="1304.0" />
+      <point x="1060.3470487845502" y="1304.0" />
+      <point x="-25.875" y="135.5" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.lobby.JoinLobbyEvent">
+      <point x="0.0" y="-91.5" />
+      <point x="2035.4744297369311" y="3532.0" />
+      <point x="1732.2906111249877" y="3532.0" />
+      <point x="-36.0" y="36.0" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.game.elements.ServerPlayerData">
+      <point x="61.28571428571422" y="-432.5" />
+      <point x="1515.8934634809643" y="1264.0" />
+      <point x="1629.2696678321693" y="1264.0" />
+      <point x="1629.2696678321693" y="617.0" />
+      <point x="2080.1320970695974" y="617.0" />
+      <point x="-52.666666666666515" y="58.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.lobby.LobbyCreatedEvent">
+      <point x="18.0" y="-91.5" />
+      <point x="2053.474429736931" y="3552.0" />
+      <point x="2227.5406111249877" y="3552.0" />
+      <point x="2227.5406111249877" y="3432.0" />
+      <point x="2086.7906111249877" y="3432.0" />
+      <point x="-55.0" y="58.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.game.PlayerEvent.DIRECTION">
+      <point x="-81.0" y="-91.5" />
+      <point x="1954.4744297369311" y="3622.0" />
+      <point x="0.0" y="3622.0" />
+      <point x="0.0" y="607.0" />
+      <point x="71.125" y="607.0" />
+      <point x="-40.875" y="47.0" />
+    </edge>
+    <edge source="server.listeners.LobbyListener" target="server.events.lobby.CreateNewLobbyEvent">
+      <point x="-66.5" y="-25.0" />
+      <point x="2298.0406111249877" y="3402.0" />
+      <point x="1994.5406111249877" y="3402.0" />
+      <point x="44.75" y="36.0" />
+    </edge>
+    <edge source="server.listeners.LeaveListener" target="server.handlers.LobbyHandler">
+      <point x="0.0" y="-25.0" />
+      <point x="0.0" y="69.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.handlers.ResourceManager">
+      <point x="-16.71428571428578" y="-432.5" />
+      <point x="1437.8934634809643" y="1274.0" />
+      <point x="1299.2220487845502" y="1274.0" />
+      <point x="0.0" y="47.5" />
+    </edge>
+    <edge source="server.main.Server" target="server.game.elements.Soldier">
+      <point x="-45.0" y="-91.5" />
+      <point x="1990.4744297369311" y="3582.0" />
+      <point x="458.0" y="3582.0" />
+      <point x="458.0" y="587.0" />
+      <point x="816.0263254107018" y="587.0" />
+      <point x="-94.0" y="278.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.events.game.GameEvent">
+      <point x="105.85714285714289" y="-432.5" />
+      <point x="1560.464892052393" y="1304.0" />
+      <point x="2082.911153776779" y="1304.0" />
+      <point x="0.0" y="36.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.lobby.LobbyJoinedEvent">
+      <point x="45.0" y="-91.5" />
+      <point x="2080.474429736931" y="3582.0" />
+      <point x="2638.8739444583207" y="3582.0" />
+      <point x="2638.8739444583207" y="3432.0" />
+      <point x="3036.3535395160397" y="3432.0" />
+      <point x="52.666666666666515" y="69.0" />
+    </edge>
+    <edge source="server.game.gameServer.GameServer" target="server.handlers.LobbyHandler">
+      <point x="-79.125" y="168.5" />
+      <point x="1692.311334498836" y="2786.0" />
+      <point x="1558.7612776112783" y="2786.0" />
+      <point x="1558.7612776112783" y="3163.0" />
+      <point x="1436.2906111249877" y="3163.0" />
+      <point x="-96.0" y="-69.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.events.game.PlayerEvent.DIRECTION">
+      <point x="-105.85714285714289" y="-432.5" />
+      <point x="1348.7506063381072" y="1354.0" />
+      <point x="833.1595487845501" y="1354.0" />
+      <point x="833.1595487845501" y="577.0" />
+      <point x="152.875" y="577.0" />
+      <point x="40.875" y="47.0" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.events.game.EnemyEvent">
+      <point x="-117.0" y="-432.5" />
+      <point x="1337.60774919525" y="1364.0" />
+      <point x="781.1595487845501" y="1364.0" />
+      <point x="83.0" y="36.0" />
+    </edge>
+    <edge source="server.events.game.PlayerEvent" target="server.events.game.PlayerEvent.DIRECTION">
+      <point x="-50.75" y="-113.5" />
+      <point x="61.25" y="617.0" />
+      <point x="98.375" y="617.0" />
+      <point x="-13.625" y="47.0" />
+    </edge>
+    <edge source="server.listeners.LobbyListener" target="server.handlers.LobbyHandler">
+      <point x="-104.5" y="-25.0" />
+      <point x="2260.0406111249877" y="3422.0" />
+      <point x="1628.2906111249877" y="3422.0" />
+      <point x="96.0" y="69.5" />
+    </edge>
+    <edge source="server.game.gameServer.GameServer" target="server.model.Headless">
+      <point x="-16.230769230769283" y="-168.5" />
+      <point x="1755.2055652680667" y="2319.0" />
+      <point x="1706.10774919525" y="2319.0" />
+      <point x="0.0" y="25.0" />
+    </edge>
+    <edge source="server.game.gameServer.GameServer" target="server.game.map.ServerMap.notifyGameServer">
+      <point x="0.0" y="-168.5" />
+      <point x="1771.436334498836" y="2309.0" />
+      <point x="1792.10774919525" y="2309.0" />
+      <point x="1792.10774919525" y="1284.0" />
+      <point x="1771.436334498836" y="1284.0" />
+      <point x="52.66666666666674" y="36.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.listeners.LobbyListener">
+      <point x="27.0" y="-91.5" />
+      <point x="2062.474429736931" y="3562.0" />
+      <point x="2364.5406111249877" y="3562.0" />
+      <point x="0.0" y="25.0" />
+    </edge>
+    <edge source="server.events.game.GameEvent" target="server.game.elements.Bullet">
+      <point x="-59.25" y="-36.0" />
+      <point x="2023.661153776779" y="607.0" />
+      <point x="1795.5487637362637" y="607.0" />
+      <point x="40.0" y="146.5" />
+    </edge>
+    <edge source="server.game.gameServer.GameServer" target="server.events.game.SwitchLevel">
+      <point x="-81.15384615384619" y="-168.5" />
+      <point x="1690.2824883449898" y="2359.0" />
+      <point x="1240.53274919525" y="2359.0" />
+      <point x="41.0" y="13.0" />
+    </edge>
+    <edge source="server.events.game.EnemyEvent" target="server.game.elements.EnemyBullet">
+      <point x="62.25" y="-36.0" />
+      <point x="760.4095487845501" y="617.0" />
+      <point x="1379.0072777916544" y="617.0" />
+      <point x="-47.200000000000045" y="124.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.model.ServerPlayer">
+      <point x="139.28571428571422" y="-432.5" />
+      <point x="1593.8934634809643" y="1354.0" />
+      <point x="2472.3397252053505" y="1354.0" />
+      <point x="-95.57142857142844" y="278.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.events.game.BulletEvent">
+      <point x="-139.28571428571422" y="-432.5" />
+      <point x="1315.322034909536" y="1384.0" />
+      <point x="411.83333333333326" y="1384.0" />
+      <point x="71.33333333333331" y="113.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.events.game.PlayerEvent">
+      <point x="-150.42857142857156" y="-432.5" />
+      <point x="1304.1791777666785" y="1394.0" />
+      <point x="179.66666666666674" y="1394.0" />
+      <point x="67.66666666666669" y="113.5" />
+    </edge>
+    <edge source="server.game.gameServer.GameServer" target="server.events.lobby.FinishLobby">
+      <point x="81.15384615384619" y="-168.5" />
+      <point x="1852.5901806526822" y="2359.0" />
+      <point x="2289.986872849374" y="2359.0" />
+      <point x="-49.19999999999982" y="25.0" />
+    </edge>
+    <edge source="server.game.gameServer.GameServer" target="server.model.ServerPlayer">
+      <point x="48.69230769230762" y="-168.5" />
+      <point x="1820.1286421911436" y="2339.0" />
+      <point x="2256.1868728493737" y="2339.0" />
+      <point x="2256.1868728493737" y="1374.0" />
+      <point x="2536.0540109196363" y="1374.0" />
+      <point x="-31.857142857142662" y="278.5" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.game.EnemyEvent">
+      <point x="-27.0" y="-91.5" />
+      <point x="2008.4744297369311" y="3562.0" />
+      <point x="615.1595487845501" y="3562.0" />
+      <point x="-83.0" y="36.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.game.GameEvent">
+      <point x="63.0" y="-91.5" />
+      <point x="2098.474429736931" y="3602.0" />
+      <point x="3082.1868728493737" y="3602.0" />
+      <point x="3082.1868728493737" y="1304.0" />
+      <point x="2161.911153776779" y="1304.0" />
+      <point x="79.0" y="36.0" />
+    </edge>
+    <edge source="server.listeners.LobbyListener" target="server.events.lobby.LobbyCreatedEvent">
+      <point x="-28.5" y="-25.0" />
+      <point x="2336.0406111249877" y="3382.0" />
+      <point x="2196.7906111249877" y="3382.0" />
+      <point x="55.0" y="58.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.lobby.LobbyStartEvent">
+      <point x="36.0" y="-91.5" />
+      <point x="2071.474429736931" y="3572.0" />
+      <point x="2545.957277791654" y="3572.0" />
+      <point x="2545.957277791654" y="3402.0" />
+      <point x="2859.5202061827067" y="3402.0" />
+      <point x="50.333333333333485" y="47.0" />
+    </edge>
+    <edge source="server.listeners.GameEventListener" target="server.events.game.PlayerEvent">
+      <point x="-76.0" y="-25.0" />
+      <point x="126.0" y="3432.0" />
+      <point x="112.0" y="3432.0" />
+      <point x="0.0" y="113.5" />
+    </edge>
+    <edge source="server.main.Server" target="server.events.lobby.CreateNewLobbyEvent">
+      <point x="9.0" y="-91.5" />
+      <point x="2044.4744297369311" y="3522.0" />
+      <point x="1905.0406111249877" y="3522.0" />
+      <point x="-44.75" y="36.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.game.elements.Bullet">
+      <point x="72.0" y="-91.5" />
+      <point x="2107.474429736931" y="3612.0" />
+      <point x="3202.474429736931" y="3612.0" />
+      <point x="3202.474429736931" y="597.0" />
+      <point x="1835.5487637362637" y="597.0" />
+      <point x="80.0" y="146.5" />
+    </edge>
+    <edge source="server.game.map.ServerMap" target="server.game.map.ServerMap.onUpdate">
+      <point x="128.1428571428571" y="-432.5" />
+      <point x="1582.7506063381072" y="1324.0" />
+      <point x="2285.911153776779" y="1324.0" />
+      <point x="-43.0" y="25.0" />
+    </edge>
+    <edge source="server.listeners.GameEventListener" target="server.events.game.BulletEvent">
+      <point x="0.0" y="-25.0" />
+      <point x="202.0" y="3432.0" />
+      <point x="169.5" y="3432.0" />
+      <point x="169.5" y="1404.0" />
+      <point x="269.16666666666674" y="1404.0" />
+      <point x="-71.33333333333326" y="113.5" />
+    </edge>
+    <edge source="server.listeners.LobbyListener" target="server.events.lobby.JoinLobbyEvent">
+      <point x="-85.5" y="-25.0" />
+      <point x="2279.0406111249877" y="3412.0" />
+      <point x="1804.2906111249877" y="3412.0" />
+      <point x="36.0" y="36.0" />
+    </edge>
+    <edge source="server.main.Server" target="server.game.elements.ServerPlayerData">
+      <point x="81.0" y="-91.5" />
+      <point x="2116.474429736931" y="3622.0" />
+      <point x="3292.8077630702646" y="3622.0" />
+      <point x="3292.8077630702646" y="587.0" />
+      <point x="2185.4654304029305" y="587.0" />
+      <point x="52.666666666666515" y="58.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8304291287386218" x="897.4034898434895" y="1160.459129345443" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
