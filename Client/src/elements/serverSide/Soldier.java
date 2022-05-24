@@ -3,6 +3,12 @@ package elements.serverSide;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Clase que se utiliza para recoger los datos del Soldado en el servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class Soldier {
     private Vector2 position;
     private Rectangle boundRectangle;
@@ -13,16 +19,6 @@ public class Soldier {
     private boolean onGround;
 
     public Soldier() {
-    }
-
-    public Soldier(float x, float y) {
-        this.onGround = false;
-        this.actionCounter = 0;
-        this.enabled = true;
-        this.hp = 5;
-        this.position = new Vector2(x,y);
-        this.boundRectangle = new Rectangle(x,y,20, 20);
-        this.feet = new Rectangle(x, y, this.boundRectangle.width / 8, this.boundRectangle.height / 10);
     }
 
     public Vector2 getPosition() {

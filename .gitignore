@@ -2,3 +2,9 @@
 Server/.idea
 Client/.idea
 Server/out/production
+/bin/
+.dbeaver
+Server/.dbeaver
+Client/.dbeaver
+Client/.classpath
+Server/.classpath

@@ -19,208 +19,201 @@ import com.badlogic.gdx.utils.Array;
 import handlers.ResourceManager;
 import parameters.Parameters;
 
-
+/**
+ * Clase para la gestion de los elementos visibles de la aplicacion
+ * 
+ * @author Eduard ANdrei Ghile
+ *
+ */
 public class Element extends Actor {
-    private Animation<TextureRegion> animation;
-    private float animationTime;
-    private boolean enabled;
-    protected Polygon colision;
-    private ShapeRenderer shapeRenderer;
-    private float polyWidth;
-    private float polyHigh;
-    private float padY=0;
-    private float padX=0;
+	private Animation<TextureRegion> animation;
+	private float animationTime;
+	private boolean enabled;
+	protected Polygon colision;
+	private ShapeRenderer shapeRenderer;
+	private float polyWidth;
+	private float polyHigh;
+	private float padY = 0;
+	private float padX = 0;
 
+	public boolean getEnabled() {
+		return enabled;
+	}
 
-    public boolean getEnabled() {
-        return enabled;
-    }
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
+	public Element(float x, float y, Stage s) {
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+		this.setPosition(x, y);
+		s.addActor(this);
+		enabled = true;
 
+		shapeRenderer = new ShapeRenderer();
 
-    public Element(float x, float y, Stage s) {
+	}
 
-        this.setPosition(x, y);
-        s.addActor(this);
-        enabled = true;
+	/**
+	 * Constructor de la clase
+	 * 
+	 * @param x Posicion en el eje x de la pantalla
+	 * @param y Posicion en el eje y de la pantalla
+	 * @param s Stage al que pertenece el objeto
+	 * @param w Anchura del objeto mostrado
+	 * @param h Altura del objeto mostrado
+	 */
+	public Element(float x, float y, Stage s, float w, float h) {
+		this.setPosition(x, y);
+		s.addActor(this);
+		enabled = true;
 
-        shapeRenderer = new ShapeRenderer();
+		shapeRenderer = new ShapeRenderer();
+		this.polyWidth = w;
+		this.polyHigh = h;
 
-    }
+	}
 
+	@Override
+	public void draw(Batch batch, float parentAlpha) {
+		// TODO Auto-generated method stub
+		if (this.getEnabled()) {
 
-    public Element(float x, float y, Stage s, float w, float h) {
-        this.setPosition(x, y);
-        s.addActor(this);
-        enabled = true;
+			if (animation != null) {
+				batch.draw(animation.getKeyFrame(animationTime), getX(), getY(), getOriginX(), getOriginY(),
+						animation.getKeyFrame(animationTime).getRegionWidth(),
+						animation.getKeyFrame(animationTime).getRegionHeight(), getScaleX(), getScaleY(),
+						getRotation());
+			}
+			if (Parameters.debug) {
+				pintarCaja(batch);
+			}
+			super.draw(batch, parentAlpha);
+		}
 
-        shapeRenderer = new ShapeRenderer();
-        this.polyWidth = w;
-        this.polyHigh = h;
+	}
 
+	public Polygon getBoundaryPolygon() {
+		colision.setPosition(getX() + this.padX, getY() + this.padY);
+		colision.setOrigin(getOriginX(), getOriginY());
+		colision.setRotation(getRotation());
+		colision.setScale(getScaleX(), getScaleY());
+		return colision;
+	}
 
-    }
+	public void pintarCaja(Batch batch) {
+		batch.end();
+		shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
+		shapeRenderer.begin(ShapeType.Line);
+		shapeRenderer.setColor(Color.WHITE);
+		if (this.getBoundaryPolygon() != null) {
+			float[] vertices = new float[this.getBoundaryPolygon().getTransformedVertices().length];
 
+			for (int i = 0; i < vertices.length / 2; i++) {
+				vertices[2 * i] = (this.getBoundaryPolygon().getTransformedVertices()[2 * i]);
+				vertices[2 * i + 1] = (this.getBoundaryPolygon().getTransformedVertices()[2 * i + 1]);
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        // TODO Auto-generated method stub
-        if (this.getEnabled()) {
+			}
 
-            if (animation != null) {
-                batch.draw(animation.getKeyFrame(animationTime),
-                        getX(), getY(), getOriginX(), getOriginY(),
-                        animation.getKeyFrame(animationTime).getRegionWidth(), animation.getKeyFrame(animationTime).getRegionHeight(), getScaleX(), getScaleY(), getRotation());
-            }
-            if (Parameters.debug) {
-                pintarCaja(batch);
-            }
-            super.draw(batch, parentAlpha);
-        }
+			shapeRenderer.polygon(vertices);
 
+		}
+		shapeRenderer.end();
+		batch.begin();
+	}
 
-    }
+	@Override
+	public void act(float delta) {
+		// TODO Auto-generated method stub
+		if (this.getEnabled()) {
+			super.act(delta);
+			animationTime += delta;
+		}
+	}
 
-    public Polygon getBoundaryPolygon() {
-        colision.setPosition(getX() + this.padX, getY() + this.padY);
-        colision.setOrigin(getOriginX(), getOriginY());
-        colision.setRotation(getRotation());
-        colision.setScale(getScaleX(), getScaleY());
-        return colision;
-    }
+	public void setAnimation(Animation<TextureRegion> anim) {
+		animation = anim;
+		if (anim == null) {
+			System.out.println("Es nulaaaa");
+		}
+		TextureRegion tr = animation.getKeyFrame(0);
+		float w = tr.getRegionWidth();
+		float h = tr.getRegionHeight();
+		setSize(w, h);
+		this.polyHigh = h;
+		this.polyWidth = w;
 
-    public void pintarCaja(Batch batch) {
-        batch.end();
-        shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
-        shapeRenderer.begin(ShapeType.Line);
-        shapeRenderer.setColor(Color.WHITE);
-        if (this.getBoundaryPolygon() != null) {
-            float[] vertices = new float[this.getBoundaryPolygon().getTransformedVertices().length];
+		setOrigin(w / 2, h / 2);
 
-            for (int i = 0; i < vertices.length / 2; i++) {
-                vertices[2 * i] = (this.getBoundaryPolygon().getTransformedVertices()[2 * i]);
-                vertices[2 * i + 1] = (this.getBoundaryPolygon().getTransformedVertices()[2 * i + 1]);
+		if (colision == null)
+			setRectangle();
+	}
 
-            }
+	public Animation<TextureRegion> loadFullAnimation(String name, int rows, int cols, float frameDuration,
+			boolean loop) {
 
-            shapeRenderer.polygon(vertices);
+		Texture texture = ResourceManager.getTexture(name);
+		// texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+		int frameWidth = texture.getWidth() / cols;
+		int frameHeight = texture.getHeight() / rows;
 
-        }
-        shapeRenderer.end();
-        batch.begin();
-    }
+		TextureRegion[][] temp = TextureRegion.split(texture, frameWidth, frameHeight);
 
+		Array<TextureRegion> textureArray = new Array<TextureRegion>();
 
-    @Override
-    public void act(float delta) {
-        // TODO Auto-generated method stub
-        if (this.getEnabled()) {
-            super.act(delta);
-            animationTime += delta;
-        }
-    }
+		for (int r = 0; r < rows; r++)
+			for (int c = 0; c < cols; c++)
+				textureArray.add(temp[r][c]);
 
-    public void setAnimation(Animation<TextureRegion> anim) {
-        animation = anim;
-        if (anim == null) {
-            System.out.println("Es nulaaaa");
-        }
-        TextureRegion tr = animation.getKeyFrame(0);
-        float w = tr.getRegionWidth();
-        float h = tr.getRegionHeight();
-        setSize(w, h);
-        this.polyHigh = h;
-        this.polyWidth = w;
+		Animation<TextureRegion> anim = new Animation<TextureRegion>(frameDuration, textureArray);
 
-        setOrigin(w / 2, h / 2);
+		if (loop)
+			anim.setPlayMode(Animation.PlayMode.LOOP);
+		else
+			anim.setPlayMode(Animation.PlayMode.NORMAL);
 
-        if (colision == null)
-            setRectangle();
-    }
+		if (animation == null) {
 
+			this.setAnimation(anim);
+		}
 
-    public Animation<TextureRegion> loadFullAnimation(String name, int rows, int cols, float frameDuration, boolean loop) {
+		return anim;
+	}
 
-        Texture texture = ResourceManager.getTexture(name);
-        // texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-        int frameWidth = texture.getWidth() / cols;
-        int frameHeight = texture.getHeight() / rows;
+	public void setRectangle() {
+		float w, h;
+		if (this.polyWidth != getWidth() && this.polyWidth > 0) {
+			w = this.polyWidth;
+		} else {
+			w = this.getWidth();
+		}
+		if (this.polyHigh != this.getHeight() && this.polyHigh > 0) {
+			h = this.polyHigh;
+		} else {
+			h = getHeight();
+		}
+		float[] vertices = { padX, padY, w - padX, padY, w - padX, h - padY, padX, h - padY };
+		colision = new Polygon(vertices);
+		this.setOrigin(w / 2, h / 2);
+	}
 
-        TextureRegion[][] temp = TextureRegion.split(texture, frameWidth, frameHeight);
+	public void setRectangle(float polyWidth, float polyHigh, float padX, float padY) {
+		this.polyWidth = polyWidth;
+		this.polyHigh = polyHigh;
+		this.padX = padX;
+		this.padY = padY;
+		setRectangle();
+	}
 
-        Array<TextureRegion> textureArray = new Array<TextureRegion>();
+	public void setPolygon(int numSides) {
+		this.setOrigin(polyWidth / 2, polyHigh / 2);
+		float[] vertices = new float[2 * numSides];
+		for (int i = 0; i < numSides; i++) {
+			float angle = i * 6.28f / numSides;
+			vertices[2 * i] = this.polyWidth / 2 * MathUtils.cos(angle) + this.polyWidth / 2;
+			vertices[2 * i + 1] = this.polyHigh / 2 * MathUtils.sin(angle) + this.polyHigh / 2;
+			colision = new Polygon(vertices);
 
-        for (int r = 0; r < rows; r++)
-            for (int c = 0; c < cols; c++)
-                textureArray.add(temp[r][c]);
-
-        Animation<TextureRegion> anim = new Animation<TextureRegion>(frameDuration, textureArray);
-
-        if (loop)
-            anim.setPlayMode(Animation.PlayMode.LOOP);
-        else
-            anim.setPlayMode(Animation.PlayMode.NORMAL);
-
-        if (animation == null) {
-
-            this.setAnimation(anim);
-        }
-
-        return anim;
-    }
-
-
-    public void setRectangle() {
-        float w, h;
-        if (this.polyWidth != getWidth() && this.polyWidth > 0) {
-            w = this.polyWidth;
-        } else {
-            w = this.getWidth();
-        }
-        if (this.polyHigh != this.getHeight() && this.polyHigh > 0) {
-            h = this.polyHigh;
-        } else {
-            h = getHeight();
-        }
-        float[] vertices = {padX, padY, w - padX, padY, w - padX, h - padY, padX, h - padY};
-        colision = new Polygon(vertices);
-        this.setOrigin(w / 2, h / 2);
-    }
-
-    public void setRectangle(float polyWidth, float polyHigh, float padX, float padY) {
-        this.polyWidth = polyWidth;
-        this.polyHigh = polyHigh;
-        this.padX = padX;
-        this.padY = padY;
-        setRectangle();
-    }
-
-
-    public void setPolygon(int numSides) {
-	       /* float w = getWidth();
-	        float h = getHeight();*/
-        this.setOrigin(polyWidth / 2, polyHigh / 2);
-
-        float[] vertices = new float[2 * numSides];
-        for (int i = 0; i < numSides; i++) {
-            float angle = i * 6.28f / numSides;
-            // x-coordinate
-            vertices[2 * i] = this.polyWidth / 2 * MathUtils.cos(angle) + this.polyWidth / 2;
-            // y-coordinate
-            vertices[2 * i + 1] = this.polyHigh / 2 * MathUtils.sin(angle) + this.polyHigh / 2;
-	        /* // x-coordinate
-	            vertices[2*i] = this.getOriginX() * MathUtils.cos(angle) + this.getOriginX()/2;
-	            // y-coordinate
-	            vertices[2*i+1] = this.getOriginY()/2 * MathUtils.sin(angle) + this.getOriginY()/2;
-	        */
-        }
-        colision = new Polygon(vertices);
-
-    }
-
-
+		}
+	}
 }

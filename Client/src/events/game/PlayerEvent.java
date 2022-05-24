@@ -3,20 +3,16 @@ package events.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-/***
- * Whenever player press a button from a keyboard this message should be send.
+/**
+ * Clase mensajera que se utiliza para enviar datos al servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
  */
 public class PlayerEvent {
 
     private String lobyName;
-
-    /** Player username */
     private String username;
-
-    /**
-     * The direction that player wants to move. Server will check the direction and
-     * let player move if its possible.
-     */
     private DIRECTION direction;
 
 

@@ -9,6 +9,12 @@ import handlers.LabelHandler;
 import main.MontessoriSlug;
 import parameters.Parameters;
 
+/**
+ * Clase que instancia la pantalla de opciones
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class OptionsScreen extends BScreen{
     private Table table;
 

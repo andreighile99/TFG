@@ -26,6 +26,12 @@ import parameters.Parameters;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que instancia la pantalla de menu
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class MenuScreen extends BScreen {
     private static Texture backgroundTexture;
     private SpriteBatch spriteBatch;

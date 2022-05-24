@@ -3,6 +3,12 @@ package elements.serverSide;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Clase que se utiliza para recoger los datos del elemento bala del servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class Bullet {
     private Rectangle boundRect;
     private Vector2 position;

@@ -9,6 +9,14 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Clase utilizada para generar texto mediante una fuente predefinida.
+ * 
+ * Utilizada para mantener la homogeneidad de fuentes en la aplicacion.
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class FontSizeHandler {
 
     public static FontSizeHandler INSTANCE = new FontSizeHandler("assets/fonts/LRpixel.ttf");
@@ -21,6 +29,13 @@ public class FontSizeHandler {
         this.fontPath = fontPath;
     }
 
+    /**
+     * Metodo que genera una fuente de texto en base a un tamaño y color dados.
+     * 
+     * @param size Tamaño de la fuente
+     * @param color Color deseado
+     * @return font La fuente generada
+     */
     public BitmapFont getFont(final int size, Color color) {
         if(this.fonts.containsKey(size)) return this.fonts.get(size);
 

@@ -10,6 +10,12 @@ import main.MontessoriSlug;
 import parameters.Parameters;
 import screens.GameScreen;
 
+/**
+ * Clase listener para eventos de dentro del juego
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class GameEventListener extends Listener {
 
     @Override

@@ -7,6 +7,12 @@ import com.esotericsoftware.kryonet.Client;
 import handlers.ResourceManager;
 import screens.MenuScreen;
 
+/**
+ * Clase que instancia el juego
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class MontessoriSlug extends Game {
 
     public ResourceManager resourceManager;
@@ -14,8 +20,11 @@ public class MontessoriSlug extends Game {
 
     @Override
     public void create() {
+    	//Load all resources that the game needs
         ResourceManager.loadAllResources();
+        //New Input
         InputMultiplexer im = new InputMultiplexer();
+        //Add the input
         Gdx.input.setInputProcessor(im);
         this.setScreen(new MenuScreen(this));
 

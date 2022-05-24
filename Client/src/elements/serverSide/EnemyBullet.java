@@ -3,6 +3,12 @@ package elements.serverSide;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Clase que se utiliza para recoger los datos del elemento bala enemiga del servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class EnemyBullet {
     private Rectangle boundRect;
     private Vector2 position;
@@ -10,13 +16,6 @@ public class EnemyBullet {
     private boolean enabled;
 
     public EnemyBullet() {
-    }
-
-    public EnemyBullet(Float positionX, Float positionY, Vector2 bulletDirection) {
-        this.enabled = true;
-        this.boundRect = new Rectangle(positionX, positionY, 2, 2);
-        this.position = new Vector2(positionX, positionY);
-        this.bulletDirection = bulletDirection;
     }
 
     public Rectangle getBoundRect() {

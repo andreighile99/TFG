@@ -1,6 +1,5 @@
 package handlers;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
@@ -20,84 +19,94 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 
+/**
+ * Clase utilizada para cargar y gestionar los recursos de la aplicacion
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public final class ResourceManager {
-    private ResourceManager() {}
-    public static AssetManager assets=new AssetManager();
-    public static LabelStyle buttonStyle;
-    public static TextButtonStyle textButtonStyle;
+	private ResourceManager() {
+	}
 
+	public static AssetManager assets = new AssetManager();
+	public static LabelStyle buttonStyle;
+	public static TextButtonStyle textButtonStyle;
 
+	/**
+	 * Metodo que carga todos los recursos de la aplicacion en un Asset Manager
+	 * 
+	 */
+	public static void loadAllResources() {
 
+		// mapas
+		assets.setLoader(TiledMap.class, new TmxMapLoader());
+		assets.load("assets/maps/firstMap.tmx", TiledMap.class);
+		assets.load("assets/maps/secondMap.tmx", TiledMap.class);
 
-    public static void loadAllResources(){
+		assets.load("assets/images/background.png", Texture.class);
+		assets.load("assets/enemies/spider.png", Texture.class);
 
-        //mapas
-        assets.setLoader(TiledMap.class, new TmxMapLoader());
-        assets.load("assets/maps/firstMap.tmx", TiledMap.class);
-        assets.load("assets/maps/secondMap.tmx", TiledMap.class);
+		assets.load("assets/player/idle.png", Texture.class);
+		assets.load("assets/player/Bola.png", Texture.class);
+		assets.load("assets/player/hp/FullBulletH.png", Texture.class);
+		assets.load("assets/player/hp/HalfBulletH.png", Texture.class);
+		assets.load("assets/player/hp/HpBackground.png", Texture.class);
 
-        assets.load("assets/images/background.png", Texture.class);
-        assets.load("assets/enemies/spider.png", Texture.class);
+		assets.finishLoading();
 
-        assets.load("assets/player/idle.png", Texture.class);
-        assets.load("assets/player/Bola.png", Texture.class);
-        assets.load("assets/player/hp/FullBulletH.png", Texture.class);
-        assets.load("assets/player/hp/HalfBulletH.png", Texture.class);
-        assets.load("assets/player/hp/HpBackground.png", Texture.class);
+	}
 
-        assets.finishLoading();
+	/**
+	 * Metodo update
+	 * 
+	 * @return
+	 */
+	public static boolean update() {
+		return assets.update();
+	}
 
-    }
+	/**
+	 * Metodo que devuelve una textura en base a una ruta dada
+	 * 
+	 * @param path Ruta en la que se encuentra la textura
+	 * @return
+	 */
+	public static Texture getTexture(String path) {
+		return assets.get(path, Texture.class);
+	}
 
-    public static boolean update(){
-        return assets.update();
-    }
-    public static void cargarEstiloBotones() {
-        //Cargar la fuente para añadirla
-        FreeTypeFontGenerator ftfg = new FreeTypeFontGenerator(Gdx.files.internal("Sans.ttf"));
-        FreeTypeFontParameter ftfp = new FreeTypeFontParameter();
-        ftfp.size = 36;
-        ftfp.color = Color.WHITE;
-        ftfp.borderColor = Color.BLACK;
-        ftfp.borderWidth = 2;
-        //Añadimos la fuente
-        BitmapFont fuentePropia = ftfg.generateFont(ftfp);
-        buttonStyle = new LabelStyle();
-        buttonStyle.font = fuentePropia;
+	/**
+	 * Metodo que devuelve una musica en base a una ruta dada
+	 * 
+	 * @param path Ruta en la que se encuentra la musica
+	 * @return Una musica
+	 */
+	public static Music getMusic(String path) {
+		return assets.get(path, Music.class);
+	}
 
-        //Generamos el boton con NinePatch para que se escale correctamente
-        textButtonStyle  = new TextButtonStyle();
-        Texture buttonText = ResourceManager.getTexture("ui/button.png");
-        NinePatch buttonPatch = new NinePatch(buttonText);
-        buttonPatch.scale(6, 1);
-        textButtonStyle.up = new NinePatchDrawable(buttonPatch);
-        textButtonStyle.font = fuentePropia;
-    }
+	/**
+	 * Metodo que devuelve un sonido en base a una ruta dada
+	 * 
+	 * @param path Ruta en la que se encuentra el sonido
+	 * @return Un sonido
+	 */
+	public static Sound getSound(String path) {
+		return assets.get(path, Sound.class);
+	}
 
-	/*public static TextureAtlas getAtlas(String path){
-		return assets.get(path, TextureAtlas.class);
+	/**
+	 * Metodo que devuelve un mapa de tiled en base a una ruta dada
+	 * 
+	 * @param path Ruta en la que se encuentra el sonido
+	 * @return Un mapa de tiled
+	 */
+	public static TiledMap getMap(String path) {
+		return assets.get(path, TiledMap.class);
+	}
 
-	}*/
-
-    public static Texture getTexture(String path) {
-        return assets.get(path, Texture.class);
-    }
-
-    public static Music getMusic(String path){
-        return assets.get(path, Music.class);
-    }
-
-    public static Sound getSound(String path)
-    {
-        return assets.get(path, Sound.class);
-    }
-
-    public static TiledMap getMap(String path){
-        return assets.get(path, TiledMap.class);
-    }
-
-    public static void dispose(){
-        assets.dispose();
-    }
+	public static void dispose() {
+		assets.dispose();
+	}
 }
-

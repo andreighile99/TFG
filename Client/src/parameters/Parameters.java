@@ -1,5 +1,11 @@
 package parameters;
 
+/**
+ * Clase para almacenar parametros utilizados por el juego
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class Parameters {
 
     //Screen

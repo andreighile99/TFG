@@ -1,9 +1,9 @@
-
+﻿
 Código:
 
 Centrar hitboxes con tamaños absolutos
 
-Añadir sonidos lol
+Añadir sonidos
 Animaciones
 
 Testing?

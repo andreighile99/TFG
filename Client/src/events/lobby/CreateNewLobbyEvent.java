@@ -1,6 +1,12 @@
 package events.lobby;
 
-public class CreateNewLobbyEvent {
+/**
+ * Clase mensajera que se utiliza para enviar datos al servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
+public class CreateNewLobbyEvent {	
     public String lobbyName;
     public String username;
 }

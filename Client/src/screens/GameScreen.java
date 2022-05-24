@@ -30,6 +30,12 @@ import parameters.Parameters;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que instancia la pantalla de juego
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class GameScreen extends BScreen{
 
     private static OrthographicCamera camera;

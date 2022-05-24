@@ -15,6 +15,12 @@ import handlers.ResourceManager;
 import main.MontessoriSlug;
 import parameters.Parameters;
 
+/**
+ * Clase que instancia la pantalla de fin del juego
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class EndingScreen extends BScreen{
     private static Texture backgroundTexture;
     private SpriteBatch spriteBatch;

@@ -13,6 +13,12 @@ import handlers.ResourceManager;
 import main.MontessoriSlug;
 
 
+/**
+ * Clase padre de todas las pantallas del juego
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class BScreen implements Screen, InputProcessor{
 	private final MontessoriSlug game;
 	public final ResourceManager resourceManager;

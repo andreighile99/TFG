@@ -1,18 +1,23 @@
 package customRenderer;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 
+/**
+ * Clase render personalizada que permite la renderización de Map Objects de forma directa
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class OrthogonalTiledMapRendererWithBackground extends OrthogonalTiledMapRenderer {
     public OrthogonalTiledMapRendererWithBackground(TiledMap map) {
         super(map);
     }
 
+
+    
     @Override
     public void renderObject(MapObject object) {
         if(object instanceof TextureMapObject) {

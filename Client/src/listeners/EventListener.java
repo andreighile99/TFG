@@ -14,6 +14,12 @@ import screens.GameScreen;
 import screens.LobbyScreen;
 import screens.MenuScreen;
 
+/**
+ * Clase listener para eventos de los lobbys y gestion de las partidas
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class EventListener extends Listener {
 
     @Override

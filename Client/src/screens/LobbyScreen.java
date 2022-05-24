@@ -18,6 +18,12 @@ import listeners.GameEventListener;
 import main.MontessoriSlug;
 import parameters.Parameters;
 
+/**
+ * Clase que instancia la pantalla de la sala
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class LobbyScreen extends BScreen{
     private static Texture backgroundTexture;
     private SpriteBatch spriteBatch;

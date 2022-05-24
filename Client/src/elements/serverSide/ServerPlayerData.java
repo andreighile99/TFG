@@ -2,6 +2,12 @@ package elements.serverSide;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Clase que se utiliza para recoger los datos del elemento jugador en el servidor
+ * 
+ * @author Eduard Andrei Ghile
+ *
+ */
 public class ServerPlayerData {
     private String username;
 
