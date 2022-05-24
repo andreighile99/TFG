@@ -29,16 +29,8 @@ public class EnemyBullet {
         return boundRect;
     }
 
-    public void setBoundRect(Rectangle boundRect) {
-        this.boundRect = boundRect;
-    }
-
     public Vector2 getPosition() {
         return position;
-    }
-
-    public void setPosition(Vector2 position) {
-        this.position = position;
     }
 
     public boolean isEnabled() {
@@ -53,20 +45,10 @@ public class EnemyBullet {
         return bulletDirection;
     }
 
-    public void setBulletDirection(Vector2 bulletDirection) {
-        this.bulletDirection = bulletDirection;
-    }
-
     public void updateEnemyBulletRectangle(){
         this.boundRect.setCenter(this.position.x, this.position.y);
         //this.boundRect.x = this.position.x;
         //this.boundRect.y = this.position.y;
     }
 
-    public void moveBy(float x, float y){
-        if (x != 0 || y != 0) {
-            this.position.x += x;
-            this.position.y += y;
-        }
-    }
 }

@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
  *
  */
 public class Bullet {
+    private String userWhoShot;
     private Rectangle boundRect;
     private Vector2 position;
     private Vector2 bulletDirection;
@@ -18,7 +19,8 @@ public class Bullet {
     public Bullet() {
     }
 
-    public Bullet(Float positionX, Float positionY, Vector2 bulletDirection) {
+    public Bullet(String userWhoShot, Float positionX, Float positionY, Vector2 bulletDirection) {
+        this.userWhoShot = userWhoShot;
         this.enabled = true;
         this.boundRect = new Rectangle(positionX, positionY, 2, 2);
         this.position = new Vector2(positionX, positionY);
@@ -45,6 +47,9 @@ public class Bullet {
         return bulletDirection;
     }
 
+    public String getUserWhoShot() {
+        return userWhoShot;
+    }
 
     public void updateBulletRectangle(){
         this.boundRect.setCenter(this.position.x, this.position.y);
@@ -52,10 +57,4 @@ public class Bullet {
         //this.boundRect.y = this.position.y;
     }
 
-    public void moveBy(float x, float y){
-        if (x != 0 || y != 0) {
-            this.position.x += x;
-            this.position.y += y;
-        }
-    }
 }

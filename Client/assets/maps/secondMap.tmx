@@ -5,7 +5,7 @@
   <object id="1" gid="1" x="0" y="352" width="6784" height="352"/>
  </objectgroup>
  <objectgroup id="3" name="Solids">
-  <object id="2" x="0.333333" y="203.833" width="1850.17" height="15.5">
+  <object id="2" x="0.333333" y="200.833" width="1850.17" height="15.5">
    <properties>
     <property name="name" value="Solid"/>
    </properties>
@@ -35,13 +35,21 @@
     <property name="name" value="Solid"/>
    </properties>
   </object>
-  <object id="20" x="1850" y="247" width="1013" height="24"/>
+  <object id="20" x="1850" y="247" width="1013" height="24">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
   <object id="22" x="2835" y="204" width="27" height="43">
    <properties>
     <property name="name" value="Solid"/>
    </properties>
   </object>
-  <object id="23" x="2863" y="204" width="545" height="12"/>
+  <object id="23" x="2863" y="204" width="545" height="12">
+   <properties>
+    <property name="name" value="Solid"/>
+   </properties>
+  </object>
   <object id="24" x="3441" y="165" width="63" height="14">
    <properties>
     <property name="name" value="Solid"/>
@@ -69,7 +77,7 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="InicioFinal">
-  <object id="9" x="15.5" y="182" width="19.5" height="18">
+  <object id="9" x="15.5" y="180" width="19.5" height="18">
    <properties>
     <property name="name" value="Inicio"/>
    </properties>
@@ -81,27 +89,27 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="Soldiers">
-  <object id="31" x="352" y="175.333" width="25.3333" height="24">
+  <object id="31" x="352" y="174.333" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="32" x="429.333" y="175.333" width="25.3333" height="24">
+  <object id="32" x="429.333" y="174.333" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="33" x="489.333" y="175.333" width="25.3333" height="24">
+  <object id="33" x="489.333" y="174.333" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="34" x="934" y="174.667" width="25.3333" height="24">
+  <object id="34" x="934" y="173.667" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="35" x="1052" y="174" width="25.3333" height="24">
+  <object id="35" x="1052" y="173" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
@@ -116,7 +124,7 @@
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="38" x="1824.67" y="178" width="25.3333" height="24">
+  <object id="38" x="1824.67" y="173" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>

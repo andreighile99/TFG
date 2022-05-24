@@ -3,10 +3,7 @@ package listeners;
 import com.badlogic.gdx.Gdx;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
-import events.lobby.FinishLobby;
-import events.lobby.LobbyCreatedEvent;
-import events.lobby.LobbyJoinedEvent;
-import events.lobby.LobbyStartEvent;
+import events.lobby.*;
 import main.MontessoriSlug;
 import parameters.Parameters;
 import screens.EndingScreen;
@@ -95,24 +92,10 @@ public class EventListener extends Listener {
                 });
             }
         }else if(object instanceof FinishLobby){
-            FinishLobby finishLobby = (FinishLobby) object;
-            System.out.println(finishLobby.code);
-
-            if(!finishLobby.code.equalsIgnoreCase("00")){
-                Gdx.app.postRunnable(()->{
+            Gdx.app.postRunnable(()->{
                     MontessoriSlug.getInstance().setScreen(new EndingScreen(MontessoriSlug.getInstance()));
                     return;
                 });
-            } else if(!(MontessoriSlug.getInstance().getScreen() instanceof EndingScreen)){
-                Gdx.app.postRunnable(()->{
-                    MontessoriSlug.getInstance().setScreen(new MenuScreen(MontessoriSlug.getInstance()));
-                    //MenuScreen menuScreen = (MenuScreen) MontessoriSlug.getInstance().getScreen();
-                    //menuScreen.renderErrorMessage("Ha ocurrido un error de conexion y se ha terminado la partida");
-                    return;
-                });
-            }
         }
-
-        //EndGame
     }
 }

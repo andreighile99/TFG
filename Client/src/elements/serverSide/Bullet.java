@@ -10,6 +10,9 @@ import com.badlogic.gdx.math.Vector2;
  * @author Eduard Andrei Ghile
  */
 public class Bullet {
+
+    /** The username of the player who shot **/
+    private String userWhoShot;
     
     /** The bound rect. */
     private Rectangle boundRect;
@@ -30,24 +33,6 @@ public class Bullet {
     }
 
     /**
-     * Gets the bound rect.
-     *
-     * @return the bound rect
-     */
-    public Rectangle getBoundRect() {
-        return boundRect;
-    }
-
-    /**
-     * Sets the bound rect.
-     *
-     * @param boundRect the new bound rect
-     */
-    public void setBoundRect(Rectangle boundRect) {
-        this.boundRect = boundRect;
-    }
-
-    /**
      * Gets the position.
      *
      * @return the position
@@ -56,32 +41,6 @@ public class Bullet {
         return position;
     }
 
-    /**
-     * Sets the position.
-     *
-     * @param position the new position
-     */
-    public void setPosition(Vector2 position) {
-        this.position = position;
-    }
-
-    /**
-     * Gets the bullet direction.
-     *
-     * @return the bullet direction
-     */
-    public Vector2 getBulletDirection() {
-        return bulletDirection;
-    }
-
-    /**
-     * Sets the bullet direction.
-     *
-     * @param bulletDirection the new bullet direction
-     */
-    public void setBulletDirection(Vector2 bulletDirection) {
-        this.bulletDirection = bulletDirection;
-    }
 
     /**
      * Checks if is enabled.
@@ -92,12 +51,4 @@ public class Bullet {
         return enabled;
     }
 
-    /**
-     * Sets the enabled.
-     *
-     * @param enabled the new enabled
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 }

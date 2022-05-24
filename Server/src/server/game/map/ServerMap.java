@@ -36,8 +36,6 @@ public class ServerMap {
 	private onUpdate onUpdateCallback;
 	private notifyGameServer notifyGameServerCallback;
 
-	private ArrayList<Float> playerPositions;
-
 	private ServerPlayer player1;
 	private ServerPlayer player2;
 
@@ -129,8 +127,6 @@ public class ServerMap {
 			soldiers.add(soldier);
 		}
 
-		this.playerPositions = new ArrayList<>();
-
 		this.player1 = player1;
 		this.player1.setStartingPoint(startingX, startingY);
 		this.player1.init();
@@ -171,12 +167,12 @@ public class ServerMap {
 	}
 
 	/**
-	 * Metodo que actualiza la posición del cliente cuando recibe un mensaje de este
+	 * Metodo que actualiza la posiciï¿½n del cliente cuando recibe un mensaje de este
 	 * 
 	 * @param message
 	 */
 	public void updatePlayerPosition(PlayerEvent message) {
-		ServerPlayer player = this.getPlayerByNickName(message);
+		ServerPlayer player = this.getPlayerByNickName(message.getUsername());
 		Vector2 v = player.getPosition();
 		switch (message.getDirection()) {
 		case LEFT:
@@ -196,7 +192,7 @@ public class ServerMap {
 	}
 
 	/**
-	 * Metodo que actualiza la posición de la hitbox del jugador en el servidor
+	 * Metodo que actualiza la posiciï¿½n de la hitbox del jugador en el servidor
 	 * 
 	 */
 	private void updatePlayersRectangles() {
@@ -206,7 +202,7 @@ public class ServerMap {
 
 	/**
 	 * 
-	 * Metodo que actualiza la posición de la hitbox de los enemigos en el servidor
+	 * Metodo que actualiza la posiciï¿½n de la hitbox de los enemigos en el servidor
 	 */
 	private void updateSoldiersRectangles() {
 		for (Soldier s : soldiers) {
@@ -221,16 +217,14 @@ public class ServerMap {
 	 * @param message
 	 */
 	public void playerShoots(BulletEvent message) {
-		ServerPlayer player = this.getPlayerByNickName(message);
-		if (message.getBulletDirection() != null) {
-			Bullet bullet = new Bullet(player.getPosition().x, player.getPosition().y + 5,
+		ServerPlayer player = this.getPlayerByNickName(message.getUsername());
+		Bullet bullet = new Bullet(message.getUsername(), player.getPosition().x, player.getPosition().y + 5,
 					message.getBulletDirection());
-			this.bullets.add(bullet);
-		}
+		this.bullets.add(bullet);
 	}
 
 	/**
-	 * Metodo que calcula la siguiente acción de los soldados en el servidor
+	 * Metodo que calcula la siguiente acciï¿½n de los soldados en el servidor
 	 * 
 	 */
 	public void soldiersAction() {
@@ -270,7 +264,7 @@ public class ServerMap {
 	}
 
 	/**
-	 * Metodo que actualiza la posición de las balas en el servidor con el paso del
+	 * Metodo que actualiza la posiciï¿½n de las balas en el servidor con el paso del
 	 * tiempo
 	 * 
 	 */
@@ -293,25 +287,11 @@ public class ServerMap {
 	/**
 	 * Metodo que busca a un jugador por su nombre
 	 * 
-	 * @param message
+	 * @param username
 	 * @return
 	 */
-	public ServerPlayer getPlayerByNickName(PlayerEvent message) {
-		if (this.player1.getUsername().equalsIgnoreCase(message.getUsername())) {
-			return this.player1;
-		} else {
-			return this.player2;
-		}
-	}
-
-	/**
-	 * Metodo que busca a un jugador por su nombre
-	 * 
-	 * @param message
-	 * @return
-	 */
-	public ServerPlayer getPlayerByNickName(BulletEvent message) {
-		if (this.player1.getUsername().equalsIgnoreCase(message.getUsername())) {
+	public ServerPlayer getPlayerByNickName(String username) {
+		if (this.player1.getUsername().equalsIgnoreCase(username)) {
 			return this.player1;
 		} else {
 			return this.player2;
@@ -437,7 +417,8 @@ public class ServerMap {
 		}
 
 		for (Bullet b : bullets) {
-			if (b.getPosition().x > this.mapWidthInPixels || b.getPosition().y > this.mapHeightInPixels) {
+			float distanceToPlayerWhoShot = this.distanceBetweenTwoPoints(b.getPosition(), this.getPlayerByNickName(b.getUserWhoShot()).getPosition());
+			if (b.getPosition().x > this.mapWidthInPixels || b.getPosition().y > this.mapHeightInPixels || distanceToPlayerWhoShot > 200) {
 				b.setEnabled(false);
 			}
 			for (Soldier s : soldiers) {
@@ -447,6 +428,7 @@ public class ServerMap {
 				}
 			}
 		}
+
 	}
 
 	/**

@@ -52,14 +52,6 @@ public class Solid{
 	}
 
 
-	public float getX() {
-		return x;
-	}
-
-	public void setX(float x) {
-		this.x = x;
-	}
-
 	public float getY() {
 		return y;
 	}
@@ -72,7 +64,4 @@ public class Solid{
 		return colision;
 	}
 
-	public void setColision(Polygon colision) {
-		this.colision = colision;
-	}
 }
