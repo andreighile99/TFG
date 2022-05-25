@@ -15,6 +15,7 @@ public class SoldierRep extends Element {
 	
 	/** The idle. */
 	private Animation<TextureRegion> idle;
+	private Animation<TextureRegion> shoot;
 
 	/**
 	 * Constructor de la clase.
@@ -26,12 +27,21 @@ public class SoldierRep extends Element {
 	public SoldierRep(float x, float y, Stage s) {
 
 		super(x, y, s);
-		this.idle = loadFullAnimation("assets/enemies/spider.png", 1, 1, 209, true);
+		this.idle = loadFullAnimation("assets/enemies/idle.png", 1, 1, 209, true);
+		this.shoot = loadFullAnimation("assets/enemies/soldadoDispara.png", 1, 1, 0.1f, false);
 	}
 
 	@Override
 	public void act(float delta) {
 		super.act(delta);
 
+	}
+
+	public Animation<TextureRegion> getIdle() {
+		return idle;
+	}
+
+	public Animation<TextureRegion> getShoot() {
+		return shoot;
 	}
 }

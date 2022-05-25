@@ -32,6 +32,9 @@ public class Soldier {
     /** The on ground. */
     private boolean onGround;
 
+    private boolean isShooting;
+    private float animationLock;
+
     /**
      * Instantiates a new soldier.
      */
@@ -164,4 +167,19 @@ public class Soldier {
         this.onGround = onGround;
     }
 
+    public boolean isShooting() {
+        return isShooting;
+    }
+
+    public void setShooting(boolean shooting) {
+        isShooting = shooting;
+    }
+
+    public float getAnimationLock() {
+        return animationLock;
+    }
+
+    public void setAnimationLock(float animationLock) {
+        this.animationLock = animationLock;
+    }
 }

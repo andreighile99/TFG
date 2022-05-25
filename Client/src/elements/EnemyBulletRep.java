@@ -26,7 +26,7 @@ public class EnemyBulletRep extends Element {
 	 */
 	public EnemyBulletRep(float x, float y, Stage s) {
 		super(x, y, s);
-		this.bullet = loadFullAnimation("assets/player/Bola.png", 1, 1, 209, true);
+		this.bullet = loadFullAnimation("assets/enemies/Bola.png", 1, 1, 209, true);
 
 	}
 

@@ -18,6 +18,7 @@ import elements.serverSide.ServerPlayerData;
 import elements.serverSide.Soldier;
 import events.game.*;
 import events.lobby.*;
+import handlers.AudioManager;
 import handlers.LabelHandler;
 import handlers.ResourceManager;
 import listeners.EventListener;
@@ -90,7 +91,6 @@ public class MenuScreen extends BScreen {
      */
     public MenuScreen(MontessoriSlug game) {
         super(game);
-
 
         this.backgroundTexture = ResourceManager.getTexture("assets/images/background.png");
         this.spriteBatch = new SpriteBatch();

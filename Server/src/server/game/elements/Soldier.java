@@ -19,6 +19,8 @@ public class Soldier {
     private boolean enabled;
     private float actionCounter;
     private boolean onGround;
+    private boolean isShooting;
+    private float animationLock;
 
     public Soldier() {
     }
@@ -29,8 +31,9 @@ public class Soldier {
         this.enabled = true;
         this.hp = 5;
         this.position = new Vector2(x,y);
-        this.boundRectangle = new Rectangle(x,y,20, 20);
+        this.boundRectangle = new Rectangle(x,y,38, 38);
         this.feet = new Rectangle(x, y, this.boundRectangle.width / 8, this.boundRectangle.height / 10);
+        this.isShooting = false;
     }
 
     public Vector2 getPosition() {
@@ -89,6 +92,22 @@ public class Soldier {
         this.onGround = onGround;
     }
 
+    public boolean isShooting() {
+        return isShooting;
+    }
+
+    public void setShooting(boolean shooting) {
+        isShooting = shooting;
+    }
+
+    public float getAnimationLock() {
+        return animationLock;
+    }
+
+    public void setAnimationLock(float animationLock) {
+        this.animationLock = animationLock;
+    }
+
     public Vector2 preventOverlap(Polygon anotherPoly)
     {
         //Map the rectangle to a polygon to check overlapping
@@ -121,7 +140,7 @@ public class Soldier {
     public void updateRectanglePosition(){
         this.boundRectangle.x = this.position.x;
         this.boundRectangle.y = this.position.y;
-        this.feet.x = this.position.x + this.boundRectangle.x/2;
-        this.feet.y = this.position.y - feet.height ;//- 0.1f;
+        this.feet.x = this.position.x + this.boundRectangle.width / 2 - feet.width / 2;
+        this.feet.y = this.position.y - 0.f ;
     }
 }

@@ -33,6 +33,9 @@ public class ManagedPlayer extends Element {
 
 	private Animation<TextureRegion> leftShoot;
 	private Animation<TextureRegion> rightShoot;
+	private Animation<TextureRegion> lookUp;
+
+
 	
 	/** The hp. */
 	private int hp;
@@ -54,12 +57,12 @@ public class ManagedPlayer extends Element {
 		this.username = username;
 		this.lobbyName = lobbyName;
 		this.lookingDirection = new Vector2(0,0);
-
 		idle = this.loadFullAnimation("assets/player/idle.png", 1, 1, 0.2f, false);
 		rightWalk = this.loadFullAnimation("assets/player/PlayerCaminaDerecha.png", 1, 5, 0.3f, true);
 		leftWalk = this.loadFullAnimation("assets/player/PlayerCaminaIzquierda.png", 1, 5, 0.3f, true);
 		rightShoot = this.loadFullAnimation("assets/player/PlayerDisparaDerecha.png", 1, 1, 0.1f, false);
 		leftShoot = this.loadFullAnimation("assets/player/PlayerDisparaIzquierda.png", 1, 1, 0.1f, false);
+		lookUp = this.loadFullAnimation("assets/player/LookUp.png", 1, 1, 0.1f, false);
 		this.setPolygon(8);
 	}
 
@@ -122,5 +125,9 @@ public class ManagedPlayer extends Element {
 
 	public Animation<TextureRegion> getRightShoot() {
 		return rightShoot;
+	}
+
+	public Animation<TextureRegion> getLookUp() {
+		return lookUp;
 	}
 }

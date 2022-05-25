@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import handlers.AudioManager;
 import handlers.LabelHandler;
 import main.MontessoriSlug;
 import parameters.Parameters;
@@ -104,10 +105,13 @@ public class OptionsScreen extends BScreen{
         this.volumeMinusButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if(Parameters.soundVolume > 0){
-                    wantedVolume = wantedVolume - 0.1f;
+                wantedVolume = wantedVolume - 0.1f;
+                if(wantedVolume < 0) {
+                    wantedVolume = 0;
+                    volumeLabel.setText(String.valueOf(0));
+                }else {
+                    volumeLabel.setText(String.valueOf(Math.round(wantedVolume * 100)));
                 }
-                volumeLabel.setText(String.valueOf(Math.round(wantedVolume * 100)));
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -116,10 +120,14 @@ public class OptionsScreen extends BScreen{
         this.volumePlusButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if(Parameters.soundVolume < 1){
-                    wantedVolume = wantedVolume + 0.1f;
+                wantedVolume = wantedVolume + 0.1f;
+                if(wantedVolume > 1) {
+                    wantedVolume = 1;
+                    volumeLabel.setText(String.valueOf(100));
                 }
-                volumeLabel.setText(String.valueOf(Math.round(wantedVolume * 100)));
+                else {
+                    volumeLabel.setText(String.valueOf(Math.round(wantedVolume * 100)));
+                }
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -129,10 +137,14 @@ public class OptionsScreen extends BScreen{
         this.musicMinusButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if(Parameters.musicVolume > 0){
-                    wantedMusicVolume = wantedMusicVolume - 0.1f;
+                wantedMusicVolume = wantedMusicVolume - 0.1f;
+                if(wantedMusicVolume < 0) {
+                    wantedMusicVolume = 0;
+                    musicLabel.setText(String.valueOf(0));
+                } else{
+                    musicLabel.setText(String.valueOf(Math.round(wantedMusicVolume * 100)));
                 }
-                musicLabel.setText(String.valueOf(Math.round(wantedMusicVolume * 100)));
+
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -141,10 +153,14 @@ public class OptionsScreen extends BScreen{
         this.musicPlusButton.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if(Parameters.musicVolume < 1){
-                    wantedMusicVolume = wantedMusicVolume + 0.1f;
+                wantedMusicVolume = wantedMusicVolume + 0.1f;
+                if(wantedMusicVolume > 1) {
+                    wantedMusicVolume = 1;
+                    musicLabel.setText(String.valueOf(100));
+                }else{
+                    musicLabel.setText(String.valueOf(Math.round(wantedMusicVolume * 100)));
                 }
-                musicLabel.setText(String.valueOf(Math.round(wantedMusicVolume * 100)));
+
                 return super.touchDown(event, x, y, pointer, button);
             }
         });
@@ -200,6 +216,7 @@ public class OptionsScreen extends BScreen{
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 Parameters.soundVolume = wantedVolume;
                 Parameters.musicVolume = wantedMusicVolume;
+                AudioManager.applyMusicVolume();
                 if(wantedScreenHeight != Parameters.screenHeight && Parameters.screenWidth != wantedScreenWidth){
                     Parameters.screenWidth = wantedScreenWidth;
                     Parameters.screenHeight = wantedScreenHeight;

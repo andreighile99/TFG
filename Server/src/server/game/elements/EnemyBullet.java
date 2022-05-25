@@ -20,7 +20,7 @@ public class EnemyBullet {
 
     public EnemyBullet(Float positionX, Float positionY, Vector2 bulletDirection) {
         this.enabled = true;
-        this.boundRect = new Rectangle(positionX, positionY, 2, 2);
+        this.boundRect = new Rectangle(positionX, positionY, 10, 10);
         this.position = new Vector2(positionX, positionY);
         this.bulletDirection = bulletDirection;
     }

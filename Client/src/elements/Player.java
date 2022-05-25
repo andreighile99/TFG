@@ -43,6 +43,7 @@ public class Player extends Element {
 
 	private Animation<TextureRegion> leftShoot;
 	private Animation<TextureRegion> rightShoot;
+	private Animation<TextureRegion> lookUp;
 
 	/** The my client. */
 	private Client myClient;
@@ -73,6 +74,7 @@ public class Player extends Element {
 		leftWalk = this.loadFullAnimation("assets/player/PlayerCaminaIzquierda.png", 1, 5, 0.2f, true);
 		rightShoot = this.loadFullAnimation("assets/player/PlayerDisparaDerecha.png", 1, 1, 0.1f, false);
 		leftShoot = this.loadFullAnimation("assets/player/PlayerDisparaIzquierda.png", 1, 1, 0.1f, false);
+		lookUp = this.loadFullAnimation("assets/player/LookUp.png", 1, 1, 0.1f, false);
 		this.setPolygon(8);
 	}
 
@@ -186,5 +188,9 @@ public class Player extends Element {
 
 	public Animation<TextureRegion> getRightShoot() {
 		return rightShoot;
+	}
+
+	public Animation<TextureRegion> getLookUp() {
+		return lookUp;
 	}
 }

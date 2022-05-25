@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.esotericsoftware.kryonet.Client;
+import handlers.AudioManager;
 import handlers.ResourceManager;
 import screens.MenuScreen;
 
@@ -29,6 +30,7 @@ public class MontessoriSlug extends Game {
         InputMultiplexer im = new InputMultiplexer();
         //Add the input
         Gdx.input.setInputProcessor(im);
+        AudioManager.playMusic("assets/music/menuTheme.mp3");
         this.setScreen(new MenuScreen(this));
 
     }

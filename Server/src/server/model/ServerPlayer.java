@@ -57,7 +57,9 @@ public class ServerPlayer {
 		this.hp = 100;
 		this.username = username;
 		this.connection = connection;
-		this.lookingDirection = new Vector2(0,0);
+		this.isShooting = false;
+		this.isMoving = false;
+		this.animationLock = 0;
 	}
 
 	/**
@@ -80,7 +82,8 @@ public class ServerPlayer {
 		this.feet = new Rectangle(0, 0, this.boundRect.width / 8, this.boundRect.height / 10);
 		this.onGround = false;
 		this.isShooting = false;
-		this.animationLock = 0;
+		this.lookingDirection = new Vector2(0,0);
+		this.isMoving = false;
 	}
 
 	/**

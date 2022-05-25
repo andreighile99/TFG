@@ -174,19 +174,21 @@ public class ServerMap {
 	public void updatePlayerPosition(PlayerEvent message) {
 		ServerPlayer player = this.getPlayerByNickName(message.getUsername());
 		Vector2 v = player.getPosition();
-		player.setLookingDirection(message.getLookingDirection());
+		if(message.getLookingDirection() != null){
+			player.setLookingDirection(message.getLookingDirection());
+		}
 		player.setMoving(message.isMoving());
 		if(message.getDirection() != null){
 			switch (message.getDirection()) {
 				case LEFT:
-					v.x -= deltaTime * 100;
+					v.x -= deltaTime * 150;
 					break;
 				case RIGHT:
-					v.x += deltaTime * 100;
+					v.x += deltaTime * 150;
 					break;
 				case UP:
 					if (player.isOnGround()) {
-						v.y += deltaTime * 2000;
+						v.y += deltaTime * 3000;
 					}
 					break;
 				default:
@@ -224,8 +226,15 @@ public class ServerMap {
 	public void playerShoots(BulletEvent message) {
 		ServerPlayer player = this.getPlayerByNickName(message.getUsername());
 		player.setShooting(true);
-		Bullet bullet = new Bullet(message.getUsername(), player.getPosition().x + 25, player.getPosition().y + 22,
+		Bullet bullet = null;
+		if(player.getLookingDirection().x == 0 && player.getLookingDirection().y >= 1){
+			bullet = new Bullet(message.getUsername(), player.getPosition().x + 10, player.getPosition().y + 40,
 					player.getLookingDirection());
+		}else{
+			bullet = new Bullet(message.getUsername(), player.getPosition().x + 25, player.getPosition().y + 22,
+					player.getLookingDirection());
+		}
+
 		this.bullets.add(bullet);
 	}
 
@@ -237,7 +246,12 @@ public class ServerMap {
 		for (Soldier s : soldiers) {
 			Random rand = new Random();
 			s.setActionCounter(s.getActionCounter() + deltaTime);
-
+			if(s.isShooting() && s.getAnimationLock() < 0.1f){
+				s.setAnimationLock(s.getAnimationLock() + deltaTime);
+			}else{
+				s.setShooting(false);
+				s.setAnimationLock(0);
+			}
 			float distanceToP1 = this.distanceBetweenTwoPoints(s.getPosition(), player1.getPosition());
 			float distanceToP2 = this.distanceBetweenTwoPoints(s.getPosition(), player2.getPosition());
 			Vector2 vectorToP1 = new Vector2(player1.getPosition().x - s.getPosition().x,
@@ -248,23 +262,21 @@ public class ServerMap {
 				// Soldier shoots
 				Vector2 shootingDirection = null;
 				if (distanceToP1 <= 200 && player1.isEnabled()) {
+
 					shootingDirection = new Vector2(player1.getPosition().x - s.getPosition().x,
 							player1.getPosition().y - s.getPosition().y).nor();
 					this.enemyBullets
 							.add(new EnemyBullet(s.getPosition().x, s.getPosition().y + 10, shootingDirection));
+					s.setShooting(true);
 					// Add market with direction so we can animate it in the clients
 				} else if (distanceToP2 <= 200 && player2.isEnabled()) {
 					shootingDirection = new Vector2(player2.getPosition().x - s.getPosition().x,
 							player2.getPosition().y - s.getPosition().y).nor();
 					this.enemyBullets
 							.add(new EnemyBullet(s.getPosition().x, s.getPosition().y + 10, shootingDirection));
+					s.setShooting(true);
 				}
 				s.setActionCounter(0f);
-			} else if (distanceToP1 <= 50) {
-				// Run from player
-				s.getPosition().x -= vectorToP1.x * deltaTime * 100;
-			} else if (distanceToP2 <= 50) {
-				s.getPosition().x -= vectorToP2.x * deltaTime * 100;
 			}
 		}
 	}
@@ -330,7 +342,6 @@ public class ServerMap {
 		}
 		gameEvent.bullets = this.bullets;
 		this.onUpdateCallback.sendToBothClients(gameEvent);
-
 		EnemyEvent enemyEvent = new EnemyEvent();
 		enemyEvent.soldiers = this.soldiers;
 		enemyEvent.enemyBullets = this.enemyBullets;

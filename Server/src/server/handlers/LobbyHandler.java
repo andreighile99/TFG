@@ -60,13 +60,20 @@ public class LobbyHandler {
      */
     public void finishLobbyByName(String lobbyName){
         Lobby lobbyToDelete = null;
+        String lobbyKey = null;
         for(Lobby lobby : lobbies.values()){
-            if(lobby.getLobbyName().equalsIgnoreCase(lobbyName)){
-                lobby.finish();
-                lobbyToDelete = lobby;
+            try{
+                if(lobby.getLobbyName().equalsIgnoreCase(lobbyName)){
+                    lobbyKey = lobbyName;
+                    lobby.finish();
+                    lobbyToDelete = lobby;
+                }
+            }catch (NullPointerException e){
+
             }
+
         }
-        this.lobbies.values().remove(lobbyToDelete);
+        this.lobbies.remove(lobbyKey, lobbyToDelete);
     }
 
 

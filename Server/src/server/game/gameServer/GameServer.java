@@ -76,6 +76,7 @@ public class GameServer extends Game implements ServerMap.notifyGameServer {
 			this.player2.getConnection().sendTCP(switchLevel);
 			this.serverMap = new ServerMap(serverMapOnUpdate, this, this.player1, this.player2, level);
 		} else {
+			this.level = 1;
 			FinishLobby finishLobby = new FinishLobby();
 			finishLobby.code = "01";
 			this.player1.getConnection().sendTCP(finishLobby);

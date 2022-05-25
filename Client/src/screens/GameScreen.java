@@ -17,6 +17,7 @@ import elements.*;
 import elements.serverSide.ServerPlayerData;
 import events.game.EnemyEvent;
 import events.game.GameEvent;
+import handlers.AudioManager;
 import handlers.FontSizeHandler;
 import handlers.ResourceManager;
 import main.MontessoriSlug;
@@ -109,6 +110,8 @@ public class GameScreen extends BScreen{
      */
     public GameScreen(MontessoriSlug game, String username1, String username2, String lobbyName) {
         super(game);
+        AudioManager.playMusic("assets/music/theme1.mp3");
+
         this.fullBulletH = ResourceManager.getTexture("assets/player/hp/FullBulletH.png");
         this.halfBulletH = ResourceManager.getTexture("assets/player/hp/HalfBulletH.png");
         this.hpBackground = ResourceManager.getTexture("assets/player/hp/HpBackground.png");
@@ -292,7 +295,7 @@ public class GameScreen extends BScreen{
                     } else if (player1.getLookingDirection().x < 0) {
                         player1.setAnimation(player1.getLeftWalk());
                     }else if(player1.getLookingDirection().y > 0 && player1.getLookingDirection().x == 0){
-
+                        player1.setAnimation(player1.getLookUp());
                     }
                 }else{
                     if(!serverPlayerData.isShooting) player1.setAnimation(player1.getIdle());
@@ -319,8 +322,6 @@ public class GameScreen extends BScreen{
                 }else{
                     if(!serverPlayerData.isShooting) player2.setAnimation(player2.getIdle());
                 }
-
-
                 if(serverPlayerData.isShooting && player2.getLookingDirection().x > 0){
                     player2.setAnimation(player2.getRightShoot());
                 }else if(serverPlayerData.isShooting && player2.getLookingDirection().x < 0){
@@ -352,6 +353,7 @@ public class GameScreen extends BScreen{
         if(deltaEnemyBullets > 0){
             for(int i = 0; i<deltaEnemyBullets; i++){
                 this.enemyBulletReps.add(new EnemyBulletRep(enemyEvent.enemyBullets.get(i).getPosition().x, enemyEvent.enemyBullets.get(i).getPosition().y, mainStage));
+                AudioManager.playSound("assets/sound/shoot.mp3");
             }
         }
         for(int i = 0; i<enemyBulletsOnServer; i++){
@@ -376,6 +378,7 @@ public class GameScreen extends BScreen{
             for(int i = 0; i<deltaBullets; i++){
                 //- (anchura bala - anchura bala servidor)/2
                 this.bulletReps.add(new BulletRep(gameEvent.bullets.get(i).getPosition().x , gameEvent.bullets.get(i).getPosition().y, mainStage));
+                AudioManager.playSound("assets/sound/shoot.mp3");
             }
         }
         for(int i = 0; i<bulletsOnServer; i++){
@@ -403,7 +406,12 @@ public class GameScreen extends BScreen{
         }
         for(int i = 0; i<soldiersOnServer; i++){
             if(enemyEvent.soldiers.get(i).isEnabled()){
-                this.soldierReps.get(i).moveBy(enemyEvent.soldiers.get(i).getPosition().x - this.soldierReps.get(i).getX(), enemyEvent.soldiers.get(i).getPosition().y - this.soldierReps.get(i).getY());
+                //this.soldierReps.get(i).moveBy(enemyEvent.soldiers.get(i).getPosition().x - this.soldierReps.get(i).getX(), enemyEvent.soldiers.get(i).getPosition().y - this.soldierReps.get(i).getY());
+                if(enemyEvent.soldiers.get(i).isShooting()){
+                    this.soldierReps.get(i).setAnimation(this.soldierReps.get(i).getShoot());
+                }else{
+                    this.soldierReps.get(i).setAnimation(this.soldierReps.get(i).getIdle());
+                }
             }else{
                 this.soldierReps.get(i).setEnabled(false);
             }

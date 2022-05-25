@@ -90,22 +90,12 @@
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="32" x="429.333" y="174.333" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
   <object id="33" x="489.333" y="174.333" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
   </object>
   <object id="34" x="934" y="173.667" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
-  <object id="35" x="1052" y="173" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
@@ -140,27 +130,12 @@
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="42" x="2533.33" y="217.333" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
   <object id="43" x="2582" y="214.667" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
   </object>
   <object id="44" x="2970" y="174.667" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
-  <object id="45" x="3045.33" y="172" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
-  <object id="46" x="3114.67" y="174" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
@@ -195,11 +170,6 @@
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="53" x="4060.67" y="175.333" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
   <object id="54" x="4176.67" y="174.667" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
@@ -215,11 +185,6 @@
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="57" x="4753.33" y="174.667" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
   <object id="58" x="5000" y="177.333" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
@@ -230,32 +195,12 @@
     <property name="name" value="Soldier"/>
    </properties>
   </object>
-  <object id="60" x="5409.33" y="171.333" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
-  <object id="61" x="5486" y="168" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
   <object id="62" x="5611.33" y="167.333" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>
   </object>
   <object id="63" x="6028.67" y="174" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
-  <object id="64" x="6268" y="168" width="25.3333" height="24">
-   <properties>
-    <property name="name" value="Soldier"/>
-   </properties>
-  </object>
-  <object id="65" x="6377.33" y="172.667" width="25.3333" height="24">
    <properties>
     <property name="name" value="Soldier"/>
    </properties>

@@ -70,6 +70,8 @@ public class LobbyScreen extends BScreen{
 
             super(game);
 
+            Parameters.level = 1;
+
             this.backgroundTexture = ResourceManager.getTexture("assets/images/background.png");
             this.spriteBatch = new SpriteBatch();
 

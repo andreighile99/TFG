@@ -22,7 +22,7 @@ public class Bullet {
     public Bullet(String userWhoShot, Float positionX, Float positionY, Vector2 bulletDirection) {
         this.userWhoShot = userWhoShot;
         this.enabled = true;
-        this.boundRect = new Rectangle(positionX, positionY, 2, 2);
+        this.boundRect = new Rectangle(positionX, positionY, 10, 10);
         this.position = new Vector2(positionX, positionY);
         this.bulletDirection = bulletDirection;
     }

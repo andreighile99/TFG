@@ -18,6 +18,7 @@ public class Lobby implements ServerMap.onUpdate {
     private GameServer gameServer;
     private ServerPlayer player1;
     private ServerPlayer player2;
+    private HeadlessApplication headlessApplication;
 
 
 
@@ -37,7 +38,7 @@ public class Lobby implements ServerMap.onUpdate {
         //60 Renders per second
         conf.updatesPerSecond = 60;
         //Start the game server
-        new HeadlessApplication(this.gameServer, conf);
+        this.headlessApplication = new HeadlessApplication(this.gameServer, conf);
 
     }
 
@@ -72,10 +73,11 @@ public class Lobby implements ServerMap.onUpdate {
             //Close both connections
             this.player1.getConnection().close();
             this.player2.getConnection().close();
-            this.gameServer.dispose();
         }catch (NullPointerException e){
 
         }
+        this.headlessApplication.exit();
+
 
     }
 

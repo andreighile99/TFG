@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Listener;
 import events.game.EnemyEvent;
 import events.game.GameEvent;
 import events.game.SwitchLevel;
+import handlers.AudioManager;
 import main.MontessoriSlug;
 import parameters.Parameters;
 import screens.GameScreen;
@@ -58,6 +59,7 @@ public class GameEventListener extends Listener {
                 String username2 = gameScreen.getPlayer2().getUsername();
                 MontessoriSlug.getInstance().getScreen().dispose();
                 Gdx.app.postRunnable(()->{
+                    AudioManager.playSound("assets/sound/missionComplete.mp3");
                     MontessoriSlug.getInstance().setScreen(new GameScreen(MontessoriSlug.getInstance(), username1, username2, Parameters.lobbyName));
                 });
         }

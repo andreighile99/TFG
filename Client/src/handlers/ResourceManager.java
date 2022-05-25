@@ -53,7 +53,10 @@ public final class ResourceManager {
 		assets.load("assets/maps/secondMap.tmx", TiledMap.class);
 
 		assets.load("assets/images/background.png", Texture.class);
-		assets.load("assets/enemies/spider.png", Texture.class);
+
+		assets.load("assets/enemies/idle.png", Texture.class);
+		assets.load("assets/enemies/soldadoDispara.png", Texture.class);
+		assets.load("assets/enemies/Bola.png", Texture.class);
 
 		assets.load("assets/player/idle.png", Texture.class);
 		assets.load("assets/player/Bola.png", Texture.class);
@@ -64,6 +67,16 @@ public final class ResourceManager {
 		assets.load("assets/player/hp/FullBulletH.png", Texture.class);
 		assets.load("assets/player/hp/HalfBulletH.png", Texture.class);
 		assets.load("assets/player/hp/HpBackground.png", Texture.class);
+		assets.load("assets/player/LookUp.png", Texture.class);
+
+		assets.load("assets/music/menuTheme.mp3", Music.class);
+		assets.load("assets/music/theme1.mp3", Music.class);
+		assets.load("assets/sound/missionComplete.mp3", Sound.class);
+		assets.load("assets/sound/shoot.mp3", Sound.class);
+
+
+
+
 
 		assets.finishLoading();
 

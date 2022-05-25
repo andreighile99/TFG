@@ -129,12 +129,7 @@
     <property name="name" value="Solid"/>
    </properties>
   </object>
-  <object id="181" x="3863.59" y="77.5512" width="41.5455" height="13.9886">
-   <properties>
-    <property name="name" value="Solid"/>
-   </properties>
-  </object>
-  <object id="183" x="3726.82" y="76.7557" width="100.864" height="13.9886">
+  <object id="181" x="3867.84" y="77.5512" width="37.2955" height="13.9886">
    <properties>
     <property name="name" value="Solid"/>
    </properties>

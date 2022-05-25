@@ -1,6 +1,7 @@
 
 package screens;
 
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import handlers.AudioManager;
 import handlers.LabelHandler;
 import handlers.ResourceManager;
 import main.MontessoriSlug;
@@ -48,6 +50,8 @@ public class EndingScreen extends BScreen{
      */
     public EndingScreen(MontessoriSlug game) {
         super(game);
+
+        AudioManager.playMusic("assets/music/menuTheme.mp3");
 
         this.backgroundTexture = ResourceManager.getTexture("assets/images/background.png");
         this.spriteBatch = new SpriteBatch();

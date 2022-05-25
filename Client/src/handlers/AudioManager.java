@@ -55,7 +55,12 @@ public class AudioManager {
      */
     public static void playSound(String path) {
         sound=ResourceManager.getSound(path);
-        sound.play(Parameters.soundVolume, 0, 0);
+        if(Parameters.soundVolume < 0.09){
+            sound.play(0, 0, 0);
+        }else{
+            sound.play(Parameters.soundVolume, Parameters.soundVolume, Parameters.soundVolume);
+        }
+
 
     }
 
@@ -63,7 +68,13 @@ public class AudioManager {
      * Metodo que ajusta el volumen de la musica en base a los parametros de la aplicacion.
      */
     public static void applyMusicVolume() {
-        currentMusic.setVolume(Parameters.musicVolume);
+        if(Parameters.musicVolume < 0.09){
+            currentMusic.setVolume(0);
+        }else{
+            currentMusic.setVolume(Parameters.musicVolume);
+        }
+
+
     }
 
     
