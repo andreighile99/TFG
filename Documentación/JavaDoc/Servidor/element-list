@@ -1,9 +1,0 @@
-server.events.game
-server.events.lobby
-server.game.elements
-server.game.gameServer
-server.game.map
-server.handlers
-server.listeners
-server.main
-server.model

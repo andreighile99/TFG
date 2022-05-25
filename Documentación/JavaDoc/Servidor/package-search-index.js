@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"server.events.game"},{"l":"server.events.lobby"},{"l":"server.game.elements"},{"l":"server.game.gameServer"},{"l":"server.game.map"},{"l":"server.handlers"},{"l":"server.listeners"},{"l":"server.main"},{"l":"server.model"}];updateSearchResults();

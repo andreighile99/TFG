@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"customRenderer"},{"l":"elements"},{"l":"elements.serverSide"},{"l":"events.game"},{"l":"events.lobby"},{"l":"handlers"},{"l":"listeners"},{"l":"main"},{"l":"parameters"},{"l":"screens"}];updateSearchResults();
